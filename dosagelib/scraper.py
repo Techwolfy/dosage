@@ -480,13 +480,13 @@ class _ParserScraper(Scraper):
         tree = html.document_fromstring(data)
         return tree
 
-    def fetchUrls(self, url, data, urlSearch):
+    def fetchUrls(self, url, data, urlSearch, attrs=html_link_attrs):
         """Search all entries for given XPath in a HTML page."""
         searchUrls = []
         for match, search in self._matchPattern(data, urlSearch):
             searchUrl = None
             try:
-                for attrib in html_link_attrs:
+                for attrib in attrs:
                     if attrib in match.attrib:
                         searchUrl = match.get(attrib)
             except AttributeError:
