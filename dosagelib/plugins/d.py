@@ -163,14 +163,12 @@ class Dilbert(_ParserScraper):
         return "%s" % name
 
 
-class DMFA(_BasicScraper):
+class DMFA(_ParserScraper):
     url = 'http://www.missmab.com/'
-    stripUrl = url + 'Comics/Vol_%s.php'
+    stripUrl = url + 'http://www.missmab.com/Comics/Vol_%s.php'
     firstStripUrl = stripUrl % '001'
-    imageSearch = compile(tagre("img", "src", r'((?:Comics/|Vol)[^"]+)'))
-    multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'((?:Comics/)?Vol[^"]+)') +
-                         tagre("img", "src", r'(?:../)?Images/comicprev\.gif'))
+    imageSearch = '//img[contains(@src, "Vol")]'
+    prevSearch = '//a[./img[contains(@src, "comicprev")]]'
     help = 'Index format: nnn (normally, some specials)'
 
 
