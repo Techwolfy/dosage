@@ -170,6 +170,13 @@ class SexyLosers(_ParserScraper):
         return index + '-' + title
 
 
+class ShadesOfGray(_WPNavi):
+    url = 'http://www.kahmith.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2006/08/20/000-2'
+    endOfLife = True
+
+
 class Sharksplode(_WordPressScraper):
     url = 'http://sharksplode.com/'
     textSearch = '//div[@id="comic"]//img/@alt'
