@@ -196,8 +196,8 @@ class Twokinds(_ParserScraper):
     url = 'http://twokinds.keenspot.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//article[%s]//img' % xpath_class('comic')
-    prevSearch = '//a[%s]' % xpath_class('navprev')
+    imageSearch = '//article[contains(@class, "comic")]/*[not(self::header)]//img'
+    prevSearch = '//a[contains(@class, "navprev")]'
     help = 'Index format: n (unpadded)'
 
 
