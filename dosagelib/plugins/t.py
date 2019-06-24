@@ -78,6 +78,13 @@ class TheMelvinChronicles(_WordPressScraper):
     url = 'http://melvin.jeaniebottle.com/'
 
 
+class TheMonsterUnderTheBed(_WordPressScraper):
+    url = 'http://themonsterunderthebed.net/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % 'test-post'
+    adult = True
+
+
 class TheNoob(_WordPressScraper):
     url = 'http://thenoobcomic.com/'
     stripUrl = url + 'comic/%s/'
