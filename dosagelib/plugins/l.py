@@ -41,16 +41,6 @@ class Laiyu(_WordPressScraper):
     starter = indirectStarter
 
 
-class LasLindas(_BasicScraper):
-    url = 'http://laslindas.katbox.net/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s/'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/[^"]+)' % rurl, after="attachment-full"))
-    multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="previous"))
-    help = 'Index format: stripname'
-
-
 class LastResort(_WordPressScraper):
     url = 'http://www.lastres0rt.com/'
     stripUrl = url + 'comic/%s/'

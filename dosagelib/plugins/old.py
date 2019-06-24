@@ -398,7 +398,6 @@ class Removed(Scraper):
             cls('PensAndTales/FireflyCross'),
             cls('PetiteSymphony/Kickinrad'),
             cls('PetiteSymphony/Orangegrind'),
-            cls('PetiteSymphony/Rascals'),
             cls('PetiteSymphony/Seed'),
             cls('Pimpette'),
             cls('PunksAndNerds', 'mis'),
@@ -625,6 +624,8 @@ class Renamed(Scraper):
             cls('KeenSpot/TheGodChild', 'GodChild'),
             cls('PetiteSymphony/Djandora', 'ComicsBreak/Djandora'),
             cls('PetiteSymphony/Generation17', 'ComicsBreak/Generation17'),
+            cls('PetiteSymphony/Rascals', 'Katbox/Rascals'),
+            cls('SmackJeeves/AddictiveScience', 'Katbox/AddictiveScience'),
             cls('Wulffmorgenthaler', 'WuMo'),
             cls('ZebraGirl', 'ComicFury/ZebraGirl'),
         )
