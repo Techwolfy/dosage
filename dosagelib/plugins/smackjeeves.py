@@ -597,6 +597,7 @@ class SmackJeeves(_ParserScraper):
             cls('Stay', sub='stay-comic', adult=True),
             cls('StellaInChrome', sub='stellainchrome'),
             cls('Stereophonic', host='stereophonic.thewebcomic.com'),
+            cls('StolenGeneration', sub='stolengen', adult=True, endOfLife=True),
             cls('Storyofadamnedlove', sub='storyofadamnedlove'),
             cls('StrangersandFriends', sub='hemu'),
             cls('Striped', sub='striped', adult=True),
