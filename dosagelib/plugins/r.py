@@ -74,6 +74,33 @@ class RedString(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class RestoredGeneration(_ParserScraper):
+    # DeviantArt scraper; ugly xpath query for previous page, but it works
+    url = 'https://www.deviantart.com/kitfox-crimson/art/Restored-Generation-final-page-171362897'
+    firstStripUrl = 'https://kitfox-crimson.deviantart.com/art/Restored-Generation-cover-126584175'
+    imageSearch = '//a[contains(@class, "dev-page-download")]'
+    prevSearch = '//div[@class="text block"]//text()[contains(., "Prev")]/following-sibling::a'
+    adult = True
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        name = pageUrl.rsplit('/', 1)[-1].rsplit('-', 1)
+        ext = imageUrl.rsplit('.', 1)[-1]
+        return '%s-%s.%s' % (name[1], name[0], ext)
+
+    def getPrevUrl(self, url, data):
+        # Missing/broken navigation links
+        if url == 'https://kitfox-crimson.deviantart.com/art/Restored-Generation-page-107-104094209':
+            return 'https://kitfox-crimson.deviantart.com/art/Restored-Generation-page-106-103367889'
+        elif url == 'https://kitfox-crimson.deviantart.com/art/Restored-Generation-page-103-102978933':
+            return 'https://kitfox-crimson.deviantart.com/art/Restored-Generation-page-102-102903773'
+        elif url == 'https://kitfox-crimson.deviantart.com/art/Restored-Generation-page-102-102903773':
+            return 'https://kitfox-crimson.deviantart.com/art/Restored-Generation-page-101-102812080'
+        elif url == 'https://kitfox-crimson.deviantart.com/art/Restored-Generation-page-96-74505308':
+            return 'https://kitfox-crimson.deviantart.com/art/Restored-Generation-page-95-74414661'
+        return super().getPrevUrl(url, data)
+
+
 class RomanticallyApocalyptic(_ParserScraper):
     url = 'http://romanticallyapocalyptic.com/'
     stripUrl = url + '%s'
