@@ -36,6 +36,33 @@ class IDreamOfAJeanieBottle(_WordPressScraper):
     url = 'http://jeaniebottle.com/'
 
 
+class InOurShadow(_ParserScraper):
+    # DeviantArt scraper; ugly xpath query for previous page, but it works
+    url = 'https://kitfox-crimson.deviantart.com/art/In-Our-Shadow-page-382-763787452'
+    firstStripUrl = 'https://kitfox-crimson.deviantart.com/art/Legacy-page-1-424190315'
+    imageSearch = '//a[contains(@class, "dev-page-download")]'
+    prevSearch = ('//div[@class="text block"]//text()[contains(., "Prev")]/following-sibling::span//a',
+                  '//div[@class="text block"]//text()[contains(., "Prev")]/following-sibling::a')
+    adult = True
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        name = pageUrl.rsplit('/', 1)[-1].split('?', 1)[0].rsplit('-', 1)
+        ext = imageUrl.rsplit('.', 1)[-1]
+        return '%s-%s.%s' % (name[1], name[0], ext)
+
+    def getPrevUrl(self, url, data):
+        # Missing/broken navigation links
+        url = url.rsplit('?', 1)[0]
+        if url == 'https://kitfox-crimson.deviantart.com/art/Legacy-page-54-485534748':
+            return 'https://kitfox-crimson.deviantart.com/art/Legacy-page-53-485353333'
+        elif url == 'https://kitfox-crimson.deviantart.com/art/Legacy-page-53-485353333':
+            return 'https://kitfox-crimson.deviantart.com/art/Legacy-page-52-485104882'
+        elif url == 'https://kitfox-crimson.deviantart.com/art/Legacy-page-2-424191803':
+            return 'https://kitfox-crimson.deviantart.com/art/Legacy-page-1-424190315'
+        return super().getPrevUrl(url, data)
+
+
 class InternetWebcomic(_WPNavi):
     url = 'http://www.internet-webcomic.com/'
     stripUrl = url + '?p=%s'
