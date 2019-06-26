@@ -149,6 +149,21 @@ class Science(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class SecondComing(_ParserScraper):
+    # DeviantArt scraper; ugly xpath query for previous page, but it works
+    url = 'https://kitfox-crimson.deviantart.com/art/Second-Coming-page-31-153056055'
+    firstStripUrl = 'https://kitfox-crimson.deviantart.com/art/Second-Coming-page-1-154320736'
+    imageSearch = '//a[contains(@class, "dev-page-download")]'
+    prevSearch = '//div[@class="text block"]//text()[contains(., "Prev")]/following-sibling::a'
+    adult = True
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        name = pageUrl.rsplit('/', 1)[-1].split('?', 1)[0].rsplit('-', 1)
+        ext = imageUrl.rsplit('.', 1)[-1]
+        return '%s-%s.%s' % (name[1], name[0], ext)
+
+
 class SequentialArt(_BasicScraper):
     url = 'http://www.collectedcurios.com/sequentialart.php'
     stripUrl = url + '?s=%s'
