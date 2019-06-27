@@ -108,6 +108,23 @@ class PeppermintSagaBGR(_WPNavi):
     adult = True
 
 
+class PeterIsTheWolf(_ParserScraper):
+    stripUrl = 'http://www.peteristhewolf.com/adult/%s.html'
+    url = stripUrl % 'home'
+    firstStripUrl = stripUrl % '001'
+    imageSearch = '//img[contains(@src, "comics/")]'
+    prevSearch = ('//a[text()="Previous Page"]',
+                  '//a[text()="Previous Story Page"]')
+    multipleImagesPerStrip = True
+    adult = True
+
+    def getPrevUrl(self, url, data):
+        # Fix loop in site navigation
+        if url == self.stripUrl % '194':
+            return self.stripUrl % '193'
+        return super().getPrevUrl(url, data)
+
+
 class PHDComics(_ParserScraper):
     BROKEN_COMMENT_END = compile(r'--!>')
 
