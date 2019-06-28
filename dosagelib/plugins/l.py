@@ -68,6 +68,63 @@ class LifeAintNoPonyFarm(_WordPressScraper):
     multipleImagesPerStrip = True
 
 
+class LifeAsRendered(_ParserScraper):
+    # Reverse navigation doesn't work properly, so search forward instead
+    stripUrl = 'http://kittyredden.com/archive/lifeasrendered/%s'
+    url = stripUrl % 'lar01'
+    firstStripUrl = stripUrl % 'lar05/lar0578'
+    imageSearch = '//div[@class="comic"]//img'
+    prevSearch = ('//a[text()="NEXT"]',
+                  '//a[text()="NEXT ACT"]',
+                  '//a[text()="THE END"]')
+    textSearch = '//div[@class="description"]//text()'
+    adult = True
+    endOfLife = True
+    nav = {
+        'lar01/lar0104': 'lar01/lar0105',
+        'lar01/lar0117': 'lar01/lar0118',
+        'lar03-A/lar0352': 'lar03-A/lar0353',
+        'lar03-A/lar0357': 'lar03-A/lar0358',
+        'lar03ex/lar03ex08': 'lar03ex/lar03ex09',
+        'lar03ex/lar03ex09': 'lar03ex/lar03ex10',
+        'lar04/lar0459': 'lar04ex',
+        'lar05/lar0503': 'lar05/lar0504',
+        'lar05/lar0528': 'lar05/lar0529',
+        'lar05/lar0552': 'lar05/lar0553'
+    }
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('ReN', 'N').replace('N01P', 'A02S')
+        if filename == 'A05Pex.png':
+            filename = 'A05P28ex.png'
+        return filename
+
+    def imageUrlModifier(self, imageUrl, data):
+        # Fix broken image links
+        imageUrl = imageUrl.replace('A03S0.png', 'A03S09.png')
+        imageUrl = imageUrl.replace('A04P0.png', 'A04P05.png')
+        imageUrl = imageUrl.replace('A05P05c.png', 'A05P04c.png')
+        return imageUrl
+
+    def getPrevUrl(self, url, data):
+        # Fix broken navigation links
+        segments = url.rstrip('/').rsplit('/', 2)
+        url = segments[1] + '/' + segments[2]
+        if self.nav and url in self.nav:
+            return self.stripUrl % self.nav[url]
+        return super().getPrevUrl(url, data)
+
+    def fetchText(self, url, data, textSearch, optional):
+        # Save final summary text
+        if url == self.firstStripUrl:
+            url = self.stripUrl % 'larend'
+            data = self.getPage(url)
+            return super().fetchText(url, data, textSearch, optional)
+        return None
+
+
 class LittleGamers(_BasicScraper):
     url = 'http://www.little-gamers.com/'
     stripUrl = url + '%s/'
