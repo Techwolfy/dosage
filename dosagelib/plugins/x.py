@@ -9,17 +9,16 @@ from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 
 
-class Xkcd(_ParserScraper):
-    name = 'xkcd'
+class XKCD(_ParserScraper):
     url = 'https://xkcd.com/'
     starter = bounceStarter
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@id="comic"]/img'
+    imageSearch = '//div[@id="comic"]//img'
+    textSearch = imageSearch + '/@title'
     prevSearch = '//a[@rel="prev"]'
     nextSearch = '//a[@rel="next"]'
     help = 'Index format: n (unpadded)'
-    textSearch = '//div[@id="comic"]/img/@title'
 
     def namer(self, image_url, page_url):
         index = int(page_url.rstrip('/').rsplit('/', 1)[-1])
@@ -30,8 +29,3 @@ class Xkcd(_ParserScraper):
         if url and '/large/' in data:
             return url.replace(".png", "_large.png")
         return url
-
-    def shouldSkipUrl(self, url, data):
-        return url in (
-            self.stripUrl % '1663',  # Garden
-        )
