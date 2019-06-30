@@ -7,6 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
+from ..helpers import indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _WordPressScraper, _WPNavi
