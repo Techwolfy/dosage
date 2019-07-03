@@ -134,13 +134,12 @@ class Metacarpolis(_ComicControlScraper):
     url = 'http://www.metacarpolis.com'
 
 
-class Misfile(_BasicScraper):
+class Misfile(_ParserScraper):
     url = 'http://www.misfile.com/'
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '2004-02-22'
-    imageSearch = compile(tagre("img", "src", r"(comics/[^']+)", quote="'"))
-    prevSearch = compile(tagre("link", "href", r"([^']+)", quote="'",
-                               before="Previous"))
+    imageSearch = '//div[@class="comic"]//img'
+    prevSearch = '//a[contains(@title, "Previous")]'
     help = 'Index format: yyyy-mm-dd'
 
 
