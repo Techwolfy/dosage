@@ -22,23 +22,23 @@ class Katbox(_ParserScraper):
         super(Katbox, self).__init__('Katbox/' + name)
 
         baseUrl = 'http://%s.katbox.net/' % sub
+        if sub == 'ourworld':
+            baseUrl = baseUrl.replace('katbox', 'katboxad')
 
         self.stripUrl = baseUrl + 'comics/%s/'
-        if sub == 'cervelet':
-            # Special case for Addictive Science
-            self.stripUrl = baseUrl + 'comic/%s/'
+        if sub == 'cervelet' or sub == 'ourworld':
+            self.stripUrl = self.stripUrl.replace('comics', 'comic')
             self.multipleImagesPerStrip = True
         if comic:
             self.stripUrl = self.stripUrl % (comic + '/%s')
 
         self.firstStripUrl = self.stripUrl % first
+        self.url = self.firstStripUrl
 
         if last:
             self.url = self.stripUrl % last
             self.starter = super().starter
             self.endOfLife = True
-        else:
-            self.url = self.firstStripUrl
 
         if adult:
             self.adult = True
@@ -89,8 +89,10 @@ class Katbox(_ParserScraper):
             cls('EtherealWorlds', 'sahtori', 'oasis', '1-nightly-wanderings'),
             cls('IMew', 'nekonny', 'imew', 'imew', last='addictive-imew-16'),
             cls('ItsyBitsyAdventures', 'silverblaze', 'iba', 'fight-the-machine'),
+            cls('Knighthood', 'chalo', 'knighthood', 'knighthood-1'),
             cls('LasLindas', 'chalo', 'las-lindas', 'day-one', adult=True),
             cls('Olivia', 'kadath', 'olivia', 'misplaced-virtues-title-page', adult=True),
+            cls('OurWorld', 'ourworld', None, 'title-page'),
             cls('Paprika', 'nekonny', 'paprika', '001-revolution'),
             cls('PeterAndCompany', 'peterverse', 'peter-and-company', 'strip-1'),
             cls('PeterAndWhitney', 'peterverse', 'peter-and-whitney', 'comic-1-graduation-day'),
