@@ -122,6 +122,15 @@ class TheOrderOfTheStick(_BasicScraper):
         return page_url.rsplit('/', 1)[-1][:-5]
 
 
+class TheProbabilityBomb(_ParserScraper):
+    stripUrl = 'http://www.rhjunior.com/%s/'
+    firstStripUrl = stripUrl % 'the-probability-bomb'
+    url = stripUrl % 'comics/the-probability-bomb'
+    imageSearch = '//div[contains(@class, "entry-content")]//img'
+    prevSearch = ('//a[@rel="prev"]', '//a[contains(@title, "Probability Bomb")]')
+    multipleImagesPerStrip = True
+
+
 class TheThinHLine(_TumblrScraper):
     url = 'http://thinhline.tumblr.com/'
     firstStripUrl = url + 'post/4177372348/thl-1-a-cats-got-his-tongue-click-on-the'
