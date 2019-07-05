@@ -448,7 +448,6 @@ class Removed(Scraper):
             cls('SmackJeeves/Intoxicated'),
             cls('SmackJeeves/Knife'),
             cls('SmackJeeves/Kranburn'),
-            cls('SmackJeeves/LatchkeyKingdom'),
             cls('SmackJeeves/LoveTwister'),
             cls('SmackJeeves/MegaManiacs'),
             cls('SmackJeeves/MerirosvotSeikkailumerella'),
