@@ -89,6 +89,17 @@ class DeepFried(_BasicScraper):
     help = 'Index format: none'
 
 
+class DelaTheHooda(_ParserScraper):
+    url = 'http://us.vclart.net/vcl/Artists/Style-Wager/index01-by-date.html'
+    imageSearch = '//a[contains(@href, "us-p.vclart.net")]'
+    prevSearch = '//a[text()=">&gt"]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        return imageUrl.rsplit('/', 1)[-1].replace('%7E', '-').lower()
+
+
 class DemolitionSquad(_ParserScraper):
     url = 'http://www.demolitionsquad.de/'
     stripUrl = url + '?comicbeitrag=%s'
