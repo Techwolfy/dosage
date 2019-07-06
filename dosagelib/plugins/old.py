@@ -625,6 +625,7 @@ class Renamed(Scraper):
             cls('PetiteSymphony/Generation17', 'ComicsBreak/Generation17'),
             cls('PetiteSymphony/Rascals', 'Katbox/Rascals'),
             cls('SmackJeeves/AddictiveScience', 'Katbox/AddictiveScience'),
+            cls('TracyAndTristan', 'ComicFury/TracyAndTristan'),
             cls('Wulffmorgenthaler', 'WuMo'),
             cls('ZebraGirl', 'ComicFury/ZebraGirl'),
         )
