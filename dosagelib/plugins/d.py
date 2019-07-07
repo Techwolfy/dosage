@@ -174,15 +174,6 @@ class Dilbert(_ParserScraper):
         return "%s" % name
 
 
-class DMFA(_ParserScraper):
-    url = 'http://www.missmab.com/'
-    stripUrl = url + 'http://www.missmab.com/Comics/Vol_%s.php'
-    firstStripUrl = stripUrl % '001'
-    imageSearch = '//img[contains(@src, "Vol")]'
-    prevSearch = '//a[./img[contains(@src, "comicprev")]]'
-    help = 'Index format: nnn (normally, some specials)'
-
-
 class DocRat(_ParserScraper):
     url = 'http://www.docrat.com.au/'
     stripUrl = url + 'comic/%s/'
