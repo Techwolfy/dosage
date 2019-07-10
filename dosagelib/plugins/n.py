@@ -86,6 +86,15 @@ class Newshounds(_ParserScraper):
         return super().getPrevUrl(url, data)
 
 
+class NewshoundsProjectionEdge(_ParserScraper):
+    name = 'Newshounds/ProjectionEdge'
+    url = 'http://newshounds.keenspot.com/'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20180710'
+    imageSearch = '//img[@class="ksc"]'
+    prevSearch = '//a[./img[@alt="Previous comic"]]'
+
+
 class NewWorld(_BasicScraper):
     url = 'http://www.tfsnewworld.com/'
     stripUrl = url + '%s/'
