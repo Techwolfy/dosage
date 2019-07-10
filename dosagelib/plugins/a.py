@@ -73,6 +73,25 @@ class Achewood(_BasicScraper):
     namer = regexNamer(compile(r'date=(\d+)'))
 
 
+class ADoemainOfOurOwn(_ParserScraper):
+    # Retrieve comic from the Internet Archive
+    url = 'https://web.archive.org/web/20170914100348/http://www.doemain.com/index.cgi/2008-11-14'
+    firstStripUrl = 'https://web.archive.org/web/20170914104142/http://www.doemain.com/index.cgi/1999-04-24'
+    imageSearch = '//img[contains(@src, "strips/")]'
+    prevSearch = '//a[./img[@alt="Previous Strip"]]'
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix date formatting
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if len(filename) > 6 and filename[0:6].isdigit():
+            month = filename[0:2]
+            day = filename[2:4]
+            year = ('19' if filename[4] == '9' else '20') + filename[4:6]
+            filename = '%s-%s-%s%s' % (year, month, day, filename[6:])
+        return filename
+
+
 class AfterStrife(_WPNavi):
     baseUrl = 'http://afterstrife.com/'
     stripUrl = baseUrl + '?p=%s'
