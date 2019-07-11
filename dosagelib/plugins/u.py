@@ -48,21 +48,32 @@ class UnlikeMinerva(_ParserScraper):
     help = 'Index format: number'
 
 
-class Unsounded(_BasicScraper):
-    url = 'http://www.casualvillain.com/Unsounded/'
-    stripUrl = url + 'comic/ch%s/ch%s_%s.html'
+class Unsounded(_ParserScraper):
+    url = 'https://unsoundedupdates.tumblr.com/'
+    baseUrl = 'http://www.casualvillain.com/Unsounded/'
+    stripUrl = baseUrl + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
-    rurl = escape(url)
-    imageSearch = compile(tagre("img", "src", r'(pageart/[^"]*)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*)', after='class="back'))
-    latestSearch = compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
-                           tagre("img", "src",
-                                 r"%simages/newpages\.png" % rurl))
-    starter = indirectStarter
+    imageSearch = '//img[contains(@src, "pageart/")]'
+    prevSearch = '//a[contains(@class, "back")]'
+    multipleImagesPerStrip = True
     help = 'Index format: chapter-number'
 
+    def starter(self):
+        # Resolve double redirect for current page
+        page = self.getPage(self.url)
+        redirect = page.xpath('//a[.//img[@alt="Click Here for the newest page!"]]')[0]
+        page = self.getPage(redirect.get('href'))
+        redirect = page.xpath('//meta[@http-equiv="refresh"]')[0]
+        return redirect.get('content').split('URL=', 1)[-1]
+
+    def getPrevUrl(self, url, data):
+        # Fix missing navigation link
+        if url == self.baseUrl + 'comic/ch13/you_let_me_fall.html':
+            return self.stripUrl % ('13', '13', '85')
+        return super().getPrevUrl(url, data)
+
     def getIndexStripUrl(self, index):
-        """Get comic strip URL from index."""
+        # Get comic strip URL from index
         chapter, num = index.split('-')
         return self.stripUrl % (chapter, chapter, num)
 
