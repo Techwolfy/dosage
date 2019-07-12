@@ -92,8 +92,10 @@ class CatAndGirl(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
-class Catena(_WordPressScraper):
-    url = 'http://catenamanor.com/'
+class CatenaCafe(_WordPressScraper):
+    url = 'https://catenamanor.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'reboot-book1cover-small'
 
 
 class CatsAndCameras(_WordPressScraper):

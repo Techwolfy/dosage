@@ -527,6 +527,7 @@ class Renamed(Scraper):
         return (
             # Renamed in 2.16
             cls('1997', '1977'),
+            cls('Catena', 'CatenaCafe'),
             cls('ComicFury/Alya', 'ComicFury/AlyaTheLastChildOfLight'),
             cls('ComicFury/Boatcrash', 'ComicFury/BoatcrashChronicles'),
             cls('ComicFury/Crimsonpixel', 'ComicFury/CrimsonPixelComics'),
