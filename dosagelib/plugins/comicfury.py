@@ -26,7 +26,8 @@ class ComicFury(_ParserScraper):
         '//p[%s]/a[2]' % xpath_class('prev'),
         '//a[%s]' % xpath_class('prev'),  # JaquieNovemberAndTheSpookiness
         # TheTempleAtFiftyFathoms
-        XPATH_IMG % (xpath_class("comicnavlink"), 'Previous'))
+        XPATH_IMG % (xpath_class("comicnavlink"), 'Previous'),
+        '//a[contains(text(), "Back")]')
     nextSearch = (
         '//a[contains(@title, "next")]',  # 137
         '//a[@rel="next"]',
@@ -35,7 +36,8 @@ class ComicFury(_ParserScraper):
         '//p[%s]/a[1]' % xpath_class('next'),
         '//a[%s]' % xpath_class('next'),  # JaquieNovemberAndTheSpookiness
         # TheTempleAtFiftyFathoms
-        XPATH_IMG % (xpath_class("comicnavlink"), 'Next'))
+        XPATH_IMG % (xpath_class("comicnavlink"), 'Next'),
+        '//a[contains(text(), "Next")]')
     help = 'Index format: n'
     starter = bounceStarter
 
@@ -832,6 +834,7 @@ class ComicFury(_ParserScraper):
             cls('RebuildOfGenericMangaShippuden', 'rebuildofgenericmanga'),
             cls('RecklessComix', 'recklesscomix'),
             cls('RED', 'redthecomic'),
+            cls('RedSpot', 'redspot'),
             # RedVelvetRequiem has a duplicate in SmackJeeves/RedVelvetRequiem
             cls('RegardingDandelions', 'regardingdandelions'),
             cls('Remedy', 'remedy'),
