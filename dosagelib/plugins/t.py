@@ -251,6 +251,13 @@ class TumbleDryComics(_WordPressScraper):
         return filename
 
 
+class TwinDragons(_WordPressScraper):
+    url = 'http://www.twindragonscomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'the-beginning'
+    multipleImagesPerStrip = True
+
+
 class TwoGuysAndGuy(_BasicScraper):
     url = 'http://www.twogag.com/'
     rurl = escape(url)
