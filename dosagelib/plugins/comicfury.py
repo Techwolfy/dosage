@@ -1093,6 +1093,7 @@ class ComicFury(_ParserScraper):
             cls('ThomasAndZacharyArchives', 'thomasandzachary'),
             cls('Thornwar', 'thornwar'),
             cls('ThoseUnknowableTheShadowsOverInnsmouth', 'tsoi'),
+            cls('Threan', 'threan'),
             cls('ThreeFreeFrikis', 'tff', 'es'),
             cls('TickTock', 'tick-tock'),
             cls('TidesOfChange', 'toc'),
