@@ -102,6 +102,12 @@ class WereIWolf(_ParserScraper):
         return self.stripUrl % (index[0], index[1])
 
 
+class WhatWeRememberMost(_WordPressScraper):
+    url = 'https://whatweremembermost.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'page-1'
+
+
 class WhiteNoise(_WordPressScraper):
     url = 'http://whitenoisecomic.com/'
     firstStripUrl = url + 'comic/book-one/'
