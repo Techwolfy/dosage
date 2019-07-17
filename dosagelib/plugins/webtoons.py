@@ -11,7 +11,7 @@ from ..scraper import _ParserScraper
 class WebToons(_ParserScraper):
     lang='en'
     multipleImagesPerStrip = True
-    imageSearch = '//img[contains(@class, "_images")]'
+    imageSearch = '//img[contains(@class, "_images")]/@data-url'
     prevSearch = '//a[contains(@class, "_prevEpisode")]'
 
     def __init__(self, name, url, titlenum):
@@ -30,8 +30,8 @@ class WebToons(_ParserScraper):
         return self.stripUrl % currentEpisode
 
     def fetchUrls(self, url, data, urlSearch):
-        # WebToons image urls are in the "data-url" attribute
-        self.imageUrls = super().fetchUrls(url, data, urlSearch, ['data-url', 'href'])
+        # Save link order for position-based filenames
+        self.imageUrls = super().fetchUrls(url, data, urlSearch)
         # Update firstStripUrl with the correct episode title
         if url.rsplit('=', 1)[-1] == '1':
             self.firstStripUrl = url
