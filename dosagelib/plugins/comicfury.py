@@ -911,6 +911,7 @@ class ComicFury(_ParserScraper):
             cls('SmallTownValues', 'smalltownvalues'),
             cls('SmitheeZombieHunter', 'smitheezombiehunter'),
             cls('SneakersUForce', 'sneakers'),
+            cls('Snowfall', 'snowfall'),
             cls('SoFunnyIForgotToLaugh', 'sofunnyiforgottolaugh'),
             cls('SonichuREDone', 'sonichuredone'),
             cls('SonichuREDoneJ', 'sonichuredonejapanese', 'ja'),
