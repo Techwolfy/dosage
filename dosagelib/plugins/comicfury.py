@@ -10,9 +10,6 @@ import os
 from ..scraper import _ParserScraper
 from ..helpers import bounceStarter, xpath_class
 
-XPATH_LINK = '//a[%s and contains(text(), "%s")]'
-XPATH_IMG = '//a[%s][img[contains(@alt, "%s")]]'
-
 
 class ComicFury(_ParserScraper):
     imageSearch = ('//img[@id="comicimage"]',
@@ -21,22 +18,22 @@ class ComicFury(_ParserScraper):
     prevSearch = (
         '//a[contains(@title, "previous")]',  # 137
         '//a[@rel="prev"]',
-        XPATH_LINK % (xpath_class("comicnavlink"), "Previous"),
+        '//a[%s and contains(text(), "Previous")]' % xpath_class("comicnavlink"),
         # Art, ConsolersDLC, ShutUpDiarybyBarbaraHolm, etc.
         '//p[%s]/a[2]' % xpath_class('prev'),
         '//a[%s]' % xpath_class('prev'),  # JaquieNovemberAndTheSpookiness
         # TheTempleAtFiftyFathoms
-        XPATH_IMG % (xpath_class("comicnavlink"), 'Previous'),
+        '//a[%s][img[contains(@alt, "Previous")]]' % xpath_class("comicnavlink"),
         '//a[contains(text(), "Back")]')
     nextSearch = (
         '//a[contains(@title, "next")]',  # 137
         '//a[@rel="next"]',
-        XPATH_LINK % (xpath_class("comicnavlink"), "Next"),
+        '//a[%s and contains(text(), "Next")]' % xpath_class("comicnavlink"),
         # Art, ConsolersDLC, ShutUpDiarybyBarbaraHolm, etc.
         '//p[%s]/a[1]' % xpath_class('next'),
         '//a[%s]' % xpath_class('next'),  # JaquieNovemberAndTheSpookiness
         # TheTempleAtFiftyFathoms
-        XPATH_IMG % (xpath_class("comicnavlink"), 'Next'),
+        '//a[%s][img[contains(@alt, "Next")]]' % xpath_class("comicnavlink"),
         '//a[contains(text(), "Next")]')
     help = 'Index format: n'
     starter = bounceStarter
