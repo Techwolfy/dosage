@@ -8,9 +8,6 @@ import os
 from ..scraper import _ParserScraper
 from ..helpers import bounceStarter, xpath_class
 
-XPATH_LINK = '//a[%s and contains(text(), "%s")]'
-XPATH_IMG = '//div[{}]//a[img[contains(@alt, "%s")]]'.format(xpath_class('comicnav'))
-
 
 class ComicFury(_ParserScraper):
     imageSearch = ('//img[@id="comicimage"]',
@@ -21,8 +18,8 @@ class ComicFury(_ParserScraper):
         # 137 (needs to be before the generic a@rel, because layout is wrong)
         '//a[contains(@title, "previous")]',
         '//a[@rel="prev"]',
-        XPATH_LINK % (xpath_class("comicnavlink"), "Previous"),
-        XPATH_IMG % ('Previous'),
+        '//a[%s and contains(text(), "Previous")]' % xpath_class('comicnavlink'),
+        '//div[%s]//a[img[contains(@alt, "Previous")]]' % xpath_class('comicnav'),
         # Art, ConsolersDLC, etc.
         u'//nav//a[contains(text(), "\u2039")]',
         # LatchkeyKingdom
@@ -37,8 +34,8 @@ class ComicFury(_ParserScraper):
         # 137 (see above)
         '//a[contains(@title, "next")]',
         '//a[@rel="next"]',
-        XPATH_LINK % (xpath_class("comicnavlink"), "Next"),
-        XPATH_IMG % ('Next'),
+        '//a[%s and contains(text(), "Next")]' % xpath_class('comicnavlink'),
+        '//div[%s]//a[img[contains(@alt, "Next")]]' % xpath_class('comicnav'),
         # Art, ConsolersDLC, etc.
         u'//nav//a[contains(text(), "\u203A")]',
         # LatchkeyKingdom
