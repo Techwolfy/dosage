@@ -15,18 +15,18 @@ class Katbox(_ParserScraper):
     imageSearch = ('//div[@class="webcomic-image"]//img',
                    '//div[contains(@class, "webcomic-media")]//img')
     prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
-    latestSearch = '//a[contains(@class, "last-webcomic-link")]'
-    starter = indirectStarter
+    latestSearch = ('//div[@class="post-webcomic"]//a[contains(@class, "last-webcomic-link")]',
+                    '//a[contains(@class, "last-webcomic-link")]')
 
     def __init__(self, name, sub, comic, first, last=None, adult=False, fixNames=False):
         super(Katbox, self).__init__('Katbox/' + name)
 
         baseUrl = 'http://%s.katbox.net/' % sub
-        if sub == 'ourworld':
+        if sub == 'ourworld' or sub == 'bone':
             baseUrl = baseUrl.replace('katbox', 'katboxad')
 
         self.stripUrl = baseUrl + 'comics/%s/'
-        if sub == 'cervelet' or sub == 'ourworld':
+        if sub == 'cervelet' or sub == 'ourworld' or sub == 'bone':
             self.stripUrl = self.stripUrl.replace('comics', 'comic')
             self.multipleImagesPerStrip = True
         if comic:
@@ -42,11 +42,17 @@ class Katbox(_ParserScraper):
 
         if adult:
             self.adult = True
-            ageGateCookie = requests.cookies.create_cookie(domain='.katbox.net', name='age_gate', value='18')
-            self.session.cookies.set_cookie(ageGateCookie)
 
         if fixNames:
             self.namer = self.dateNamer
+
+    def starter(self):
+        # Set age-gate cookies
+        if self.adult:
+            ageGateCookie = requests.cookies.create_cookie(domain='.katbox.net', name='age_gate', value='18')
+            self.session.cookies.set_cookie(ageGateCookie)
+            self.session.get(self.url + '?webcomic_birthday=1')
+        return indirectStarter(self)
 
     def fetchUrls(self, url, data, urlSearch):
         self.imageUrls = super().fetchUrls(url, data, urlSearch)
@@ -71,8 +77,11 @@ class Katbox(_ParserScraper):
 
     def getPrevUrl(self, url, data):
         # Special case for broken navigation in Addictive Science
-        if url == 'http://cervelet.katbox.net/comic/addictive-science/easter-egg-5/':
-            return 'http://cervelet.katbox.net/comic/addictive-science/school-stuff-13/'
+        if url == self.stripUrl % 'easter-egg-5':
+            return self.stripUrl % 'school-stuff-13'
+        # Special case for broken navigation in False Start
+        if url == self.stripUrl % 'issue-6-page-18':
+            return self.stripUrl % 'issue-6-page-17'
         return super().getPrevUrl(url, data)
 
 
@@ -87,6 +96,7 @@ class Katbox(_ParserScraper):
             cls('Draconia', 'razorfox', None, 'chapter-1-page-1', adult=True),
             cls('Eorah', 'hiorou', 'eorah', 'eorah-title'),
             cls('EtherealWorlds', 'sahtori', 'oasis', '1-nightly-wanderings'),
+            cls('FalseStart', 'bone', 'false-start', 'issue-1-cover', adult=True, fixNames=True),
             cls('IMew', 'nekonny', 'imew', 'imew', last='addictive-imew-16'),
             cls('ItsyBitsyAdventures', 'silverblaze', 'iba', 'fight-the-machine'),
             cls('Knighthood', 'chalo', 'knighthood', 'knighthood-1'),
