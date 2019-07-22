@@ -22,11 +22,11 @@ class Katbox(_ParserScraper):
         super(Katbox, self).__init__('Katbox/' + name)
 
         baseUrl = 'http://%s.katbox.net/' % sub
-        if sub == 'ourworld' or sub == 'bone':
+        if sub == 'ourworld' or sub == 'bone' or sub == 'rascals':
             baseUrl = baseUrl.replace('katbox', 'katboxad')
 
         self.stripUrl = baseUrl + 'comics/%s/'
-        if sub == 'cervelet' or sub == 'ourworld' or sub == 'bone':
+        if sub == 'cervelet' or sub == 'ourworld' or sub == 'bone' or sub == 'rascals':
             self.stripUrl = self.stripUrl.replace('comics', 'comic')
             self.multipleImagesPerStrip = True
         if comic:
@@ -107,6 +107,7 @@ class Katbox(_ParserScraper):
             cls('PeterAndCompany', 'peterverse', 'peter-and-company', 'strip-1'),
             cls('PeterAndWhitney', 'peterverse', 'peter-and-whitney', 'comic-1-graduation-day'),
             cls('PracticeMakesPerfect', 'nekonny', 'pmp', '001-procrastination'),
+            cls('ProjectZero', 'rascals', 'project-zero', 'project-zero-cover', adult=True),
             cls('Rascals', 'godai', 'rascals', 'rascals-cover', adult=True),
             cls('TheEyeOfRamalach', 'avencri', 'theeye', 'boxes-and-memories'),
             cls('TheSprawl', 'snowdon', 'sprawl', 'the-sprawl-log01-print-edition-available-now', adult=True),
