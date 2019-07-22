@@ -103,6 +103,7 @@ class Katbox(_ParserScraper):
             cls('IMew', 'nekonny', 'imew', 'imew', last='addictive-imew-16'),
             cls('ItsyBitsyAdventures', 'silverblaze', 'iba', 'fight-the-machine'),
             cls('Knighthood', 'chalo', 'knighthood', 'knighthood-1'),
+            cls('KnuckleUp', 'rascals', 'knuckle-up', 'knuckle-up-prologue-i', adult=True),
             cls('LasLindas', 'chalo', 'las-lindas', 'day-one', adult=True),
             cls('Olivia', 'kadath', 'olivia', 'misplaced-virtues-title-page', adult=True),
             cls('OurWorld', 'ourworld', None, 'title-page'),
