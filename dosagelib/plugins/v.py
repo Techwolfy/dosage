@@ -11,6 +11,23 @@ from ..helpers import bounceStarter, indirectStarter, xpath_class
 from ..util import tagre
 
 
+class VerloreGeleentheid(_ParserScraper):
+    url = 'http://verlore.smackjeeves.com/comics/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '904752/titelblad'
+    imageSearch = '//img[@id="comic_image"]'
+    prevSearch = '//a[./img[contains(@alt, "Previous")]]'
+    nextSearch = '//a[./img[contains(@alt, "Next")]]'
+    textSearch = '//div[@id="author" and .//img[contains(@src, "5fd013cd3VN8I")]]'
+    starter = bounceStarter
+    lang = 'af'
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        post = pageUrl.rstrip('/').rsplit('/', 2)
+        return "%s_%s.%s" % (post[1], post[2], imageUrl.rsplit('.', 1)[-1])
+
+
 class Vexxarr(_ParserScraper):
     baseUrl = 'http://www.vexxarr.com/'
     url = baseUrl + 'Index.php'

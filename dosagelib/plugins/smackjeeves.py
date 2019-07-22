@@ -704,7 +704,6 @@ class SmackJeeves(_ParserScraper):
             cls('UshalaatWorldsEnd', sub='ushala', adult=True),
             cls('Vacan7', sub='vacan7', adult=True),
             cls('VACANT', sub='vacant'),
-            cls('VerloreGeleentheid', host='verlore.thewebcomic.com'),
             cls('VoidMisadventures', sub='voidmisadventures'),
             cls('VoidTheGuideToAHealthyRelationship', sub='vtgtahr', adult=True),
             cls('VoyageoftheBrokenPromise', sub='voyageofthebrokenpromise', adult=True),
