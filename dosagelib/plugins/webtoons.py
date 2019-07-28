@@ -50,6 +50,9 @@ class WebToons(_ParserScraper):
             # Unicode title
             cls('Lozolz', 'tiptoon/lozolz', 1268),
 
+            # WebToons Canvas comics
+            cls('SpaceVixen', 'challenge/space-vixen-deep-space-k9', 207049),
+
             # START AUTOUPDATE
             cls('1000', 'action/one-thousand', 1217),
             cls('10thDimensionBoys', 'comedy/10th-dimension-boys', 71),
