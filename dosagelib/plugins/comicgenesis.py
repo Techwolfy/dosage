@@ -107,6 +107,7 @@ class ComicGenesis(_ParserScraper):
             cls('RandomAxeOfKindness', 'randomaxe'),
             cls('SalemUncommons', 'salemuncommons'),
             cls('SamandElisAdventures', 'sameliadv'),
+            cls('Sandusky', 'sandusky', ignoreRobotsTxt=True),
             cls('SarahZero', 'plughead'),
             cls('SixByNineCollege', 'sixbyninecollege'),
             cls('SpoononHighandFireontheMountian', 'spoon'),
