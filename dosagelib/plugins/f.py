@@ -240,3 +240,18 @@ class FurthiaHigh(_ParserScraper):
     imageSearch = '//img[contains(@alt, "Comic")]'
     prevSearch = '//a[./img[@alt="Previous"]]'
     multipleImagesPerStrip = True
+
+
+class FurWillFly(_ParserScraper):
+    baseUrl = 'https://www.jadephoenix.org/fwf/'
+    url = baseUrl + 'index.php'
+    stripUrl = baseUrl + 'comics/index.php?date=%s'
+    firstStripUrl = stripUrl % 'fur_fly1.jpg'
+    imageSearch = '//img[contains(@src, "comics/") and not(@width)]'
+    prevSearch = '//a[contains(text(), "Previous Comic")]'
+    endOfLife = True
+    ignoreRobotsTxt = True
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix filenames of early comics
+        return imageUrl.rsplit('/', 1)[-1].replace('fur_fly', 'furwillfly')
