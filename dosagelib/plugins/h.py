@@ -107,6 +107,63 @@ class HijinksEnsuePhoto(_WPNaviIn):
     endOfLife = True
 
 
+class Holystone(_WordPressScraper):
+    url = 'http://www.holystone-comic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'prologue-page-1'
+    starter = bounceStarter
+    ignoreRobotsTxt = True
+    indexOffset = True
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        missingIndex = {
+            'chapter-7-page-36-no-one': '372',
+            'interlude-seven-fracture': '324',
+            'chapter-7-page-37-tear': '317.5',
+            'chapter-7-page-10-only-one': '291.5',
+            'chapter-7-seeds-of-the-past': '282.5',
+            'interlude-six-containment': '281.5',
+            'ch-6-pg-29-midnight': '273',
+            'interlude-5-intervention': '232.5',
+            'ch-5-pg-22-another-way': '213',
+            'chapter-5-unforgiven-tresspasses': '191',
+            'interlude-four_downfall': '179.5',
+            'chapter-4-old-world-order': '142',
+            'interesting-things': '55',
+            'chapter-two-high-seas-contention': '48',
+            'the-horizon': '38',
+            'belay': '33',
+            'chapter-one-chance-encounters': '0'
+        }
+        incorrectIndex = {
+            'understand',
+            'trouble',
+            'beasts',
+            'powers',
+            'dangerous',
+            'good-luck',
+            'children',
+            'divisions',
+            'qarin',
+            'future-khen'
+        }
+        # Fix missing and incorrect indices
+        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
+        if page in missingIndex:
+            page = missingIndex[page] + '-' + page
+        elif page in incorrectIndex:
+            page = '2' + page[1:]
+        # Fix offset
+        if page != '287-embrace':
+            self.indexOffset = False
+        if self.indexOffset:
+            page = page.split('-', 1)
+            page[0] = str(int(page[0]) + 10)
+            page = page[0] + '-' + page[1]
+        return page + '.' + imageUrl.rsplit('.', 1)[-1]
+
+
 class Housepets(_WordPressScraper):
     url = 'http://www.housepetscomic.com/'
     stripUrl = url + 'comic/%s/'
