@@ -46,7 +46,7 @@ class ComicListUpdater(object):
         """Get an HTML page and parse it with LXML."""
         print("Parsing", url, file=sys.stderr)
         try:
-            data = html.document_fromstring(get_page(url, self.session).text)
+            data = html.document_fromstring(get_page(url, self.session, True).text)
             if expand:
                 data.make_links_absolute(url)
             if self.sleep > 0:

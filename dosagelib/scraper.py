@@ -79,11 +79,18 @@ class Scraper(object):
     # usually the index format help
     help = ''
 
-    # Specifing a list of HTTP error codes which should be handled as a
-    # successful request.  This is a workaround for some comics which return
-    # regular pages with strange HTTP codes. By default, all HTTP errors raise
+    # A list of HTTP error codes which should be handled as a successful
+    # request. This is a workaround for some comics which return regular
+    # pages with strange HTTP codes. By default, all HTTP errors raise
     # exceptions.
     allow_errors = ()
+
+    # Ignore the website's robots.txt settings. Some comics use this to block
+    # scrapers, but do not provide any other methods to download or purchase
+    # the comic. The Internet Archive excludes pages blocked by this method,
+    # which can cause comics to be permanently lost over time. This flag
+    # should be used with extreme caution.
+    ignoreRobotsTxt = False
 
     # HTTP session for configuration & cookies
     session = requests_session()
@@ -312,7 +319,10 @@ class Scraper(object):
         methods should be able to use the data if they so desire... (Affected
         methods: shouldSkipUrl, imageUrlModifier)
         """
-        return get_page(url, self.session, allow_errors=self.allow_errors)
+        return get_page(url,
+                        self.session,
+                        not self.ignoreRobotsTxt,
+                        allow_errors=self.allow_errors)
 
     def fetchUrls(self, url, data, urlsearch):
         raise ValueError("No implementation for fetchUrls!")

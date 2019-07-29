@@ -179,9 +179,10 @@ def case_insensitive_re(name):
     return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
 
 
-def get_page(url, session, **kwargs):
+def get_page(url, session, robot, **kwargs):
     """Get text content of given URL."""
-    check_robotstxt(url, session)
+    if robot:
+        check_robotstxt(url, session)
     # read page data
     page = urlopen(url, session, max_content_bytes=MaxContentBytes, **kwargs)
     out.debug(u"Got page content %r" % page.content, level=3)
