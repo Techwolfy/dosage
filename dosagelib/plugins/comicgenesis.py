@@ -111,6 +111,7 @@ class ComicGenesis(_ParserScraper):
             cls('SarahZero', 'plughead'),
             cls('SixByNineCollege', 'sixbyninecollege'),
             cls('SpoononHighandFireontheMountian', 'spoon'),
+            cls('SuicideForHire', 'suicideforhire', ignoreRobotsTxt=True),
             cls('SynapticMisfires', 'synapticmisfires'),
             cls('TakingStock', 'mapaghimagsik'),
             cls('TemplarArizona', 'templaraz'),
