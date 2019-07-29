@@ -71,6 +71,7 @@ class ComicGenesis(_ParserScraper):
             cls('FancyThat', 'fancythat'),
             cls('FantasyQwest', 'creatorauthorman'),
             cls('Fantazine', 'fantazin'),
+            cls('FaultyLogic', 'faultylogic', ignoreRobotsTxt=True),
             cls('Flounderville', 'flounderville'),
             cls('GEM', 'keltzy'),
             cls('Gonefor300days', 'g4300d'),
