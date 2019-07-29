@@ -304,6 +304,13 @@ class Comedity(_BasicScraper):
     help = 'Index format: n (no padding)'
 
 
+class ComingUpViolet(_WordPressScraper):
+    url = 'https://jadephoenix.org/comingupviolet/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'coming-up-violet'
+    ignoreRobotsTxt = True
+
+
 class CommanderKitty(_WPNavi):
     url = 'http://www.commanderkitty.com/'
     stripUrl = url + '%s/'
