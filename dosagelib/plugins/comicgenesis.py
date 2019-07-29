@@ -20,7 +20,7 @@ class ComicGenesis(_ParserScraper):
     )
     help = 'Index format: yyyymmdd'
 
-    def __init__(self, name, sub=None, last=None, baseUrl=None, lang=None):
+    def __init__(self, name, sub=None, last=None, baseUrl=None, lang=None, ignoreRobotsTxt=False):
         super(ComicGenesis, self).__init__('ComicGenesis/' + name)
 
         if sub:
@@ -35,6 +35,9 @@ class ComicGenesis(_ParserScraper):
 
         if lang:
             self.lang = lang
+
+        if ignoreRobotsTxt:
+            self.ignoreRobotsTxt = True
 
     @classmethod
     def getmodules(cls):
@@ -118,6 +121,7 @@ class ComicGenesis(_ParserScraper):
             cls('Unconventional', 'unconventional'),
             cls('WarMageNC17', 'warmage'),
             cls('WebcomicTheWebcomicWebcomicWebcomicWebcomic', 'dannormnsanidey'),
+            cls('Wereworld', 'wereworld', ignoreRobotsTxt=True),
             cls('WhatYouDontSee', 'phantomlady4'),
             cls('Wierdman', 'asa'),
         )
