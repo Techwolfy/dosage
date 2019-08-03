@@ -199,7 +199,6 @@ class Removed(Scraper):
             cls('Creators/BCinSpanish'),
             cls('Creators/GirlsandSportsinSpanish'),
             cls('Creators/RugratsinSpanish'),
-            cls('CtrlAltDel', 'block'),
             cls('CtrlAltDel/Sillies', 'block'),
             cls('DailyDose'),
             cls('DeathToTheExtremist'),

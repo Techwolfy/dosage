@@ -5,6 +5,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+import json
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
@@ -421,6 +422,26 @@ class CrossTimeCafe(_ParserScraper):
     prevSearch = '//a[.//text()="Back"]'
     multipleImagesPerStrip = True
     endOfLife = True
+
+
+class CtrlAltDel(_ParserScraper):
+    url = 'https://cad-comic.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'nice-melon'
+    imageSearch = '//div[@class="comicpage"]/a/img'
+    prevSearch = '//a[@rel="prev"]'
+    ignoreRobotsTxt = True
+
+    def getPrevUrl(self, url, data):
+        # Reimplement JS-only navigation logic
+        postId = data.xpath('//article/@class')[0].split(' ', 1)[0].replace('post-', '')
+        query = '?action=get_nav_post&nav_type=previous&post_id=' + postId
+        prev = self.getPage(self.url + 'wp-admin/admin-ajax.php' + query).text_content()
+        return json.loads(prev)['url']
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        return imageUrl.rsplit('/', 1)[-1].replace('ENG_', 'cad-')
 
 
 class CucumberQuest(_BasicScraper):
