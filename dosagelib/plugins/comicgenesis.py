@@ -122,6 +122,7 @@ class ComicGenesis(_ParserScraper):
             cls('TheMisadventuresofOkk', 'okk'),
             cls('ThePath', 'thepath', '20081226'),
             cls('TheTalesofKalduras', 'kalduras'),
+            cls('UmlautHouse', 'umlauthouse', ignoreRobotsTxt=True),
             cls('Unconventional', 'unconventional'),
             cls('WarMageNC17', 'warmage'),
             cls('WebcomicTheWebcomicWebcomicWebcomicWebcomic', 'dannormnsanidey'),
