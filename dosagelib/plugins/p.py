@@ -5,6 +5,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+import requests
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
@@ -18,16 +19,23 @@ class PandyLand(_WordPressScraper):
     firstStripUrl = 'http://pandyland.net/1/'
 
 
-class ParadigmShift(_BasicScraper):
-    url = 'http://www.paradigmshiftmanga.com/'
+class ParadigmShift(_ParserScraper):
+    stripUrl = 'http://www.paradigmshiftmanga.com/ps/%s.html'
+    firstStripUrl = stripUrl % 'part-one-equilibrium'
+    url = firstStripUrl
+    imageSearch = '//div[@id="the-comic"]//img'
+    prevSearch = '//a[contains(@class, "previous-comic-link")]'
+    latestSearch = '//a[contains(@class, "last-comic-link")]'
     starter = indirectStarter
-    stripUrl = url + 'ps/%s.html'
-    imageSearch = compile(tagre("img", "src", r'([^"]*comics/ps/[^"]*)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)',
-                               after="previous-comic-link"))
-    latestSearch = compile(tagre("a", "href", r'([^"]+)',
-                                 after="next-comic-link"))
-    help = 'Index format: custom'
+    currentVolume = 4
+
+    def namer(self, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if not filename.startswith('ps' + str(self.currentVolume)):
+            filename = 'ps' + str(self.currentVolume) + '-' + filename
+        if pageUrl.rsplit('/', 1)[-1].startswith('part-'):
+            self.currentVolume = self.currentVolume - 1
+        return filename
 
 
 class ParallelUniversum(_BasicScraper):
