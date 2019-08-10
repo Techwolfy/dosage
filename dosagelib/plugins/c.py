@@ -83,6 +83,13 @@ class CarryOnOfMouseAndMoon(CarryOn):
     ignoreRobotsTxt = True
 
 
+class CarryOnPiratesOfPenumbra(CarryOn):
+    name = 'CarryOn/PiratesOfPenumbra'
+    url = 'http://www.hirezfox.com/km/pop/pop1024/'
+    firstStripUrl = url + 'd/20040117.html'
+    ignoreRobotsTxt = True
+
+
 class CaseyAndAndy(_BasicScraper):
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'
