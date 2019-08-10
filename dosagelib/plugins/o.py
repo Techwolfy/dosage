@@ -49,11 +49,10 @@ class OffWhite(_ParserScraper):
 class Oglaf(_ParserScraper):
     url = 'http://oglaf.com/'
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'cumsprite'
     imageSearch = '//img[@id="strip"]'
-    # search for "previous story" only
-    prevSearch = '//a[div[@id="pvs"]]'
-    # search for "next page"
-    nextSearch = '//a[div[@id="nx"]]'
+    prevSearch = '//a[@rel="prev"]'
+    nextSearch = '//a[@rel="next"]'
     multipleImagesPerStrip = True
     adult = True
 
