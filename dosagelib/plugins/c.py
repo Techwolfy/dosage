@@ -261,6 +261,13 @@ class ClanOfTheCats(_WordPressScraper):
         return super().getPrevUrl(url, data).replace('/2954/', '/2002-06-22/')
 
 
+class ClanOfTheCatsReunion(_WordPressScraper):
+    name = 'ClanOfTheCats/Reunion'
+    url = 'http://www.clanofthecats.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'cotc-reunion'
+
+
 class Cloudscratcher(_ParserScraper):
     url = 'http://www.cloudscratcher.com/'
     stripUrl = url + 'comic.php?page=%s'
