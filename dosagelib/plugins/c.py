@@ -76,6 +76,13 @@ class CarryOnLegendOfAnneBunny(CarryOn):
         return filename
 
 
+class CarryOnOfMouseAndMoon(CarryOn):
+    name = 'CarryOn/OfMouseAndMoon'
+    url = 'http://www.hirezfox.com/km/omam/omam1024/'
+    firstStripUrl = url + 'd/20031101.html'
+    ignoreRobotsTxt = True
+
+
 class CaseyAndAndy(_BasicScraper):
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'
