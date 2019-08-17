@@ -841,6 +841,7 @@ class ComicFury(_ParserScraper):
             cls('ReSetArt', 'resetfanarts'),
             cls('ResidentWeirdo', 'residentweirdo'),
             cls('ResNullius', 'resnullius'),
+            cls('ResNulliusCS', 'resnulliuscs'),
             cls('ReturnOfWonderland', 'returnofwonderland'),
             cls('Revive', 'revive'),
             cls('RexAfterDark', 'rexafterdark'),
