@@ -42,11 +42,11 @@ class ComicListUpdater(object):
         self.session = requests.Session()
         self.sleep = 0
 
-    def get_url(self, url, expand=True):
+    def get_url(self, url, expand=True, robot=True):
         """Get an HTML page and parse it with LXML."""
         print("Parsing", url, file=sys.stderr)
         try:
-            data = html.document_fromstring(get_page(url, self.session, True).text)
+            data = html.document_fromstring(get_page(url, self.session, robot).text)
             if expand:
                 data.make_links_absolute(url)
             if self.sleep > 0:
