@@ -57,6 +57,7 @@ class ComicGenesis(_ParserScraper):
             cls('Candi', baseUrl='http://candicomics.com/'),
             cls('Cerintha', 'cerintha'),
             cls('CorporateLife', 'corporatelife'),
+            cls('CrimsonFury', 'crimsonfury', ignoreRobotsTxt=True),
             cls('DarkWelkin', 'darkwelkin'),
             cls('DeepBlue', 'gjbivin', last='20131109'),
             cls('DemonEater', 'demoneater'),
