@@ -119,6 +119,7 @@ class ComicGenesis(_ParserScraper):
             cls('TheAdventuresofKaniraBaxter', 'kanirabaxter'),
             cls('TheAdventuresofVindibuddSuperheroInTraining', 'vindibudd', last='20070720'),
             cls('TheEasyBreather', 'easybreather'),
+            cls('TheFoxfireChronicles', 'foxfire', ignoreRobotsTxt=True),
             cls('TheMisadventuresofOkk', 'okk'),
             cls('ThePath', 'thepath', '20081226'),
             cls('TheTalesofKalduras', 'kalduras'),
