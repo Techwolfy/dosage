@@ -119,5 +119,7 @@ class Katbox(_ParserScraper):
             cls('TruckOff', 'fox-pop', 'truck-off', 'prologue-00'),
             cls('UberQuest', 'kozmiko', 'uberquest', 'uberquest-chapter-i-temporal-adventure'),
             cls('VampireHunterBoyfriends', 'bone', 'vhb', 'vampire-hunter-boyfriends-chapter-1-cover', adult=True),
-            cls('Yosh', 'sage', 'yosh', 'introduction'),
+
+            # Comics that have left the Katbox
+            #cls('Yosh', 'sage', 'yosh', 'introduction'),
         )
