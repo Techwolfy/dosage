@@ -107,7 +107,6 @@ class Katbox(_ParserScraper):
             cls('Olivia', 'kadath', 'olivia', 'misplaced-virtues-title-page', adult=True),
             cls('OurWorld', 'ourworld', None, 'title-page'),
             cls('Paprika', 'nekonny', 'paprika', '001-revolution'),
-            cls('PeterAndCompany', 'peterverse', 'peter-and-company', 'strip-1'),
             cls('PeterAndWhitney', 'peterverse', 'peter-and-whitney', 'comic-1-graduation-day'),
             cls('PracticeMakesPerfect', 'nekonny', 'pmp', '001-procrastination'),
             cls('ProjectZero', 'rascals', 'project-zero', 'project-zero-cover', adult=True),
@@ -121,5 +120,6 @@ class Katbox(_ParserScraper):
 
             # Comics that have left the Katbox
             #cls('ArtificialIncident', 'sage', 'ai', 'issue-one-life-changing'),
+            #cls('PeterAndCompany', 'peterverse', 'peter-and-company', 'strip-1'),
             #cls('Yosh', 'sage', 'yosh', 'introduction'),
         )

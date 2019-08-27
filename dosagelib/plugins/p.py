@@ -125,6 +125,15 @@ class PeppermintSagaBGR(_WPNavi):
     adult = True
 
 
+class PeterAndCompany(_ParserScraper):
+    url = 'http://peterandcompany.com/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '20050101'
+    imageSearch = ('//div[@id="page"]//img',
+                   '//div[@id="strip"]//img[contains(@src, "strips/")]')
+    prevSearch = '//a[./img[contains(@src, "nav_previous")]]'
+
+
 class PeterIsTheWolf(_ParserScraper):
     stripUrl = 'http://www.peteristhewolf.com/adult/%s.html'
     url = stripUrl % 'home'
