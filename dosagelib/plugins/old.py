@@ -619,6 +619,7 @@ class Renamed(Scraper):
             cls('GoComics/Zootopia', 'ComicSherpa/Zootopia'),
             cls('Katbox/ArtificialIncident', 'ArtificialIncident'),
             cls('Katbox/PeterAndCompany', 'PeterAndCompany'),
+            cls('Katbox/PeterAndWhitney', 'PeterAndWhitney'),
             cls('Katbox/Yosh', 'YoshSaga'),
             cls('KeenSpot/ElGoonishShive', 'ElGoonishShive'),
             cls('KeenSpot/ElGoonishShiveNP', 'ElGoonishShiveNP'),

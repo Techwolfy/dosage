@@ -134,6 +134,14 @@ class PeterAndCompany(_ParserScraper):
     prevSearch = '//a[./img[contains(@src, "nav_previous")]]'
 
 
+class PeterAndWhitney(_ParserScraper):
+    url = 'http://peterandwhitney.com/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '20160502'
+    imageSearch = '//div[@id="page"]//img'
+    prevSearch = '//a[./img[contains(@src, "nav_previous")]]'
+
+
 class PeterIsTheWolf(_ParserScraper):
     stripUrl = 'http://www.peteristhewolf.com/adult/%s.html'
     url = stripUrl % 'home'
