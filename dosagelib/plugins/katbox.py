@@ -91,7 +91,6 @@ class Katbox(_ParserScraper):
     @classmethod
     def getmodules(cls):
         return (
-            cls('AddictiveScience', 'cervelet', 'addictive-science', 'page-1', fixNames=True),
             cls('Debunkers', 'nixie', 'debunkers', 'nixie-the-debunker'),
             cls('Draconia', 'razorfox', None, 'chapter-1-page-1', adult=True),
             cls('Eorah', 'hiorou', 'eorah', 'eorah-title'),
@@ -109,6 +108,7 @@ class Katbox(_ParserScraper):
             cls('VampireHunterBoyfriends', 'bone', 'vhb', 'vampire-hunter-boyfriends-chapter-1-cover', adult=True),
 
             # Comics that have left the Katbox
+            #cls('AddictiveScience', 'cervelet', 'addictive-science', 'page-1', fixNames=True),
             #cls('ArtificialIncident', 'sage', 'ai', 'issue-one-life-changing'),
             #cls('CaribbeanBlue', 'nekonny', 'cblue', 'caribbean-blue', last='326-the-end'),
             #cls('DesertFox', 'desertfox', None, 'origins-1', adult=True, fixNames=True),
