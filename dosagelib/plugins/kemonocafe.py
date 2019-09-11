@@ -54,4 +54,5 @@ class KemonoCafe(_ParserScraper):
             cls('PracticeMakesPerfect', 'pmp', 'title-001'),
             cls('Rascals', 'rascals', 'rascals-pg-0', adult=True),
             cls('TheEyeOfRamalach', 'theeye', 'theeye-page01'),
+            cls('TinaOfTheSouth', 'tots', 'tos-01-01'),
         )
