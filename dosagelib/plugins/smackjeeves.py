@@ -302,6 +302,7 @@ class SmackJeeves(_ParserScraper):
             cls('GoodGame', sub='goodgame', endOfLife=True),
             cls('GoodnightMrsGoose', sub='goose'),
             cls('Grayscale', sub='grayscale', adult=True),
+            cls('GrowingTroubles', sub='growingtroubles'),
             cls('GuardianGhost', sub='guardianghost'),
             cls('GuardiansoftheGalaxialSpaceways', sub='ggs'),
             cls('Habibahssong', sub='habibahsong'),
