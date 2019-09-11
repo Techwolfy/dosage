@@ -619,6 +619,7 @@ class Renamed(Scraper):
             cls('GoComics/Zootopia', 'ComicSherpa/Zootopia'),
             cls('Katbox/ArtificialIncident', 'ArtificialIncident'),
             cls('Katbox/CaribbeanBlue', 'KemonoCafe/CaribbeanBlue'),
+            cls('Katbox/DesertFox', 'DesertFox'),
             cls('Katbox/IMew', 'KemonoCafe/IMew'),
             cls('Katbox/Knighthood', 'KemonoCafe/Knighthood'),
             cls('Katbox/LasLindas', 'KemonoCafe/LasLindas'),
