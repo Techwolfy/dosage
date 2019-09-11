@@ -91,7 +91,6 @@ class Katbox(_ParserScraper):
     @classmethod
     def getmodules(cls):
         return (
-            cls('Debunkers', 'nixie', 'debunkers', 'nixie-the-debunker'),
             cls('Draconia', 'razorfox', None, 'chapter-1-page-1', adult=True),
             cls('Eorah', 'hiorou', 'eorah', 'eorah-title'),
             cls('EtherealWorlds', 'sahtori', 'oasis', '1-nightly-wanderings'),
@@ -111,6 +110,7 @@ class Katbox(_ParserScraper):
             #cls('AddictiveScience', 'cervelet', 'addictive-science', 'page-1', fixNames=True),
             #cls('ArtificialIncident', 'sage', 'ai', 'issue-one-life-changing'),
             #cls('CaribbeanBlue', 'nekonny', 'cblue', 'caribbean-blue', last='326-the-end'),
+            #cls('Debunkers', 'nixie', 'debunkers', 'nixie-the-debunker'),
             #cls('DesertFox', 'desertfox', None, 'origins-1', adult=True, fixNames=True),
             #cls('IMew', 'nekonny', 'imew', 'imew', last='addictive-imew-16'),
             #cls('Knighthood', 'chalo', 'knighthood', 'knighthood-1'),

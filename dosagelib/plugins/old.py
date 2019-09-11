@@ -620,6 +620,7 @@ class Renamed(Scraper):
             cls('Katbox/AddictiveScience', 'KemonoCafe/AddictiveScience'),
             cls('Katbox/ArtificialIncident', 'ArtificialIncident'),
             cls('Katbox/CaribbeanBlue', 'KemonoCafe/CaribbeanBlue'),
+            cls('Katbox/Debunkers', 'WebToons/Debunkers'),
             cls('Katbox/DesertFox', 'DesertFox'),
             cls('Katbox/IMew', 'KemonoCafe/IMew'),
             cls('Katbox/Knighthood', 'KemonoCafe/Knighthood'),

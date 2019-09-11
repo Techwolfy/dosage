@@ -51,6 +51,7 @@ class WebToons(_ParserScraper):
             cls('Lozolz', 'tiptoon/lozolz', 1268),
 
             # WebToons Canvas comics
+            cls('Debunkers', 'challenge/debunkers', 148475),
             cls('InternetExplorer', 'challenge/internet-explorer', 219164),
             cls('SpaceVixen', 'challenge/space-vixen-deep-space-k9', 207049),
 
