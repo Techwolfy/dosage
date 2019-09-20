@@ -22,7 +22,10 @@ class Katbox(_ParserScraper):
         super(Katbox, self).__init__('Katbox/' + name)
 
         baseUrl = 'http://%s.katbox.net/' % sub
-        if sub == 'ourworld' or sub == 'bone' or sub == 'rascals':
+        if (sub == 'ourworld' or
+            sub == 'bone' or
+            sub == 'rascals' or
+            sub == 'laslindas'):
             baseUrl = baseUrl.replace('katbox', 'katboxad')
 
         self.stripUrl = baseUrl + 'comics/%s/'
@@ -32,19 +35,18 @@ class Katbox(_ParserScraper):
             (sub == 'rascals' and comic == 'project-zero')):
             self.stripUrl = self.stripUrl.replace('comics', 'comic')
             self.multipleImagesPerStrip = True
+        elif sub == 'laslindas':
+            self.stripUrl = baseUrl + '%s/'
         if comic:
             self.stripUrl = self.stripUrl % (comic + '/%s')
 
         self.firstStripUrl = self.stripUrl % first
         self.url = self.firstStripUrl
+        self.adult = adult
 
         if last:
             self.url = self.stripUrl % last
-            self.starter = super().starter
             self.endOfLife = True
-
-        if adult:
-            self.adult = True
 
         if fixNames:
             self.namer = self.dateNamer
@@ -55,6 +57,8 @@ class Katbox(_ParserScraper):
             ageGateCookie = requests.cookies.create_cookie(domain='.katbox.net', name='age_gate', value='18')
             self.session.cookies.set_cookie(ageGateCookie)
             self.session.get(self.url + '?webcomic_birthday=1')
+        if self.endOfLife:
+            return super().starter()
         return indirectStarter(self)
 
     def fetchUrls(self, url, data, urlSearch):
@@ -97,6 +101,7 @@ class Katbox(_ParserScraper):
             cls('FalseStart', 'bone', 'false-start', 'issue-1-cover', adult=True, fixNames=True),
             cls('ItsyBitsyAdventures', 'silverblaze', 'iba', 'fight-the-machine'),
             cls('KnuckleUp', 'rascals', 'knuckle-up', 'knuckle-up-prologue-i', adult=True),
+            cls('LasLindasBATB', 'laslindas', 'breasts-are-the-best', 'breasts-are-the-best-1', last='breasts-are-the-best-60', adult=True),
             cls('Olivia', 'kadath', 'olivia', 'misplaced-virtues-title-page', adult=True),
             cls('OurWorld', 'ourworld', None, 'title-page'),
             cls('ProjectZero', 'rascals', 'project-zero', 'project-zero-cover', adult=True),
@@ -122,4 +127,30 @@ class Katbox(_ParserScraper):
             #cls('Rascals', 'godai', 'rascals', 'rascals-cover', adult=True),
             #cls('TheEyeOfRamalach', 'avencri', 'theeye', 'boxes-and-memories'),
             #cls('Yosh', 'sage', 'yosh', 'introduction'),
+        )
+
+
+class KatboxImageDump(_ParserScraper):
+    imageSearch = '//div[@class="post-content"]//img'
+    multipleImagesPerStrip = True
+    endOfLife = True
+
+    def __init__(self, name, sub, comic, last=None, adult=False):
+        super(KatboxImageDump, self).__init__('Katbox/' + name)
+
+        baseUrl = 'http://%s.katbox.net/' % sub
+        if sub == 'laslindas':
+            baseUrl = baseUrl.replace('katbox', 'katboxad')
+
+        self.url = baseUrl + comic + '/'
+        self.firstStripUrl = self.url
+
+    @classmethod
+    def getmodules(cls):
+        return (
+            cls('LasLindasBuildingAnEmpire', 'laslindas', 'cancelled-be'),
+            cls('LasLindasCrestDiaries', 'laslindas', 'cancelled-cd'),
+            cls('LasLindasDungeonsAndDames', 'laslindas', 'cancelled-dnd'),
+            cls('LasLindasDungeonsAndDames2', 'laslindas', 'cancelled-dnd2'),
+            cls('LasLindasLearningCurves', 'laslindas', 'cancelled-lc', adult=True),
         )
