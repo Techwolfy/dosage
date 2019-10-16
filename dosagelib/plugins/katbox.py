@@ -95,8 +95,6 @@ class Katbox(_ParserScraper):
     @classmethod
     def getmodules(cls):
         return (
-            cls('Draconia', 'razorfox', None, 'chapter-1-page-1', adult=True),
-            cls('Eorah', 'hiorou', 'eorah', 'eorah-title'),
             cls('EtherealWorlds', 'sahtori', 'oasis', '1-nightly-wanderings'),
             cls('FalseStart', 'bone', 'false-start', 'issue-1-cover', adult=True, fixNames=True),
             cls('ItsyBitsyAdventures', 'silverblaze', 'iba', 'fight-the-machine'),
@@ -108,7 +106,6 @@ class Katbox(_ParserScraper):
             cls('RascalsGoyoku', 'rascals', 'goyoku', 'goyoku-prologue1', adult=True),
             cls('TheSprawl', 'snowdon', 'sprawl', 'the-sprawl-log01-print-edition-available-now', adult=True),
             cls('TruckOff', 'fox-pop', 'truck-off', 'prologue-00'),
-            cls('UberQuest', 'kozmiko', 'uberquest', 'uberquest-chapter-i-temporal-adventure'),
             cls('VampireHunterBoyfriends', 'bone', 'vhb', 'vampire-hunter-boyfriends-chapter-1-cover', adult=True),
 
             # Comics that have left the Katbox
@@ -117,6 +114,8 @@ class Katbox(_ParserScraper):
             #cls('CaribbeanBlue', 'nekonny', 'cblue', 'caribbean-blue', last='326-the-end'),
             #cls('Debunkers', 'nixie', 'debunkers', 'nixie-the-debunker'),
             #cls('DesertFox', 'desertfox', None, 'origins-1', adult=True, fixNames=True),
+            #cls('Draconia', 'razorfox', None, 'chapter-1-page-1', adult=True),
+            #cls('Eorah', 'hiorou', 'eorah', 'eorah-title'),
             #cls('IMew', 'nekonny', 'imew', 'imew', last='addictive-imew-16'),
             #cls('Knighthood', 'chalo', 'knighthood', 'knighthood-1'),
             #cls('LasLindas', 'chalo', 'las-lindas', 'day-one', adult=True),
@@ -126,6 +125,7 @@ class Katbox(_ParserScraper):
             #cls('PracticeMakesPerfect', 'nekonny', 'pmp', '001-procrastination'),
             #cls('Rascals', 'godai', 'rascals', 'rascals-cover', adult=True),
             #cls('TheEyeOfRamalach', 'avencri', 'theeye', 'boxes-and-memories'),
+            #cls('UberQuest', 'kozmiko', 'uberquest', 'uberquest-chapter-i-temporal-adventure'),
             #cls('Yosh', 'sage', 'yosh', 'introduction'),
         )
 
