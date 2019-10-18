@@ -11,7 +11,7 @@ from six.moves.urllib.parse import urljoin
 from ..helpers import bounceStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, _WPWebcomic
 
 
 class RadioactivePanda(_BasicScraper):
@@ -148,13 +148,10 @@ class Ruthe(_BasicScraper):
     help = 'Index format: number'
 
 
-class Ryugou(_ParserScraper):
+class Ryugou(_WPWebcomic):
     url = 'http://ryugou.swashbuckledcomics.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = 'ryugou-chapter-1-cover'
-    imageSearch = '//div[@class="webcomic-image"]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
-    nextSearch = '//a[contains(@class, "next-webcomic-link")]'
     starter = bounceStarter
 
     def namer(self, imageUrl, pageUrl):

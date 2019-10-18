@@ -10,7 +10,7 @@ from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter, indirectStarter, xpath_class
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class WapsiSquare(_WordPressScraper):
@@ -108,11 +108,11 @@ class WhatWeRememberMost(_WordPressScraper):
     firstStripUrl = stripUrl % 'page-1'
 
 
-class WhiteNoise(_WordPressScraper):
+class WhiteNoise(_WPWebcomic):
     url = 'http://whitenoisecomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'book-one'
-    prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
+    imageSearch = '//div[@id="comic"]//img'
 
 
 class WhiteNoiseLee(_ComicControlScraper):

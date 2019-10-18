@@ -12,7 +12,7 @@ import datetime
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
 class SabrinaOnline(_BasicScraper):
@@ -256,26 +256,20 @@ class SinFest(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class Sithrah(_ParserScraper):
+class Sithrah(_WPWebcomic):
     url = 'http://sithrah.com/'
-    imageSearch = '//div[@class="webcomic-image"]/img'
-    prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
 
-class SixPackOfOtters(_ParserScraper):
+class SixPackOfOtters(_WPWebcomic):
     url = 'http://sixpackofotters.com/'
     stripUrl = url + 'pages/%s/'
     firstStripUrl = stripUrl % 'chapter-01-tandem'
-    imageSearch = '//div[contains(@class, "webcomic-image")]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
 
 
-class SkinDeep(_ParserScraper):
+class SkinDeep(_WPWebcomic):
     url = 'http://www.skindeepcomic.com/'
     stripUrl = url + 'archive/%s/'
     firstStripUrl = stripUrl % 'issue-1-cover'
-    imageSearch = '//a[%s]/img' % xpath_class('webcomic-link')
-    prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
 
 class SleeplessDomain(_ComicControlScraper):
@@ -366,14 +360,11 @@ class SomethingPositive(_BasicScraper):
     help = 'Index format: mmddyyyy'
 
 
-class Sorcery101(_ParserScraper):
+class Sorcery101(_WPWebcomic):
     baseUrl = 'http://www.sorcery101.net/sorcery-101/'
     stripUrl = baseUrl + '%s/'
     url = stripUrl % 'sorcery101-ch-01'
     firstStripUrl = url
-    imageSearch = '//div[@class="webcomic-image"]/img'
-    prevSearch = '//a[@rel="prev"]'
-    latestSearch = '//a[%s]' % xpath_class('last-webcomic-link')
     starter = indirectStarter
     allow_errors = (500,)
     help = 'Index format: stripname'
