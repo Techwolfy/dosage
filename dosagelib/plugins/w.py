@@ -110,7 +110,8 @@ class WhatWeRememberMost(_WordPressScraper):
 
 class WhiteNoise(_WordPressScraper):
     url = 'http://whitenoisecomic.com/'
-    firstStripUrl = url + 'comic/book-one/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'book-one'
     prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
 
