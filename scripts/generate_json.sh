@@ -4,11 +4,11 @@ set -u
 
 d=$(dirname $0)
 if [ $# -ge 1 ]; then
-  list="$*"
+    list="$*"
 else
-  list="arcamax comicfury comicgenesis creators gocomics keenspot smackjeeves webcomicfactory"
+    list="arcamax comicfury comicgenesis creators gocomics keenspot smackjeeves webcomicfactory webtoons"
 fi
 for script in $list; do
-  echo "Executing ${script}.py"
-  "${d}/${script}.py"
+    echo "Executing ${script}.py"
+    "${d}/${script}.py"
 done
