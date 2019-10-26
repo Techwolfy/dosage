@@ -120,6 +120,15 @@ class LifeAsRendered(_ParserScraper):
         return None
 
 
+class LilithsWord(_ComicControlScraper):
+    url = 'http://www.lilithword.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'prologue-page-00'
+
+    def namer(self, imageUrl, pageUrl):
+        return imageUrl.rsplit('/', 1)[-1].split('-', 1)[1]
+
+
 class LittleGamers(_BasicScraper):
     url = 'http://www.little-gamers.com/'
     stripUrl = url + '%s/'
