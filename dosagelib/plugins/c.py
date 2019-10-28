@@ -256,7 +256,7 @@ class ClanOfTheCats(_WordPressScraper):
 
     def getPrevUrl(self, url, data):
         # Fix broken navigation link
-        return super().getPrevUrl(url, data).replace('/2954/', '/2002-06-22/')
+        return super(ClanOfTheCats, self).getPrevUrl(url, data).replace('/2954/', '/2002-06-22/')
 
 
 class ClanOfTheCatsReunion(_WordPressScraper):

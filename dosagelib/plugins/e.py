@@ -105,9 +105,9 @@ class Erfworld(_ParserScraper):
     def fetchUrls(self, url, data, urlSearch):
         # Return the main logo for text-only pages
         try:
-            imageUrls = super().fetchUrls(url, data, urlSearch)
+            imageUrls = super(Erfworld, self).fetchUrls(url, data, urlSearch)
         except ValueError:
-            imageUrls = super().fetchUrls(url, data, '//li[@class="erf-logo"]//img')
+            imageUrls = super(Erfworld, self).fetchUrls(url, data, '//li[@class="erf-logo"]//img')
         return imageUrls
 
     def namer(self, imageUrl, pageUrl):
@@ -128,7 +128,7 @@ class Erfworld(_ParserScraper):
             return self.stripUrl % 'Book+1/184'
         if url == self.stripUrl % 'Book+1/1':
             return self.stripUrl % 'Book+0/81'
-        return super().getPrevUrl(url, data)
+        return super(Erfworld, self).getPrevUrl(url, data)
 
 
 class ErmaFelnaEDF(_ParserScraper):

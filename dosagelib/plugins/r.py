@@ -160,7 +160,7 @@ class Ryugou(_WPWebcomic):
         return title + '.' + ext
 
     def fetchUrls(self, url, data, urlSearch):
-        imageUrls = super().fetchUrls(url, data, urlSearch)
+        imageUrls = super(Ryugou, self).fetchUrls(url, data, urlSearch)
         if url == self.stripUrl % '1-3':
             imageUrls = [imageUrls[1]]
         return imageUrls

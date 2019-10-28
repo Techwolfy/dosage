@@ -156,7 +156,7 @@ class PeterIsTheWolf(_ParserScraper):
         # Fix loop in site navigation
         if url == self.stripUrl % '194':
             return self.stripUrl % '193'
-        return super().getPrevUrl(url, data)
+        return super(PeterIsTheWolf, self).getPrevUrl(url, data)
 
 
 class PHDComics(_ParserScraper):
@@ -270,7 +270,7 @@ class PowerNap(_ParserScraper):
         return url.replace('\n', '').strip()
 
     def getPrevUrl(self, url, data):
-        return super().getPrevUrl(url, data).replace('\n', '').strip()
+        return super(PowerNap, self).getPrevUrl(url, data).replace('\n', '').strip()
 
 
 class Precocious(_ParserScraper):

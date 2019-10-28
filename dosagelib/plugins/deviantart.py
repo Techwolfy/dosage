@@ -38,7 +38,7 @@ class DeviantArt(_ParserScraper):
         url = url.rsplit('/', 1)[-1].rsplit('?', 1)[0]
         if self.nav and url in self.nav:
             return self.stripUrl % self.nav[url]
-        return super().getPrevUrl(url, data)
+        return super(DeviantArt, self).getPrevUrl(url, data)
 
 
     @classmethod

@@ -109,14 +109,14 @@ class LifeAsRendered(_ParserScraper):
         url = segments[1] + '/' + segments[2]
         if self.nav and url in self.nav:
             return self.stripUrl % self.nav[url]
-        return super().getPrevUrl(url, data)
+        return super(LifeAsRendered, self).getPrevUrl(url, data)
 
     def fetchText(self, url, data, textSearch, optional):
         # Save final summary text
         if url == self.firstStripUrl:
             url = self.stripUrl % 'larend'
             data = self.getPage(url)
-            return super().fetchText(url, data, textSearch, optional)
+            return super(LifeAsRendered, self).fetchText(url, data, textSearch, optional)
         return None
 
 
@@ -162,8 +162,7 @@ class LittleTales(_ParserScraper):
         page = url.rsplit('=', 1)[1]
         if page in self.nav:
             return self.stripUrl % self.nav[page]
-        return super().getPrevUrl(url, data)
-
+        return super(LittleTales, self).getPrevUrl(url, data)
 
 
 class LoadingArtist(_ParserScraper):

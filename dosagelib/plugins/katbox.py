@@ -58,11 +58,11 @@ class Katbox(_ParserScraper):
             self.session.cookies.set_cookie(ageGateCookie)
             self.session.get(self.url + '?webcomic_birthday=1')
         if self.endOfLife:
-            return super().starter()
+            return super(Katbox, self).starter()
         return indirectStarter(self)
 
     def fetchUrls(self, url, data, urlSearch):
-        self.imageUrls = super().fetchUrls(url, data, urlSearch)
+        self.imageUrls = super(Katbox, self).fetchUrls(url, data, urlSearch)
         # Special case for broken navigation in Addictive Science
         if url == 'http://cervelet.katbox.net/comic/addictive-science/easter-egg-5/':
             self.imageUrls = ('http://cervelet.katbox.net/wp-content/uploads/sites/11/ad.Science644.jpg',
@@ -89,7 +89,7 @@ class Katbox(_ParserScraper):
         # Special case for broken navigation in False Start
         if url == self.stripUrl % 'issue-6-page-18':
             return self.stripUrl % 'issue-6-page-17'
-        return super().getPrevUrl(url, data)
+        return super(Katbox, self).getPrevUrl(url, data)
 
 
     @classmethod

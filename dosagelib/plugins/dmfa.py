@@ -27,7 +27,7 @@ class DMFA(_ParserScraper):
 
         if last:
             self.url = self.stripUrl % last
-            self.starter = super().starter
+            self.starter = super(DMFA, self).starter
             self.endOfLife = True
 
     @classmethod

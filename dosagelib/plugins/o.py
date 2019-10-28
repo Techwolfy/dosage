@@ -37,13 +37,13 @@ class OffWhite(_ParserScraper):
         # Fix missing page
         if url == self.stripUrl % 'page-37':
             return ['http://off-white.eu/ow_v2/wp-content/uploads/2011/01/new-037.jpg']
-        return super().fetchUrls(url, data, urlSearch)
+        return super(OffWhite, self).fetchUrls(url, data, urlSearch)
 
     def getPrevUrl(self, url, data):
         # Fix missing page
         if url == self.stripUrl % 'page-37':
             return self.stripUrl % 'page-36'
-        return super().getPrevUrl(url, data)
+        return super(OffWhite, self).getPrevUrl(url, data)
 
 
 class Oglaf(_ParserScraper):

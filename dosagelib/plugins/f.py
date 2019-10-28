@@ -150,7 +150,7 @@ class FoxTails(_ParserScraper):
         # Include pre-reboot archive
         if url == self.stripUrl % '20090906':
             return self.stripUrl % '20090704'
-        return super().getPrevUrl(url, data)
+        return super(FoxTails, self).getPrevUrl(url, data)
 
 
 class Fragile(_ParserScraper):

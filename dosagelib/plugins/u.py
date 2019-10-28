@@ -58,7 +58,7 @@ class Unsounded(_ParserScraper):
         # Fix missing navigation link
         if url == self.baseUrl + 'comic/ch13/you_let_me_fall.html':
             return self.stripUrl % ('13', '13', '85')
-        return super().getPrevUrl(url, data)
+        return super(Unsounded, self).getPrevUrl(url, data)
 
     def getIndexStripUrl(self, index):
         # Get comic strip URL from index

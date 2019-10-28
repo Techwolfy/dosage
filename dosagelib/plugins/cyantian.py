@@ -29,7 +29,7 @@ class TheCyantianChronicles(_WordPressScraper):
         url = url.rstrip('/').rsplit('/', 1)[-1]
         if self.nav and url in self.nav:
             return self.stripUrl % self.nav[url]
-        return super().getPrevUrl(url, data)
+        return super(TheCyantianChronicles, self).getPrevUrl(url, data)
 
     @classmethod
     def getmodules(cls):
@@ -79,7 +79,7 @@ class ShivaeComics(_WordPressScraper):
         url = url.rstrip('/').rsplit('/', 1)[-1]
         if self.nav and url in self.nav:
             return self.stripUrl % self.nav[url]
-        return super().getPrevUrl(url, data)
+        return super(Shivae, self).getPrevUrl(url, data)
 
     @classmethod
     def getmodules(cls):

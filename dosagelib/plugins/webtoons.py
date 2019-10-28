@@ -31,7 +31,7 @@ class WebToons(_ParserScraper):
 
     def fetchUrls(self, url, data, urlSearch):
         # Save link order for position-based filenames
-        self.imageUrls = super().fetchUrls(url, data, urlSearch)
+        self.imageUrls = super(WebToons, self).fetchUrls(url, data, urlSearch)
         # Update firstStripUrl with the correct episode title
         if url.rsplit('=', 1)[-1] == '1':
             self.firstStripUrl = url

@@ -116,7 +116,7 @@ class AdventuresOfFifne(_ParserScraper):
         # Fix broken navigation links
         if url == self.stripUrl % 'lg06':
             return self.stripUrl % 'lg05'
-        return super().getPrevUrl(url, data)
+        return super(AdventuresOfFifne, self).getPrevUrl(url, data)
 
 
 class AfterStrife(_WPNavi):
@@ -155,7 +155,7 @@ class AHClub(_WPNaviIn):
         url = url.rstrip('/').rsplit('/', 1)[-1]
         if self.nav and url in self.nav:
             return self.stripUrl % self.nav[url]
-        return super().getPrevUrl(url, data)
+        return super(AHClub, self).getPrevUrl(url, data)
 
 
 class AhoiPolloi(_ParserScraper):
@@ -203,7 +203,7 @@ class AlienDice(_WordPressScraper):
         # Fix broken navigation
         if url == self.stripUrl % 'day-29-part-2-page-3-4':
             return self.stripUrl % 'day-29-part-2-page-3-2'
-        return super().getPrevUrl(url, data)
+        return super(AlienDice, self).getPrevUrl(url, data)
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filename
