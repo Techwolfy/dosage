@@ -13,7 +13,10 @@ from ..scraper import _ParserScraper
 
 class ComicGenesis(_ParserScraper):
     multipleImagesPerStrip = True
-    imageSearch = '//img[contains(@src, "/comics/")]'
+    imageSearch = (
+        '//img[contains(@src, "/comics/")]',
+        '//img[@title!=""]'
+    )
     prevSearch = (
         '//a[img/@alt="Previous comic"]',
         '//a[text()="Previous comic"]',
@@ -42,6 +45,7 @@ class ComicGenesis(_ParserScraper):
     @classmethod
     def getmodules(cls):
         return (
+            cls('21stCenturyFox', 'techfox', ignoreRobotsTxt=True),
             cls('AAAAA', 'aaaaa'),
             cls('AdventuresofKiltman', 'kiltman'),
             cls('AmorModerno', 'amormoderno'),
