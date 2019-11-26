@@ -9,21 +9,22 @@ from ..scraper import _ParserScraper
 
 
 class WebToons(_ParserScraper):
-    lang='en'
-    multipleImagesPerStrip = True
     imageSearch = '//img[contains(@class, "_images")]/@data-url'
     prevSearch = '//a[contains(@class, "_prevEpisode")]'
+    multipleImagesPerStrip = True
 
     def __init__(self, name, url, titlenum):
         super(WebToons, self).__init__('WebToons/' + name)
-        self.baseUrl = 'https://www.webtoons.com/' + self.lang + '/' + url
-        self.titlenum = str(titlenum)
-        self.stripUrl = self.baseUrl + '/episode/viewer?title_no=' + self.titlenum + '&episode_no=%s'
+
+        baseUrl = 'https://www.webtoons.com/en/'
+        self.url = baseUrl + url + '/episode/viewer?title_no=' + str(titlenum)
+        self.listUrl = baseUrl + url + '/list?title_no=' + str(titlenum)
+        self.stripUrl = self.url + '&episode_no=%s'
         self.firstStripUrl = self.stripUrl % '1'
 
     def starter(self):
         # Find current episode number
-        listPage = self.getPage(self.baseUrl + '/list?title_no=' + self.titlenum)
+        listPage = self.getPage(self.listUrl)
         currentEpisode = listPage.xpath('//div[@class="detail_lst"]/ul/li')[0].attrib['data-episode-no']
         # Check for completed tag
         self.endOfLife = (listPage.xpath('//span[@class="txt_ico_completed2"]') != [])
