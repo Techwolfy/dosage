@@ -49,6 +49,7 @@ class WebToons(_ParserScraper):
     def getmodules(cls):
         return (
             # WebToons Canvas comics
+            cls('Anthronauts', 'challenge/anthronauts', 358917),
             cls('Debunkers', 'challenge/debunkers', 148475),
             cls('InternetExplorer', 'challenge/internet-explorer', 219164),
             cls('SpaceVixen', 'challenge/space-vixen-deep-space-k9', 207049),
