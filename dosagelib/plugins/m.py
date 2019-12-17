@@ -272,5 +272,7 @@ class MysteriesOfTheArcana(_ParserScraper):
 
 
 class MonsterUnderTheBed(_WordPressScraper):
-    adult = True
     url = 'http://themonsterunderthebed.net/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % 'test-post'
+    adult = True
