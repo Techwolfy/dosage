@@ -53,6 +53,7 @@ class WebToons(_ParserScraper):
             cls('Debunkers', 'challenge/debunkers', 148475),
             cls('InternetExplorer', 'challenge/internet-explorer', 219164),
             cls('SpaceVixen', 'challenge/space-vixen-deep-space-k9', 207049),
+            cls('PinchPoint', 'challenge/pinch-point-reborn', 334640),
 
             # Unicode title
             cls('Lozolz', 'tiptoon/lozolz', 1268),
