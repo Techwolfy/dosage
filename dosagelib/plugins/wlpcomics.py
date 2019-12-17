@@ -58,12 +58,43 @@ class MaidAttack(_WLPComics):
 
 
 class PeterIsTheWolfAdult(_WLPComics):
-    url = 'http://www.peteristhewolf.com/adult/home.html'
+    stripUrl = 'http://www.peteristhewolf.com/adult/%s.html'
+    url = stripUrl % 'home'
+    firstStripUrl = stripUrl % '001'
+    multipleImagesPerStrip = True
     adult = True
+
+    def namer(self, imageUrl, pageUrl):
+        name = pageUrl.rsplit('/', 1)[-1].split('.')[0] + '_' + imageUrl.rsplit('/', 1)[-1]
+        if 'adult' in imageUrl:
+            name = name.split('.')
+            return name[0] + '_adult.' + name[1]
+        return name
+
+
+    def getPrevUrl(self, url, data):
+        # Fix loop in site navigation
+        if url == self.stripUrl % '194':
+            return self.stripUrl % '193'
+        return super(PeterIsTheWolfAdult, self).getPrevUrl(url, data)
 
 
 class PeterIsTheWolfGeneral(_WLPComics):
     url = 'http://www.peteristhewolf.com/general/'
+    stripUrl = url + '%s.html'
+    firstStripUrl = stripUrl % '001'
+
+    def getPrevUrl(self, url, data):
+        # Fix loops in site navigation
+        if url == self.stripUrl % '406':
+            return self.stripUrl % '405'
+        if url == self.stripUrl % '230':
+            return self.stripUrl % '229'
+        if url == self.stripUrl % '229':
+            return self.stripUrl % '228'
+        if url == self.stripUrl % '153':
+            return self.stripUrl % '152'
+        return super(PeterIsTheWolfGeneral, self).getPrevUrl(url, data)
 
 
 class Stellar(_WLPComics):
