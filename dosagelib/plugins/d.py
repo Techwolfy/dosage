@@ -227,6 +227,22 @@ class Dilbert(_ParserScraper):
         return "%s" % name
 
 
+class Djandora(_WordPressScraper):
+    url = 'https://web.archive.org/web/20170923062433/http://djandora.comicsbreak.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'intro'
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('2014-10-31-Page70', 'Page70')
+        filename = filename.replace('a3p69eng', 'Page69')
+        if '2015/08/a4p57eng' in imageUrl:
+            filename = filename.replace('p57', 'p56')
+        return filename
+
+
 class DocRat(_WPWebcomic):
     url = 'http://www.docrat.com.au/'
     stripUrl = url + 'comic/%s/'

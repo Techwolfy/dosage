@@ -531,6 +531,7 @@ class Renamed(Scraper):
             cls('ComicFury/Alya', 'ComicFury/AlyaTheLastChildOfLight'),
             cls('ComicFury/Boatcrash', 'ComicFury/BoatcrashChronicles'),
             cls('ComicFury/Crimsonpixel', 'ComicFury/CrimsonPixelComics'),
+            cls('ComicFury/Djandora', 'Djandora'),
             cls('ComicFury/Doublejump', 'ComicFury/DoubleJumpGameComics'),
             cls('ComicFury/Elektroanthology', 'ComicFury/ElektrosComicAnthology'),
             cls('ComicFury/ICanSeeYourFeels', 'ComicFury/SeeYourFeels'),
