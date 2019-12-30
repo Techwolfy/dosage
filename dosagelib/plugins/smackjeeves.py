@@ -370,7 +370,6 @@ class SmackJeeves(_ParserScraper):
             cls('KuroNeko', sub='kuro-neko'),
             cls('LastBlockStanding', sub='lastblockstanding'),
             cls('LastLivingSouls', host='lastlivingsouls.thewebcomic.com'),
-            cls('LatchkeyKingdom', sub='latchkeykingdom'),
             cls('LavenderLegend', sub='lavenderlegend'),
             cls('LeCirquedObscure', sub='cirquedobscure'),
             cls('LedbyaMadMan', sub='ledbyamadman'),

@@ -21,6 +21,8 @@ class ComicFury(_ParserScraper):
         '//a[%s and contains(text(), "Previous")]' % xpath_class("comicnavlink"),
         # Art, ConsolersDLC, ShutUpDiarybyBarbaraHolm, etc.
         '//p[%s]/a[2]' % xpath_class('prev'),
+        # LatchkeyKingdom
+        '//a[%s and img[contains(@src, "Previous")]]' % xpath_class('navi'),
         '//a[%s]' % xpath_class('prev'),  # JaquieNovemberAndTheSpookiness
         # TheTempleAtFiftyFathoms
         '//a[%s][img[contains(@alt, "Previous")]]' % xpath_class("comicnavlink"),
@@ -31,6 +33,8 @@ class ComicFury(_ParserScraper):
         '//a[%s and contains(text(), "Next")]' % xpath_class("comicnavlink"),
         # Art, ConsolersDLC, ShutUpDiarybyBarbaraHolm, etc.
         '//p[%s]/a[1]' % xpath_class('next'),
+        # LatchkeyKingdom
+        '//a[%s and img[contains(@src, "Next")]]' % xpath_class('navi'),
         '//a[%s]' % xpath_class('next'),  # JaquieNovemberAndTheSpookiness
         # TheTempleAtFiftyFathoms
         '//a[%s][img[contains(@alt, "Next")]]' % xpath_class("comicnavlink"),
@@ -614,6 +618,7 @@ class ComicFury(_ParserScraper):
             cls('LastTaxi', 'lasttaxi'),
             cls('LaszloAndEdgar', 'laszloedgar'),
             cls('Latchkey', 'latchkey'),
+            cls('LatchkeyKingdom', 'latchkeykingdom'),
             cls('Lately', 'lately'),
             cls('Lauras24HourComics', 'lauras24hourcomics'),
             # LavenderLegend has a duplicate in SmackJeeves/LavenderLegend
