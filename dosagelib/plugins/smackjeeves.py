@@ -468,7 +468,6 @@ class SmackJeeves(_ParserScraper):
             cls('ObsidianHeart', sub='obsidianheart'),
             cls('October20th', sub='october20th'),
             cls('OddPlaceOddTime', sub='oddplaceoddtime'),
-            cls('OffCentaured', sub='offcentaured'),
             cls('Ohman', sub='ohman'),
             cls('OldElastikid', sub='oldelastikid'),
             cls('OneRainyDay', sub='one-rainy-day', adult=True),

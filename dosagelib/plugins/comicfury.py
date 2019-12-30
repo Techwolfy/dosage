@@ -753,6 +753,7 @@ class ComicFury(_ParserScraper):
             cls('OceanLabyrinth', 'oceanlabyrinth'),
             cls('Oeight', 'oeight'),
             cls('OffHours', 'offhours'),
+            cls('OffCentaured', 'offcentaured'),
             cls('OfficeLogic', 'office-logic'),
             cls('OffSeason', 'offseasoncomic'),
             cls('OffWorldTheCrease', 'thecrease'),

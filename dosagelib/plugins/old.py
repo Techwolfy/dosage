@@ -647,6 +647,7 @@ class Renamed(Scraper):
             cls('PetiteSymphony/Rascals', 'KemonoCafe/Rascals'),
             cls('SmackJeeves/AddictiveScience', 'KemonoCafe/AddictiveScience'),
             cls('SmackJeeves/LatchkeyKingdom', 'ComicFury/LatchkeyKingdom'),
+            cls('SmackJeeves/OffCentaured', 'ComicFury/OffCentaured'),
             cls('SmackJeeves/VerloreGeleentheid', 'VerloreGeleentheid'),
             cls('TracyAndTristan', 'ComicFury/TracyAndTristan'),
             cls('Wulffmorgenthaler', 'WuMo'),
