@@ -104,12 +104,6 @@ class TheLandscaper(_BasicScraper):
     help = 'Index format: name'
 
 
-class TheMeek(_WordPressScraper):
-    url = 'https://www.meekcomic.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'chapter-1-cover'
-
-
 class TheMelvinChronicles(_WordPressScraper):
     url = 'http://melvin.jeaniebottle.com/'
 
