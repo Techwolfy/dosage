@@ -244,8 +244,9 @@ class MyLifeWithFel(_ParserScraper):
 
     def starter(self):
         # Retrieve comic metadata from API
-        data = self.getPage(self.url)
-        return self.stripUrl % json.loads(data.text_content())['last']['id']
+        data = self.session.get(self.url)
+        data.raise_for_status()
+        return self.stripUrl % data.json()['last']['id']
 
     def getPrevUrl(self, url, data):
         return self.stripUrl % json.loads(data.text_content())['previous']['id']
