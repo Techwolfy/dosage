@@ -74,7 +74,7 @@ class KeenSpot(_ParserScraper):
             cls('HeadTrip', 'headtrip'),
             cls('HeroByNight', 'herobynight'),
             cls('HoaxHunters', 'hoaxhunters'),
-            cls('InfinityRefugees', 'newshounds'),
+            cls('ProjectionEdge', 'newshounds'),
             cls('InHere', 'inhere'),
             cls('JadeWarriors', 'jadewarriors'),
             cls('Katrina', 'katrina'),
