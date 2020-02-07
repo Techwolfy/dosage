@@ -268,6 +268,12 @@ class Sithrah(_WPWebcomic):
     url = 'http://sithrah.com/'
 
 
+class SixGunMage(_ComicControlScraper):
+    url = 'http://www.6gunmage.com/comic/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '6-gun-mage-kickoff'
+
+
 class SixPackOfOtters(_WPWebcomic):
     url = 'http://sixpackofotters.com/'
     stripUrl = url + 'pages/%s/'
