@@ -77,5 +77,14 @@ class IslaAukateColor(_ParserScraper):
         return filename
 
 
+class ISO(_ParserScraper):
+    url = 'http://www.hirezfox.com/isoarchives/'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20090102'
+    imageSearch = '//img[contains(@src, "isoarchives/comics/")]'
+    prevSearch = '//a[text()="Previous Day"]'
+    ignoreRobotsTxt = True
+
+
 class ItsWalky(_WordPressScraper):
     url = 'http://www.itswalky.com/'
