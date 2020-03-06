@@ -283,6 +283,8 @@ class ButImACatPerson(_WordPressScraper):
     url = 'http://www.bicatperson.com/'
     stripUrl = 'comic/%s/'
     firstStripUrl = 'sketches-1'
+    endOfLife = True
+
 
 class ButtercupFestival(_ParserScraper):
     url = 'http://www.buttercupfestival.com/'
