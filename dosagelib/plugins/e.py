@@ -223,6 +223,15 @@ class ExploitationNow(_WPNavi):
     endOfLife = True
 
 
+class Exvulnerum(_ParserScraper):
+    url = 'https://zules.com/exvulnerum/'
+    stripUrl = url + 'comic.php?page=%s'
+    firstStripUrl = stripUrl.replace('comic', 'newprologue') % '1'
+    imageSearch = ('//img[contains(@src, "pages/")]',
+                   '//img[contains(@src, "newprologue/")]')
+    prevSearch = '//a[./img[contains(@src, "nav_prev")]]'
+
+
 class ExtraFabulousComics(_WordPressScraper):
     url = 'http://extrafabulouscomics.com/comic/buttfly/'
     firstStripUrl = url
