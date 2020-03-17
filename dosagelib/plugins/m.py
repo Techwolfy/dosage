@@ -3,15 +3,12 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 import json
 from re import compile, escape, IGNORECASE
 
 from ..helpers import indirectStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
-from ..util import tagre, urlopen
+from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPWebcomic
 
 
@@ -102,7 +99,7 @@ class Meek(_WordPressScraper):
 
 
 class MegaTokyo(_BasicScraper):
-    url = 'http://megatokyo.com/'
+    url = 'https://megatokyo.com/'
     stripUrl = url + 'strip/%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'"(strips/.+?)"', IGNORECASE)
@@ -184,7 +181,7 @@ class Moonlace(_WPWebcomic):
 
     def starter(self):
         # Set age-gate cookie
-        urlopen(self.firstStripUrl + '?webcomic_birthday=1', self.session)
+        self.session.get(self.firstStripUrl + '?webcomic_birthday=1')
         return indirectStarter(self)
 
     def namer(self, imageUrl, pageUrl):
@@ -209,8 +206,8 @@ class MrLovenstein(_BasicScraper):
     firstStripUrl = stripUrl % '1'
     imageSearch = (
         # captures rollover comic
-        compile(tagre("div", "class", r'comic_image') + "\s*.*\s*" +
-                tagre("div", "style", r'display: none;') + "\s*.*\s*" +
+        compile(tagre("div", "class", r'comic_image') + r'\s*.*\s*' +
+                tagre("div", "style", r'display: none;') + r'\s*.*\s' +
                 tagre("img", "src", r'(/images/comics/[^"]+)')),
         # captures standard comic
         compile(tagre("img", "src", r'(/images/comics/[^"]+)',
@@ -256,7 +253,7 @@ class MyLifeWithFel(_ParserScraper):
         return [self.baseUrl + json.loads(data.text_content())['post']['image']]
 
     def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
+        return pageUrl.rsplit('/', 1)[-1]
 
 
 class MynarskiForest(_ParserScraper):

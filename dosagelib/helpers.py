@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from .util import getQueryParams
 
 
@@ -26,6 +23,18 @@ def regexNamer(regex, use_page_url=False):
         mo = regex.search(url)
         if mo:
             return mo.group(1)
+    return _namer
+
+
+def joinPathPartsNamer(pageurlparts, imageurlparts=(-1,), joinchar='_'):
+    """Get name by mashing path parts together with underscores."""
+    def _namer(self, imageurl, pageurl):
+        # Split and drop host name
+        pageurlsplit = pageurl.split('/')[3:]
+        imageurlsplit = imageurl.split('/')[3:]
+        joinparts = ([pageurlsplit[i] for i in pageurlparts] +
+            [imageurlsplit[i] for i in imageurlparts])
+        return joinchar.join(joinparts)
     return _namer
 
 

@@ -3,10 +3,6 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
-import requests
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
@@ -53,8 +49,10 @@ class ParallelUniversum(_BasicScraper):
 
 
 class PartiallyClips(_WordPressScraper):
-    url = 'http://partiallyclips.com/'
+    url = ('https://web.archive.org/web/20180509161332/'
+        'http://partiallyclips.com/')
     firstStripUrl = url + 'comic/screaming-woman/'
+    endOfLife = True
 
 
 class PastelDefender(_BasicScraper):
@@ -103,8 +101,7 @@ class PennyAndAggie(_BasicScraper):
 
 
 class PennyArcade(_ParserScraper):
-    url = 'http://www.penny-arcade.com/comic/'
-    rurl = escape(url)
+    url = 'https://www.penny-arcade.com/comic/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1998/11/18'
     imageSearch = '//div[@id="comicFrame"]//img'
@@ -261,8 +258,8 @@ class PowerNap(_ParserScraper):
     def imageUrlModifier(self, url, data):
         return url.replace('\n', '').strip()
 
-    def getPrevUrl(self, url, data):
-        return super(PowerNap, self).getPrevUrl(url, data).replace('\n', '').strip()
+    def link_modifier(self, fromurl, tourl):
+        return tourl.replace('\n', '').strip()
 
 
 class Precocious(_ParserScraper):

@@ -1,26 +1,22 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
-
-from __future__ import absolute_import, division, print_function
-
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 import re
 import multiprocessing
-from six.moves.urllib.parse import urlsplit
-
-
-def get_host(url):
-    """Get host part of URL."""
-    return urlsplit(url)[1].lower()
+from urllib.parse import urlsplit
 
 
 # Dictionary with per-host locks.
 _locks = {}
 # Allowed number of connections per host
-MaxConnections = 4
+MaxConnections = 2
 # Maximum number of strips to get to test a comic
 MaxStrips = 5
+# Match (already-escaped) archive.org URL
+ARCHIVE_ORG_MATCH = re.compile(r'(?<=web\\.archive\\.org/web)/\d+/')
+# Matches some (maybe-escaped - because Python 2) printf-style format specifiers
+PRINTF_MATCH = re.compile(r'\\?%[0-9]*[sd]')
 
 
 def get_lock(host):
@@ -30,16 +26,12 @@ def get_lock(host):
     return _locks[host]
 
 
-def test_comicmodule(tmpdir, scraperobj):
+def test_comicmodule(tmpdir, scraperobj, worker_id):
     '''Test a scraper. It must be able to traverse backward for at least 5
     strips from the start, and find strip images on at least 4 pages.'''
     # Limit number of connections to one host.
-    host = get_host(scraperobj.url)
-    try:
-        with get_lock(host):
-            _test_comic(str(tmpdir), scraperobj)
-    except OSError:
-        # interprocess lock not supported
+    host = urlsplit(scraperobj.url).hostname
+    with get_lock(host):
         _test_comic(str(tmpdir), scraperobj)
 
 
@@ -110,10 +102,10 @@ def _check_stripurl(strip, scraperobj):
         return
     # test that the stripUrl regex matches the retrieved strip URL
     urlmatch = re.escape(scraperobj.stripUrl)
-    urlmatch = urlmatch.replace(r"\%s", r".+")
-    urlmatch = "^%s$" % urlmatch
+    urlmatch = PRINTF_MATCH.sub('.+', urlmatch)
+    urlmatch = ARCHIVE_ORG_MATCH.sub(r'/\\d+/', urlmatch)
     ro = re.compile(urlmatch)
-    mo = ro.search(strip.strip_url)
+    mo = ro.match(strip.strip_url)
     err = 'strip URL {!r} does not match stripUrl pattern {}'.format(
         strip.strip_url, urlmatch)
     assert mo is not None, err

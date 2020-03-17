@@ -3,22 +3,20 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 
 
 class XKCD(_ParserScraper):
+    name = 'xkcd'
     url = 'https://xkcd.com/'
-    starter = bounceStarter
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//div[@id="comic"]//img'
     textSearch = imageSearch + '/@title'
     prevSearch = '//a[@rel="prev"]'
     nextSearch = '//a[@rel="next"]'
+    starter = bounceStarter
     help = 'Index format: n (unpadded)'
 
     def namer(self, image_url, page_url):

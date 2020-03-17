@@ -3,20 +3,19 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
-from re import compile, escape
+from re import compile
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
-from .common import _WordPressScraper, _WPNavi
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class Underling(_WPNavi):
-    url = 'http://underlingcomic.com/'
+    url = ('https://web.archive.org/web/20190806120425/'
+        'http://underlingcomic.com/')
     firstStripUrl = url + 'page-one/'
+    endOfLife = True
 
 
 class Undertow(_BasicScraper):
@@ -25,6 +24,10 @@ class Undertow(_BasicScraper):
     prevSearch = compile(r'href="(.+?)".+?teynpoint')
     latestSearch = compile(r'href="(.+?)".+?Most recent page')
     starter = indirectStarter
+
+
+class unDivine(_ComicControlScraper):
+    url = 'http://undivinecomic.com/'
 
 
 class UnicornJelly(_BasicScraper):
@@ -38,26 +41,20 @@ class UnicornJelly(_BasicScraper):
 
 
 class Unsounded(_ParserScraper):
-    url = 'https://unsoundedupdates.tumblr.com/'
-    baseUrl = 'http://www.casualvillain.com/Unsounded/'
-    stripUrl = baseUrl + 'comic/ch%s/ch%s_%s.html'
+    url = 'http://www.casualvillain.com/Unsounded/'
+    startUrl = url + 'comic+index/'
+    stripUrl = url + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
     imageSearch = '//img[contains(@src, "pageart/")]'
     prevSearch = '//a[contains(@class, "back")]'
+    latestSearch = '//div[@id="chapter_box"][1]//a[last()]'
     multipleImagesPerStrip = True
-    help = 'Index format: chapter-number'
-
-    def starter(self):
-        # Resolve double redirect for current page
-        page = self.getPage(self.url)
-        redirect = page.xpath('//a[.//img[@alt="Click Here for the newest page!"]]')[0]
-        page = self.getPage(redirect.get('href'))
-        redirect = page.xpath('//meta[@http-equiv="refresh"]')[0]
-        return redirect.get('content').split('URL=', 1)[-1]
+    starter = indirectStarter
+    help = 'Index format: chapter-page'
 
     def getPrevUrl(self, url, data):
-        # Fix missing navigation link
-        if url == self.baseUrl + 'comic/ch13/you_let_me_fall.html':
+        # Fix missing navigation links between chapters
+        if 'ch13/you_let_me_fall' in url:
             return self.stripUrl % ('13', '13', '85')
         return super(Unsounded, self).getPrevUrl(url, data)
 

@@ -3,13 +3,10 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
-from re import compile, escape
+from re import compile
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter, indirectStarter, xpath_class
+from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
 
@@ -44,7 +41,7 @@ class LastResort(_WordPressScraper):
 
 
 class LeastICouldDo(_ParserScraper):
-    url = 'http://www.leasticoulddo.com/'
+    url = 'https://leasticoulddo.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '20030210'
     imageSearch = '//div[@id="content-comic"]//img'
@@ -59,9 +56,11 @@ class LetsSpeakEnglish(_ComicControlScraper):
 
 
 class LifeAintNoPonyFarm(_WordPressScraper):
-    url = 'http://sarahburrini.com/en/'
+    url = ('https://web.archive.org/web/20181221154155/'
+        'http://sarahburrini.com/en/')
     firstStripUrl = url + 'comic/my-first-webcomic/'
     multipleImagesPerStrip = True
+    endOfLife = True
 
 
 class LifeAsRendered(_ParserScraper):
@@ -191,6 +190,4 @@ class LookingForGroup(_ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
-        page = page.replace('2967', '647')
-        ext = imageUrl.rsplit('.', 1)[-1]
-        return page + '.' + ext
+        return page.replace('2967', '647')

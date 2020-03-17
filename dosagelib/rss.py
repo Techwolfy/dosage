@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2015-2017 Tobias Gruetzmacher
-
-from __future__ import absolute_import, division, print_function
-
 import xml.dom.minidom
 import time
 from .configuration import App
@@ -68,10 +65,10 @@ def parseFeed(filename, yesterday):
     dom = xml.dom.minidom.parse(filename)
 
     def getText(node, tag):
-        node.getElementsByTagName(tag)[0].childNodes[0].data
+        return node.getElementsByTagName(tag)[0].childNodes[0].data
 
     def getNode(tag):
-        dom.getElementsByTagName(tag)
+        return dom.getElementsByTagName(tag)
 
     content = getNode('channel')[0]  # Only one channel node
 

@@ -3,9 +3,6 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from re import compile, escape
 
 from ..util import tagre
@@ -160,12 +157,13 @@ class BiggerThanCheeses(_BasicScraper):
 
 
 class BillyTheDunce(_ParserScraper):
-    url = 'http://www.duncepress.com/'
-    firstStripUrl = url + '2009/06/an-introduction-of-sorts'
+    stripUrl = ('https://web.archive.org/web/20180404142544/'
+        'http://www.duncepress.com/%s/')
+    url = stripUrl % '2012/02/losing-more'
+    firstStripUrl = stripUrl % '2009/06/an-introduction-of-sorts'
     imageSearch = '//div[@class="entry"]/p[1]/a'
     prevSearch = '//a[@rel="prev"]'
-    latestSearch = '//h2[@class="post-title"]/a'
-    starter = indirectStarter
+    endOfLife = True
 
 
 class BittersweetCandyBowl(_ParserScraper):
@@ -187,6 +185,13 @@ class BlankIt(_ParserScraper):
     prevSearch = '//a[%s]' % xpath_class('comic-nav-previous')
     latestSearch = '//a[%s]' % xpath_class('comic-nav-last')
     starter = indirectStarter
+
+
+class BlondeSunrise(_ParserScraper):
+    url = 'https://blondesunrise.com/comic.php?page=latest'
+    firstStripUrl = 'https://blondesunrise.com/comic/comic.php?page=1'
+    imageSearch = '//img[contains(@src, "comic_imgs/")]'
+    prevSearch = '//a[img[contains(@src, "previous")]]'
 
 
 class BloodBound(_WordPressScraper):
@@ -280,10 +285,11 @@ class BusinessCat(_WPNaviIn):
 
 
 class ButImACatPerson(_WordPressScraper):
-    url = 'http://www.bicatperson.com/'
-    stripUrl = 'comic/%s/'
+    url = 'https://www.bicatperson.com/'
+    stripUrl = url + 'comic/%s/'
     firstStripUrl = 'sketches-1'
     endOfLife = True
+
 
 
 class ButtercupFestival(_ParserScraper):

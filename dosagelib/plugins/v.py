@@ -3,30 +3,11 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
 from re import compile
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter, xpath_class
 from ..util import tagre
-
-
-class VerloreGeleentheid(_ParserScraper):
-    url = 'http://verlore.smackjeeves.com/comics/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '904752/titelblad'
-    imageSearch = '//img[@id="comic_image"]'
-    prevSearch = '//a[./img[contains(@alt, "Previous")]]'
-    nextSearch = '//a[./img[contains(@alt, "Next")]]'
-    textSearch = '//div[@id="author" and .//img[contains(@src, "5fd013cd3VN8I")]]'
-    starter = bounceStarter
-    lang = 'af'
-    endOfLife = True
-
-    def namer(self, imageUrl, pageUrl):
-        post = pageUrl.rstrip('/').rsplit('/', 2)
-        return "%s_%s.%s" % (post[1], post[2], imageUrl.rsplit('.', 1)[-1])
 
 
 class Vexxarr(_ParserScraper):
@@ -41,8 +22,7 @@ class Vexxarr(_ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         page = pageUrl.rsplit('=', 1)[-1]
-        ext = imageUrl.rsplit('.', 1)[-1]
-        return '20%s-%s-%s.%s' % (page[4:6], page[0:2], page[2:4], ext)
+        return '20%s-%s-%s' % (page[4:6], page[0:2], page[2:4])
 
 
 class VGCats(_BasicScraper):

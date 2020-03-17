@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2019-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from ..scraper import _ParserScraper
 
 
@@ -45,7 +42,6 @@ class KemonoCafe(_ParserScraper):
             num = int(page.xpath('//div[@id="comic-wrap"]/@class')[0].replace('comic-id-', ''))
             filename = '%04d_%s' % (num, filename)
         return filename
-
 
     @classmethod
     def getmodules(cls):

@@ -3,9 +3,6 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
@@ -22,20 +19,12 @@ class Galaxion(_WPNavi):
     help = 'Index format: n-comic/book-n/chapter-n/title-nnn'
 
 
-class Garanos(_BasicScraper):
-    baseUrl = 'http://garanos.alexheberling.com/'
-    rurl = escape(baseUrl)
-    url = baseUrl + 'pages/page-1/'
-    starter = indirectStarter
-    stripUrl = baseUrl + 'pages/page-%s'
-    imageSearch = compile(
-        tagre("img", "src",
-              r'(%swp-content/uploads/sites/\d+/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl,
-                               after="prev"))
-    latestSearch = compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl,
-                                 after="nav-last"))
-    help = 'Index format: n (unpadded)'
+class Garanos(_WordPressScraper):
+    stripUrl = ('https://web.archive.org/web/20180314181433/'
+        'http://garanos.alexheberling.com/pages/%s/')
+    url = stripUrl % 'page-487'
+    firstStripUrl = stripUrl % 'vol01'
+    endOfLife = True
 
 
 class GastroPhobia(_ParserScraper):
@@ -47,13 +36,14 @@ class GastroPhobia(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class Geeks(_BasicScraper):
-    url = 'http://sevenfloorsdown.com/geeks/'
+class Geeks(_ParserScraper):
+    url = ('https://web.archive.org/web/20190527194921/'
+        'http://sevenfloorsdown.com/geeks/')
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '10'
-    imageSearch = compile(
-        r'<img src=\'(http://sevenfloorsdown.com/geeks/comics/.+?)\'')
-    prevSearch = compile(r'<a href="(.+?)">&laquo; Previous')
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//a[contains(text(), "Previous")]'
+    endOfLife = True
     help = 'Index format: nnn'
 
 
@@ -68,13 +58,14 @@ class GeeksNextDoor(_BasicScraper):
 
 
 class Ginpu(_WPNavi):
-    url = 'http://www.ginpu.us/'
+    url = 'https://www.ginpu.us/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'filler-2'
 
     def namer(self, imageUrl, pageUrl):
         filename = imageUrl.rsplit('/', 3)
         return '%s-%s_%s' % (filename[1], filename[2], filename[3])
+
 
 class GirlGenius(_BasicScraper):
     baseUrl = 'http://www.girlgeniusonline.com/'
@@ -91,7 +82,7 @@ class GirlGenius(_BasicScraper):
 
 
 class GirlsWithSlingshots(_BasicScraper):
-    url = 'http://www.girlswithslingshots.com/'
+    url = 'https://girlswithslingshots.com/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'gws1'
@@ -101,41 +92,21 @@ class GirlsWithSlingshots(_BasicScraper):
                       r'(http://cdn\.girlswithslingshots\.com/comics/[^"]+)')),
     )
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl,
-                               after="prev"))
+                               before='rel="prev"'))
     help = 'Index format: stripname'
 
 
-class GlassHalfEmpty(_BasicScraper):
-    url = 'http://www.defectivity.com/ghe/index.php'
-    stripUrl = url + '?strip_id=%s'
-    firstStripUrl = stripUrl % '0'
-    imageSearch = compile(r'src="(comics/.+?)"')
-    prevSearch = compile(
-        tagre("a", "href", r'(\?strip_id=\d+)') +
-        tagre("img", "src", r'\.\./images/arrowbuttons/onback\.jpg'))
-    help = 'Index format: nnn'
-
-
-class GleefulNihilism(_BasicScraper):
-    url = 'http://gleefulnihilism.com/'
-    rurl = escape(url)
+class GleefulNihilism(_WordPressScraper):
+    url = ('https://web.archive.org/web/20170911203122/'
+        'http://gleefulnihilism.com/')
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'amoeba'
-    imageSearch = compile(
-        tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(
-        tagre("a", "href", r'(%scomic/[^"]+)' % rurl) + '&lsaquo;')
+    endOfLife = True
     help = 'Index format: stripname'
 
 
-class GoblinsComic(_ParserScraper):
+class GoblinsComic(_ComicControlScraper):
     url = 'http://www.goblinscomic.org/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    css = True
-    imageSearch = '#comic img'
-    prevSearch = '.nav-previous > a'
-    help = 'Index format: ddmmyyyy'
 
 
 class GodChild(_WordPressScraper):
@@ -172,7 +143,7 @@ class GeneralProtectionFault(_ParserScraper):
 
 
 class GrrlPower(_WordPressScraper):
-    url = 'http://grrlpowercomic.com/'
+    url = 'https://grrlpowercomic.com/'
     stripUrl = url + 'archives/comic/%s/'
     firstStripUrl = stripUrl % 'gp0001'
 

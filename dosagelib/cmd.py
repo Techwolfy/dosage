@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
-
-from __future__ import absolute_import, division, print_function
-
-import os
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 import argparse
-import six
+import os
 
-from . import events, configuration, singleton, director, scraper, __version__
+from . import events, configuration, singleton, director, scraper
+from . import AppName, __version__
 from .output import out
 from .util import internal_error, strlimit
 
@@ -51,7 +48,8 @@ def setup_options():
     parser.add_argument('-v', '--verbose', action='count', default=0,
         help='provides verbose output, use multiple times for more verbosity')
     parser.add_argument('-n', '--numstrips', action='store', type=int, default=0,
-        help='traverse and retrieve the given number of comic strips; use --all to retrieve all comic strips')
+        help='traverse and retrieve the given number of comic strips;'
+        ' use --all to retrieve all comic strips')
     parser.add_argument('-a', '--all', action='store_true',
         help='traverse and retrieve all comic strips')
     parser.add_argument('-c', '--continue', action='store_true', dest='cont',
@@ -60,7 +58,8 @@ def setup_options():
         metavar='PATH',
         help='set the path to create invidivual comic directories in, default is Comics')
     parser.add_argument('--baseurl', action='store', metavar='PATH',
-        help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path')
+        help='the base URL of your comics directory (for RSS, HTML, etc.);'
+        ' this should correspond to --base-path')
     parser.add_argument('-l', '--list', action='store_true',
         help='list available comic modules')
     parser.add_argument('--singlelist', action='store_true',
@@ -84,11 +83,13 @@ def setup_options():
     parser.add_argument('--adult', action='store_true',
         help='confirms that you are old enough to view adult content')
     parser.add_argument('--allow-multiple', action='store_true',
-        help='allows multiple instances to run at the same time. Use if you know what you are doing.')
+        help='allows multiple instances to run at the same time.'
+        ' Use if you know what you are doing.')
     # used for development testing prev/next matching
     parser.add_argument('--dry-run', action='store_true',
         help=argparse.SUPPRESS)
-    # multimatch is only used for development, eg. testing if all comics of a scripted plugin are working
+    # multimatch is only used for development, eg. testing if all comics of
+    # a scripted plugin are working
     parser.add_argument('--multimatch', action='store_true',
         help=argparse.SUPPRESS)
     # List all comic modules, even those normally suppressed, because they
@@ -126,7 +127,7 @@ def display_version(verbose):
                     # display update link
                     text = ('A new version %(version)s of %(app)s is '
                             'available at %(url)s.')
-                attrs = dict(version=version, app=configuration.AppName,
+                attrs = dict(version=version, app=AppName,
                              url=url, currentversion=__version__)
                 print(text % attrs)
         else:
@@ -134,7 +135,7 @@ def display_version(verbose):
                 value = 'invalid update file syntax'
             text = ('An error occured while checking for an '
                     'update of %(app)s: %(error)s.')
-            attrs = dict(error=value, app=configuration.AppName)
+            attrs = dict(error=value, app=AppName)
             print(text % attrs)
     return 0
 
@@ -163,8 +164,8 @@ def display_comic_help(scraperobj):
     orig_context = out.context
     out.context = scraperobj.name
     try:
-        out.info(u"URL: " + six.text_type(scraperobj.url))
-        out.info(u"Language: " + scraperobj.language())
+        out.info('URL: {}'.format(scraperobj.url))
+        out.info('Language: {}'.format(scraperobj.language()))
         if scraperobj.adult:
             out.info(u"Adult comic, use option --adult to fetch.")
         disabled = scraperobj.getDisabledReasons()
@@ -201,18 +202,8 @@ def vote_comic(scraperobj):
     orig_context = out.context
     out.context = scraperobj.name
     try:
-        name = scraperobj.name
-        answer = scraperobj.vote()
-        out.debug(u'Vote answer %r' % answer)
-        if answer == 'counted':
-            url = configuration.Url + 'comics/%s.html' % name.replace('/', '_')
-            out.info(u'Vote submitted. Votes are updated regularly at %s.' % url)
-        elif answer == 'no':
-            out.info(u'Vote not submitted - your vote has already been submitted before.')
-        elif answer == 'noname':
-            out.warn(u'The comic %s cannot be voted.' % name)
-        else:
-            out.warn(u'Error submitting vote parameters: %r' % answer)
+        scraperobj.vote()
+        out.info(u'Vote submitted.')
     except Exception as msg:
         out.exception(msg)
         errors += 1

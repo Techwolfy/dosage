@@ -3,15 +3,16 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
-from re import compile, escape
+from re import compile, escape, MULTILINE
+try:
+    from functools import cached_property
+except ImportError:
+    from cached_property import cached_property
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
 class TailsAndTactics(_ParserScraper):
@@ -35,10 +36,14 @@ class Tamberlane(_WPWebcomic):
 
 
 class TheBrads(_ParserScraper):
-    url = 'http://bradcolbow.com/archive/'
-    imageSearch = '//div[%s]//img' % xpath_class('entry')
-    prevSearch = '//a[%s]' % xpath_class('prev')
+    url = ('https://web.archive.org/web/20171211154809/'
+        'http://bradcolbow.com/archive/C4/')
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'P125'
+    imageSearch = '//div[{}]//img'.format(xpath_class('entry'))
+    prevSearch = '//a[{}]'.format(xpath_class('prev'))
     multipleImagesPerStrip = True
+    endOfLife = True
 
 
 class TheClassMenagerie(_ParserScraper):
@@ -68,7 +73,7 @@ class TheDepths(_WPWebcomic):
 
 
 class TheDevilsPanties(_WPNavi):
-    url = 'http://thedevilspanties.com/'
+    url = 'https://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '300'
     help = 'Index format: number'
@@ -110,15 +115,14 @@ class TheJunkHyenasDiner(_WordPressScraper):
     firstStripUrl = stripUrl % 'intro'
 
 
-class TheLandscaper(_BasicScraper):
-    stripUrl = 'http://landscaper.visual-assault.net/comic/%s'
+class TheLandscaper(_ParserScraper):
+    stripUrl = ('https://web.archive.org/web/20171129163510/'
+        'http://landscaper.visual-assault.net/comic/%s')
     url = stripUrl % 'latest'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src",
-                                r'(/comics/comic/comic_page/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)') +
-                         '&lsaquo; Previous')
-    help = 'Index format: name'
+    imageSearch = '//article[{}]//img[1]'.format(xpath_class('comic'))
+    prevSearch = '//a[contains(text(), "Previous")]'
+    endOfLife = True
 
 
 class TheMelvinChronicles(_WordPressScraper):
@@ -163,21 +167,14 @@ class TheOrderOfTheStick(_BasicScraper):
         return page_url.rsplit('/', 1)[-1][:-5]
 
 
-class TheThinHLine(_TumblrScraper):
-    url = 'http://thinhline.tumblr.com/'
-    firstStripUrl = url + 'post/4177372348/thl-1-a-cats-got-his-tongue-click-on-the'
-    imageSearch = '//img[@id="content-image"]/@data-src'
-    prevSearch = '//div[@id="pagination"]/a[text()=">"]'
-    latestSearch = '//a[@class="timestamp"]'
+class TheRockCocks(_BasicScraper):
+    url = 'http://rockcocks.slipshine.net/'
+    rurl = escape(url)
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % "page-1-nsfw-track-1-start"
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl, after='id="cc-comic"'))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after='rel="prev"'))
     adult = True
-
-    indirectImageSearch = '//div[@id="post"]//a[not(@rel) and img]'
-
-    def getComicStrip(self, url, data):
-        """The comic strip image is in a separate page."""
-        subPage = self.fetchUrl(url, data, self.indirectImageSearch)
-        pageData = self.getPage(subPage)
-        return super(TheThinHLine, self).getComicStrip(subPage, pageData)
 
 
 class TheWhiteboard(_ParserScraper):
@@ -268,7 +265,7 @@ class TrippingOverYou(_BasicScraper):
 
 
 class TumbleDryComics(_WordPressScraper):
-    url = 'http://tumbledrycomics.com/'
+    url = 'https://www.tumbledrycomics.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'we-need-to-get-high-jpg'
     textSearch = '//div[@id="comic"]//img/@alt'
@@ -286,6 +283,33 @@ class TumbleDryComics(_WordPressScraper):
         if not filename.startswith(year):
             filename = year + "-" + month + "-" + filename
         return filename
+
+
+class Turnoff(_ParserScraper):
+    name = 'turnoff'
+    url = 'https://turnoff.us/'
+    imageSearch = '//article[%s]//img' % xpath_class('post-content')
+    prevSearch = '//div[%s]//a' % xpath_class('prev')
+    stripUrl = url + 'geek/%s'
+    firstStripUrl = stripUrl % 'tcp-buddies'
+    multipleImagesPerStrip = True
+
+    @cached_property
+    def comics_order(self):
+        # Neither the images nor the pages contain information about dates or indices.
+        # However we can extract the order of the images from the JavaScript.
+        html = self.session.get(self.url).text
+        list_regex = compile(r"""^\s*"/geek/(.*)",\s*$""", flags=MULTILINE)
+        return list(reversed(list_regex.findall(html)))
+
+    def namer(self, image_url, page_url):
+        comic_name = page_url.split('/')[-1]
+        try:
+            index = self.comics_order.index(comic_name) + 1
+        except ValueError:
+            index = len(self.comics_order)
+        file_name = image_url.split('/')[-1]
+        return "%03d-%s" % (index, file_name)
 
 
 class TwinDragons(_WordPressScraper):
@@ -311,7 +335,7 @@ class Twokinds(_ParserScraper):
     url = 'http://twokinds.keenspot.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//article[contains(@class, "comic")]/*[not(self::header)]//img'
+    imageSearch = '//article[contains(@class, "comic")]//img'
     prevSearch = '//a[contains(@class, "navprev")]'
     help = 'Index format: n (unpadded)'
 

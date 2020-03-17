@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/webcomics/dosage.svg?branch=master)](https://travis-ci.org/webcomics/dosage)
 [![Code Climate](https://codeclimate.com/github/webcomics/dosage/badges/gpa.svg)](https://codeclimate.com/github/webcomics/dosage)
 [![codecov](https://codecov.io/gh/webcomics/dosage/branch/master/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
-[![Maintenance](https://img.shields.io/maintenance/yes/2019.svg)]()
+[![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)]()
 
 Dosage is designed to keep a local copy of specific webcomics and other
 picture-based content such as Picture of the Day sites. With the dosage
@@ -35,12 +35,6 @@ add the following entry to your robots.txt file:
     User-agent: Dosage
     Allow: *
 
-## Adult content
-
-Some comics contain adult content and require age confirmation. These comics
-can only be downloaded by using the `--adult` option, which confirms that you
-are old enough to view them.
-
 ## Usage
 
 List available comics (ca. 3000 at the moment):
@@ -64,35 +58,55 @@ To help others find good comics, you can vote for your favourite ones:
 
 For advanced options and features execute `dosage --help`.
 
-## Dependencies
+### Adult content
 
-[Python](http://www.python.org/): for Python 2.x at least 2.7.0, for Python 3.x
-at least Python 3.3. Dosage requires the following Python modules:
-
-- colorama
-- lxml
-- pbr
-- requests
-- six
-
-For certain modules, you need the `cssselect` module, for bash argument
-completion you need the `argcomplete` module.
+Some comics contain adult content and require age confirmation. These comics
+can only be downloaded by using the `--adult` option, which confirms that you
+are old enough to view them.
 
 ## Installation
 
-The easy way with pip:
+### Dependencies
 
-    pip install --user dosage
+Since dosage is written in [Python](http://www.python.org/), a Python
+installation is required: Dosage needs at least Python 3.5. Dosage requires
+some Python modules from PyPI, so installation with `pip` is recommended.
 
-You can invoke Dosage directly from the source code as `./dosage`.
-Alternatively, you can install Dosage using setuptools by invoking `setup.py`
-in the root of the distribution. For example:
+### Using the Windows binary
 
-    python setup.py install
+Windows users can download a complete binary (including Python) from the
+[release page].
 
-or if you do not have root permissions:
+[release page]: https://github.com/webcomics/dosage/releases/latest
 
-    python setup.py install --home=$HOME
+### Install with pipx
+
+The simplest way to install and upgrade dosage is with [pipx]. To install the
+newest stable version with all optional features use:
+
+    pipx install --spec dosage[css,bash] dosage
+
+To install the newest development version, use:
+
+    pipx install --spec "dosage[css,bash] @ git+https://github.com/webcomics/dosage.git" dosage
+
+To upgrade such installations, just run:
+
+    pipx upgrade dosage
+
+### Installation for development
+
+If you want to run dosage directly from the source code, you should install
+it in "[editable]" mode, preferable in a [virtual environment]:
+
+    pip install -e .[css,bash]
+
+You can invoke Dosage directly from the source code as `./dosage`, but this
+mode of operation is discouraged, since dependencies might be missing.
+
+[pipx]: https://github.com/pipxproject/pipx
+[editable]: https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs
+[virtual environment]: https://docs.python.org/3/library/venv.html
 
 ## Reporting Bugs
 

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
-
-from __future__ import absolute_import, division, print_function
-
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 from ..scraper import _ParserScraper
 
 
@@ -16,6 +13,7 @@ class ComicSherpa(_ParserScraper):
 
     def __init__(self, name, path):
         super(ComicSherpa, self).__init__('ComicSherpa/' + name)
+        self.session.add_throttle('www.comicssherpa.com', 1.0, 2.0)
         self.url = 'http://www.comicssherpa.com/site/feature?uc_comic=' + path
 
     def getIndexStripUrl(self, index):
@@ -35,7 +33,6 @@ class ComicSherpa(_ParserScraper):
             cls('ACMEINKD', 'csmwt'),
             cls('AcornPark', 'csdfe'),
             cls('Adulting', 'cskky'),
-            cls('AJAndMagnus', 'csrxy'),
             cls('AllInGoodTime', 'csjhr'),
             cls('AmandaTheGreat', 'cssyr'),
             cls('AndNow', 'csnxr'),
@@ -60,12 +57,10 @@ class ComicSherpa(_ParserScraper):
             cls('CandacenCompany', 'csvpd'),
             cls('CarteBlanche', 'csnwk'),
             cls('CharmysArmy', 'cswrl'),
-            cls('CleoAndCompany', 'cscwy'),
             cls('Complex', 'csusy'),
             cls('CourageousManAdventures', 'csgkn'),
             cls('DadsDay', 'cswly'),
             cls('DBCartoons', 'csnvt'),
-            cls('DevinCraneComicStripGhostwriter', 'csadf'),
             cls('DoghouseInYourSoul', 'cstwx'),
             cls('DoingTime', 'csvuk'),
             cls('DontPickTheFlowers', 'cswfs'),
@@ -74,17 +69,14 @@ class ComicSherpa(_ParserScraper):
             cls('DungeonHordes', 'csnlo'),
             cls('DustSpecks', 'csqgq'),
             cls('DutchnPals', 'cskqc'),
-            cls('Dysconnected', 'csxbc'),
             cls('Econogirl', 'csxoj'),
             cls('EightballEyeball', 'csnfh'),
             cls('Elmo', 'csvff'),
             cls('Endangered', 'cshii'),
-            cls('Experiment42', 'csbjr'),
             cls('FamousAndNotSoFamousQuotes', 'csdgz'),
             cls('FarOut', 'csaem'),
             cls('FatherOfTheBrood', 'csuul'),
-            cls('FloydAndTony', 'cszgj'),
-            cls('FoolsParadise', 'csvnw'),
+            cls('FoxTheCat', 'csxbc'),
             cls('FrankAndSteinway', 'cseui'),
             cls('FriedCritter', 'cshtp'),
             cls('GarciaCartoonCo', 'csyuw'),
@@ -94,7 +86,6 @@ class ComicSherpa(_ParserScraper):
             cls('GreenPieces', 'csnwy'),
             cls('GunstonStreet', 'csgru'),
             cls('HallEditorialCartoons', 'csgzx'),
-            cls('HaloAndHorns', 'csgub'),
             cls('HaphazardHumor', 'cspsa'),
             cls('Headcheese', 'cspku'),
             cls('Hogwashed', 'csbnf'),
@@ -114,7 +105,6 @@ class ComicSherpa(_ParserScraper):
             cls('LilleysSillies', 'cstka'),
             cls('LimboRoad', 'csfpp'),
             cls('LumAndAbner', 'cscji'),
-            cls('MadDogGhettoCop', 'cskwp'),
             cls('MarysNature', 'csogt'),
             cls('Millennialville', 'csxrl'),
             cls('Milton50', 'csmof'),
@@ -127,7 +117,6 @@ class ComicSherpa(_ParserScraper):
             cls('Mongrels', 'csbjo'),
             cls('MortsIsland', 'csfyq'),
             cls('MySonIsADog', 'csfec'),
-            cls('NavyBean', 'csfiq'),
             cls('NoAmbiguity', 'csryw'),
             cls('NoBusinessIKnow', 'csmfg'),
             cls('NoOrdinaryLife', 'csicr'),
@@ -184,7 +173,6 @@ class ComicSherpa(_ParserScraper):
             cls('TheBoobiehatch', 'csoev'),
             cls('TheCardinal', 'csfjg'),
             cls('TheDinkledorfs', 'cszhp'),
-            cls('TheEntrepiranha', 'cslml'),
             cls('TheFabulousBushPigs', 'cscqi'),
             cls('TheGrayZone', 'csmue'),
             cls('TheGreenMonkeys', 'cscue'),
@@ -198,7 +186,6 @@ class ComicSherpa(_ParserScraper):
             cls('TheQuinnAndFinnShow', 'csynn'),
             cls('TheRocks', 'cswky'),
             cls('TheUnemployed', 'csanx'),
-            cls('TheWagesOfSindy', 'cszff'),
             cls('Thingsesque', 'cstsq'),
             cls('TodaysTrump', 'csbrj'),
             cls('TopicToons', 'csgly'),

@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2019-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
-import requests
-
-from ..helpers import indirectStarter
 from ..scraper import _ParserScraper
 
 
@@ -55,11 +49,9 @@ class StudioKhimera(_ParserScraper):
             filename = filename.replace('UberQuest99.', 'UberQuest099.')
         return filename
 
-
     @classmethod
     def getmodules(cls):
         return (
-            cls('Draconia', 'thedraconiachronicles', adult=True),
             cls('Eorah', 'eorah'),
             cls('Mousechievous', 'mousechievous'),
             cls('UberQuest', 'uberquest'),

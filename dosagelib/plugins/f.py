@@ -3,13 +3,11 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-from re import compile, escape, IGNORECASE
+from re import compile, escape
 
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter, joinPathPartsNamer, xpath_class
 from .common import _ComicControlScraper, _WPNaviIn, _WordPressScraper
 
 
@@ -28,14 +26,15 @@ class Faneurysm(_WPNaviIn):
     endOfLife = True
 
 
-class FantasyRealms(_BasicScraper):
-    url = 'http://www.fantasyrealmsonline.com/'
-    stripUrl = url + 'manga/%s.php'
-    imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
-    prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
-    latestSearch = compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE)
+class FantasyRealms(_ParserScraper):
+    stripUrl = ('https://web.archive.org/web/20161204192651/'
+        'http://fantasyrealmsonline.com/manga/%s.php')
+    url = stripUrl % '091'
+    firstStripUrl = stripUrl % '001'
+    imageSearch = '//img[contains(@src, "/manga/0")]'
+    prevSearch = '//a[img[contains(@src, "nav-back")]]'
+    endOfLife = True
     help = 'Index format: nnn'
-    starter = indirectStarter
 
 
 class FarToTheNorth(_ComicControlScraper):
@@ -58,14 +57,15 @@ class FireflyCross(_WordPressScraper):
     firstStripUrl = url + '?comic=05062002'
 
 
-class FirstWorldProblems(_BasicScraper):
-    url = 'http://bradcolbow.com/archive/C5/'
+class FirstWorldProblems(_ParserScraper):
+    url = ('https://web.archive.org/web/20150710053456/'
+        'http://bradcolbow.com/archive/C5/')
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'P10'
-    imageSearch = compile(tagre("img", "src", r'(http://(?:fwpcomics\.s3\.amazonaws\.com|s3\.amazonaws\.com/fwpcomics)/s1-[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://bradcolbow\.com/archive/C5/[^"]+)', before="prev"))
+    imageSearch = '//div[{}]//img'.format(xpath_class('entry'))
+    prevSearch = '//a[{}]'.format(xpath_class('prev'))
     multipleImagesPerStrip = True
-    help = 'Index format: a letter and a number'
+    endOfLife = True
 
 
 class FlakyPastry(_BasicScraper):
@@ -78,12 +78,14 @@ class FlakyPastry(_BasicScraper):
     help = 'Index format: nnnn'
 
 
-class Flemcomics(_BasicScraper):
-    url = 'http://www.flemcomics.com/'
+class Flemcomics(_ParserScraper):
+    url = ('https://web.archive.org/web/20180414110349/'
+        'http://www.flemcomics.com/')
     stripUrl = url + 'd/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') +
-                         tagre("img", "src", r'/images/previous_day\.jpg'))
+    firstStripUrl = stripUrl % '19980101'
+    imageSearch = '//img[{}]'.format(xpath_class('ksc'))
+    prevSearch = '//a[@rel="prev"]'
+    endOfLife = True
     help = 'Index format: yyyymmdd'
 
 
@@ -114,6 +116,10 @@ class FonFlatter(_ParserScraper):
         )
 
 
+class ForestHill(_WordPressScraper):
+    url = 'https://www.foresthillcomic.org/'
+
+
 class ForLackOfABetterComic(_BasicScraper):
     url = 'http://forlackofabettercomic.com/'
     rurl = r'http://(?:www\.)?forlackofabettercomic\.com/'
@@ -136,7 +142,7 @@ class FoxDad(_ParserScraper):
         post = page.xpath('//link[@type="application/json+oembed"]')[0].get('href')
         post = post.replace('https://www.tumblr.com/oembed/1.0?url=https://foxdad.com/post', '')
         post = post.replace('-support-me-on-patreon', '')
-        return post.replace('/', '-') + '.' + imageUrl.rsplit('.', 1)[-1]
+        return post.replace('/', '-')
 
 
 class FoxTails(_ParserScraper):
@@ -155,14 +161,16 @@ class FoxTails(_ParserScraper):
 
 
 class Fragile(_ParserScraper):
-    url = 'http://www.fragilestory.com/'
+    url = ('https://web.archive.org/web/20190308203109/'
+        'http://www.fragilestory.com/')
     imageSearch = '//div[@id="comic_strip"]/a[@class="nobg"]/img'
     prevSearch = '//div[@id="nav_comic_a"]/a[2]'
     firstStripUrl = url + 'strips/chapter_01'
+    endOfLife = True
 
 
 class FredoAndPidjin(_ParserScraper):
-    url = 'http://www.pidjin.net/'
+    url = 'https://www.pidjin.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/02/19/goofy-monday'
     imageSearch = '//div[%s]//img' % xpath_class("episode")
@@ -170,6 +178,7 @@ class FredoAndPidjin(_ParserScraper):
     prevSearch = '//span[%s]/a' % xpath_class("prev")
     latestSearch = '//section[%s]//a' % xpath_class("latest")
     starter = indirectStarter
+    namer = joinPathPartsNamer((0, 1, 2))
 
 
 class Freefall(_ParserScraper):
@@ -219,19 +228,22 @@ class FullFrontalNerdity(_BasicScraper):
     help = 'Index format: number'
 
 
-class FunInJammies(_BasicScraper):
-    url = 'http://www.funinjammies.com/'
+class FunInJammies(_WordPressScraper):
+    url = ('https://web.archive.org/web/20170205105241/'
+        'http://funinjammies.com/')
     stripUrl = url + 'comic.php?issue=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'(/comics/.+?)"')
-    prevSearch = compile(r'(/comic.php.+?)" id.+?prev')
+    prevSearch = '//a[text()="< Prev"]'
+    endOfLife = True
     help = 'Index format: n (unpadded)'
 
 
 class FurPiled(_ParserScraper):
-    stripUrl = 'https://web.archive.org/web/20160404074145/http://www.liondogworks.com/images/fp-%03d.jpg'
+    stripUrl = ('https://web.archive.org/web/20160404074145/'
+        'http://www.liondogworks.com/images/fp-%03d.jpg')
     url = stripUrl % 427
     firstStripUrl = stripUrl % 1
+    endOfLife = True
 
     def getPrevUrl(self, url, data):
         # Skip missing pages

@@ -3,24 +3,13 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from re import compile
-from six.moves.urllib.parse import urljoin
+from urllib.parse import urljoin
 
 from ..helpers import bounceStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _WordPressScraper, _WPWebcomic
-
-
-class RadioactivePanda(_BasicScraper):
-    url = 'http://www.radioactivepanda.com/'
-    stripUrl = url + 'comic/%s'
-    imageSearch = compile(r'<img src="(/Assets/.*?)".+?"comicimg"')
-    prevSearch = compile(r'<a href="(/comic/.*?)".+?previous_btn')
-    help = 'Index format: n (no padding)'
 
 
 class RalfTheDestroyer(_WordPressScraper):
@@ -33,7 +22,7 @@ class RaynaOnTheRiver(_WordPressScraper):
 
 
 class RealLife(_WordPressScraper):
-    url = 'http://reallifecomics.com/'
+    url = 'https://reallifecomics.com/'
     stripUrl = url + 'comic.php?comic=%s'
     firstStripUrl = stripUrl % 'title-1'
     help = 'Index format: monthname-dd-yyyy'
@@ -76,15 +65,6 @@ class RedMeat(_ParserScraper):
         return '_'.join(parts[1:3])
 
 
-class RedString(_BasicScraper):
-    url = 'http://www.redstring.strawberrycomics.com/'
-    stripUrl = url + 'index.php?id=%s'
-    firstStripUrl = stripUrl % '434'
-    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
-    help = 'Index format: nnn'
-
-
 class Replay(_ParserScraper):
     url = 'http://replaycomic.com/'
     stripUrl = url + 'comic/%s/'
@@ -117,6 +97,10 @@ class Replay(_ParserScraper):
         if pageUrl in self.startOfChapter:
             self.chapter -= 1
         return name
+
+
+class RiversideExtras(_WPWebcomic):
+    url = 'https://riversidecomics.com/'
 
 
 class RomanticallyApocalyptic(_ParserScraper):

@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2019-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from .common import _ParserScraper
 
 
@@ -13,13 +10,13 @@ class NamirDeiter(_ParserScraper):
                   '//a[./img[contains(@src, "previous")]]',
                   '//a[contains(text(), "Previous")]')
 
-    def __init__(self, name, baseUrl, first, last=None):
+    def __init__(self, name, baseUrl, first=None, last=None):
         if name == 'NamirDeiter':
             super(NamirDeiter, self).__init__(name)
         else:
             super(NamirDeiter, self).__init__('NamirDeiter/' + name)
 
-        self.url = 'http://' + baseUrl + '/'
+        self.url = 'https://' + baseUrl + '/'
         self.stripUrl = self.url + 'comics/index.php?date=%s'
 
         if first:
@@ -31,23 +28,27 @@ class NamirDeiter(_ParserScraper):
             self.url = self.stripUrl % last
             self.endOfLife = True
 
+    def link_modifier(self, fromurl, tourl):
+        # Links are often absolute and keep jumping between http and https
+        return tourl.replace('http:', 'https:').replace('/www.', '/')
+
     @classmethod
     def getmodules(cls):
         return (
-            cls('ApartmentForTwo', 'www.apartmentfor2.com', None),
-            cls('NamirDeiter', 'www.namirdeiter.com', None, last='20150410'),
-            cls('NicoleAndDerek', 'nicoleandderek.com', None),
-            cls('OneHundredPercentCat', 'ndunlimited.com/100cat', None, last='20121001'),
-            cls('SpareParts', 'www.sparepartscomics.com', '20031022', last='20080331'),
-            cls('TheNDU', 'www.thendu.com', None),
-            cls('WonderKittens', 'wonderkittens.com', None),
-            cls('YouSayItFirst', 'www.yousayitfirst.com', '20040220', last='20130125')
+            cls('ApartmentForTwo', 'apartmentfor2.com'),
+            cls('NamirDeiter', 'namirdeiter.com', last='20150410'),
+            cls('NicoleAndDerek', 'nicoleandderek.com'),
+            cls('OneHundredPercentCat', 'ndunlimited.com/100cat', last='20121001'),
+            cls('SpareParts', 'sparepartscomics.com', first='20031022', last='20080331'),
+            cls('TheNDU', 'thendu.com'),
+            cls('WonderKittens', 'wonderkittens.com'),
+            cls('YouSayItFirst', 'yousayitfirst.com', first='20040220', last='20130125')
         )
 
 
 class UnlikeMinerva(_ParserScraper):
     name = 'NamirDeiter/UnlikeMinerva'
-    baseUrl = 'http://www.unlikeminerva.com/archive/index.php'
+    baseUrl = 'https://unlikeminerva.com/archive/index.php'
     stripUrl = baseUrl + '?week=%s'
     url = stripUrl % '127'
     firstStripUrl = stripUrl % '26'

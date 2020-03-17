@@ -3,14 +3,11 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 import os
 import threading
-from six.moves import _thread
-from six.moves.queue import Queue, Empty
-from six.moves.urllib.parse import urlparse
+import _thread
+from queue import Queue, Empty
+from urllib.parse import urlparse
 
 from .output import out
 from . import events, scraper
@@ -63,10 +60,11 @@ def get_host_lock(url):
 class ComicGetter(threading.Thread):
     """Get all strips of a comic in a thread."""
 
-    def __init__(self, options):
+    def __init__(self, options, jobs):
         """Store options."""
         super(ComicGetter, self).__init__()
         self.options = options
+        self.jobs = jobs
         self.origname = self.name
         self.stopped = False
         self.errors = 0
@@ -75,12 +73,12 @@ class ComicGetter(threading.Thread):
         """Process from queue until it is empty."""
         try:
             while not self.stopped:
-                scraperobj = jobs.get(False)
+                scraperobj = self.jobs.get(False)
                 self.name = scraperobj.name
                 try:
                     self.getStrips(scraperobj)
                 finally:
-                    jobs.task_done()
+                    self.jobs.task_done()
                     self.name = self.origname
         except Empty:
             pass
@@ -96,10 +94,10 @@ class ComicGetter(threading.Thread):
 
     def _getStrips(self, scraperobj):
         """Get all strips from a scraper."""
-        if self.options.all or self.options.cont:
-            numstrips = None
-        elif self.options.numstrips:
+        if self.options.numstrips:
             numstrips = self.options.numstrips
+        elif self.options.cont or self.options.all:
+            numstrips = None
         else:
             # get current strip
             numstrips = 1
@@ -138,7 +136,8 @@ class ComicGetter(threading.Thread):
                 if self.stopped:
                     break
             except Exception as msg:
-                out.exception('Could not save image at %s to %s: %r' % (image.referrer, image.filename, msg))
+                out.exception('Could not save image at {} to {}: {!r}'.format(
+                    image.referrer, image.filename, msg))
                 self.errors += 1
         return allskipped
 
@@ -147,12 +146,11 @@ class ComicGetter(threading.Thread):
         self.stopped = True
 
 
-jobs = ComicQueue()
-threads = []
-
-
 def getComics(options):
     """Retrieve comics."""
+    threads = []
+    jobs = ComicQueue()
+
     if options.handler:
         for name in set(options.handler):
             events.addHandler(name, options.basepath, options.baseurl, options.allowdownscale)
@@ -165,7 +163,7 @@ def getComics(options):
         # start threads
         num_threads = min(options.parallel, jobs.qsize())
         for i in range(num_threads):
-            t = ComicGetter(options)
+            t = ComicGetter(options, jobs)
             threads.append(t)
             t.start()
         # wait for threads to finish
@@ -176,20 +174,14 @@ def getComics(options):
         out.exception(msg)
         errors += 1
     except KeyboardInterrupt:
-        finish()
+        out.warn("Interrupted! Waiting for download threads to finish.")
     finally:
+        for t in threads:
+            t.stop()
+        jobs.clear()
         events.getHandler().end()
         events.clear_handlers()
     return errors
-
-
-def finish():
-    """Print warning about interrupt and empty the job queue."""
-    out.warn("Interrupted!")
-    for t in threads:
-        t.stop()
-    jobs.clear()
-    out.warn("Waiting for download threads to finish.")
 
 
 def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listing=False):
@@ -250,9 +242,11 @@ def shouldRunScraper(scraperobj, adult=True, listing=False):
 
 def warn_adult(scraperobj):
     """Print warning about adult content."""
-    out.warn(u"skipping adult comic %s; use the --adult option to confirm your age" % scraperobj.name)
+    out.warn(u"skipping adult comic {};"
+        " use the --adult option to confirm your age".format(scraperobj.name))
 
 
 def warn_disabled(scraperobj, reasons):
     """Print warning about disabled comic modules."""
-    out.warn(u"Skipping comic %s: %s" % (scraperobj.name, ' '.join(reasons.values())))
+    out.warn(u"Skipping comic {}: {}".format(
+        scraperobj.name, ' '.join(reasons.values())))

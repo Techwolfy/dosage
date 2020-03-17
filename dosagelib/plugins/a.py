@@ -3,9 +3,6 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from re import compile, escape, MULTILINE
 
 from ..util import tagre
@@ -20,24 +17,21 @@ class AbbysAgency(_WordPressScraper):
     firstStripUrl = stripUrl % 'a'
 
 
-class AbstruseGoose(_BasicScraper):
-    url = 'http://abstrusegoose.com/'
-    rurl = escape(url)
+class AbstruseGoose(_ParserScraper):
+    url = 'https://abstrusegoose.com/'
     starter = bounceStarter
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre('img', 'src',
-                                r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
-    prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) +
-                         r'&laquo; Previous')
-    nextSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) +
-                         r'Next &raquo;')
+    imageSearch = '//img[contains(@src, "/strips/")]'
+    textSearch = imageSearch + '/@title'
+    textOptional = True
+    prevSearch = '//a[contains(text(), "Previous")]'
+    nextSearch = '//a[contains(text(), "Next")]'
     help = 'Index format: n (unpadded)'
-    textSearch = compile(tagre("img", "title", r'([^"]+)'))
 
-    def namer(self, image_url, page_url):
-        index = int(page_url.rstrip('/').split('/')[-1])
-        name = image_url.split('/')[-1].split('.')[0]
+    def namer(self, imageurl, pageurl):
+        index = int(pageurl.rsplit('/', 1)[1])
+        name = imageurl.rsplit('/', 1)[1]
         return 'c%03d-%s' % (index, name)
 
 
@@ -177,7 +171,7 @@ class Alice(_WordPressScraper):
 
 
 class AlienDice(_WordPressScraper):
-    url = 'http://aliendice.com/'
+    url = 'https://aliendice.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '05162001'
 
@@ -194,7 +188,7 @@ class AlienDice(_WordPressScraper):
 
 class AlienDiceLegacy(_WordPressScraper):
     name = 'AlienDice/Legacy'
-    stripUrl = 'http://aliendice.com/comic/%s/'
+    stripUrl = 'https://aliendice.com/comic/%s/'
     url = stripUrl % 'legacy-2-15'
     firstStripUrl = stripUrl % 'legacy-1'
 
@@ -214,14 +208,12 @@ class AlienShores(_WordPressScraper):
     firstStripUrl = url + 'AScomic/updated-cover/'
 
 
-class AllTheGrowingThings(_BasicScraper):
-    url = 'http://growingthings.typodmary.com/'
-    rurl = escape(url)
+class AllTheGrowingThings(_WordPressScraper):
+    url = ('https://web.archive.org/web/20160611212229/'
+        'http://growingthings.typodmary.com/')
     stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2009/04/21/all-the-growing-things'
-    imageSearch = compile(tagre("img", "src", r'(%sfiles/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/strip-name'
+    firstStripUrl = stripUrl % 'all-the-growing-things'
+    endOfLife = True
 
 
 class AlphaLuna(_ParserScraper):
@@ -256,11 +248,13 @@ class Altermeta(_ParserScraper):
         return pageUrl.rsplit('=', 1)[-1] + '_' + imageUrl.rsplit('/', 1)[-1]
 
 
-class AltermetaOld(Altermeta):
+class AltermetaOld(_ParserScraper):
     url = Altermeta.url + 'oldarchive/index.php'
     stripUrl = Altermeta.url + 'oldarchive/archive.php?comic=%s'
     firstStripUrl = stripUrl % '0'
-    prevSearch = compile(r'<a href="([^"]+)">Back')
+    imageSearch = '//img[contains(@src, "comics/")]'
+    prevSearch = '//a[text()="Back"]'
+    help = 'Index format: n (unpadded)'
 
 
 class AmazingSuperPowers(_BasicScraper):
@@ -330,11 +324,14 @@ class Angels2200(_BasicScraper):
 
 
 class Annyseed(_ParserScraper):
-    baseUrl = 'http://www.mirrorwoodcomics.com/'
-    url = baseUrl + 'AnnyseedLatest.htm'
+    baseUrl = ('https://web.archive.org/web/20190511031451/'
+        'http://www.mirrorwoodcomics.com/')
     stripUrl = baseUrl + 'Annyseed%s.htm'
+    url = stripUrl % 'Latest'
+    firstStripUrl = stripUrl % '000'
     imageSearch = '//div/img[contains(@src, "Annyseed")]'
     prevSearch = '//a[img[@name="Previousbtn"]]'
+    endOfLife = True
     help = 'Index format: nnn'
     FIX_RE = compile(r'Annyseed/Finished%20For%20Print/')
 
@@ -349,7 +346,7 @@ class Annyseed(_ParserScraper):
 
 
 class AntiheroForHire(_ParserScraper):
-    stripUrl = 'http://www.giantrobot.club/antihero-for-hire/%s'
+    stripUrl = 'https://www.giantrobot.club/antihero-for-hire/%s'
     firstStripUrl = stripUrl % '2016/6/8/entrance-vigil'
     url = firstStripUrl
     imageSearch = '//div[@class="image-wrapper"]//img[not(@class="thumb-image")]'

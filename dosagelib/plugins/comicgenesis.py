@@ -3,9 +3,6 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from ..scraper import _ParserScraper
 
 # Comicgenesis has a lot of comics, but most of them are disallowed by
@@ -60,7 +57,6 @@ class ComicGenesis(_ParserScraper):
             cls('BreakingtheDoldrum', 'breakingthedoldrum'),
             cls('BrotherSwan', 'warlordofnoodles'),
             cls('Candi', baseUrl='http://candicomics.com/'),
-            cls('Cerintha', 'cerintha'),
             cls('CorporateLife', 'corporatelife'),
             cls('CrimsonFury', 'crimsonfury', ignoreRobotsTxt=True),
             cls('DarkWelkin', 'darkwelkin'),

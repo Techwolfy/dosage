@@ -3,16 +3,13 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 import json
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _TumblrScraper, _WordPressScraper, _WPNavi, _WPWebcomic
+from .common import _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class CampComic(_BasicScraper):
@@ -57,7 +54,8 @@ class CarryOn(_ParserScraper):
 class CarryOnAliceBlueAndTheGardensOfQ(CarryOn):
     name = 'CarryOn/AliceBlueAndTheGardensOfQ'
     url = 'http://www.hirezfox.com/km/abgq/abgq1024/'
-    firstStripUrl = url + 'd/20050401.html'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20050401'
 
     def namer(self, imageUrl, pageUrl):
         # Fix filenames
@@ -67,7 +65,8 @@ class CarryOnAliceBlueAndTheGardensOfQ(CarryOn):
 class CarryOnLegendOfAnneBunny(CarryOn):
     name = 'CarryOn/LegendOfAnneBunny'
     url = 'http://www.hirezfox.com/km/loab/loab1024/'
-    firstStripUrl = url + 'd/20040701.html'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20040701'
 
     def namer(self, imageUrl, pageUrl):
         # Fix filenames of early comics
@@ -139,8 +138,8 @@ class CatenaCafe(_WordPressScraper):
 
 
 class CatenaManor(_ParserScraper):
-    # Retrieve comic from the Internet Archive
-    baseUrl = 'https://web.archive.org/web/20141027141116/http://catenamanor.com/'
+    baseUrl = ('https://web.archive.org/web/20141027141116/'
+        'http://catenamanor.com/')
     url = baseUrl + 'archives'
     stripUrl = baseUrl + '%s/'
     firstStripUrl = stripUrl % '2003/07'
@@ -198,7 +197,7 @@ class CatVersusHuman(_ParserScraper):
 
 class CavesAndCritters(_WPWebcomic):
     url = 'https://cavesandcritters.com/?ao_confirm'
-    stripUrl = url + 'https://cavesandcritters.com/cnc_webcomic/%s/'
+    stripUrl = 'https://cavesandcritters.com/cnc_webcomic/%s/'
     firstStripUrl = stripUrl % '01_000'
     adult = True
 
@@ -219,23 +218,10 @@ class Centralia2050(_WordPressScraper):
 
 class ChainsawSuit(_WordPressScraper):
     url = 'http://chainsawsuit.com/comic/'
-    stripUrl = url + 'archive/%s/'
+    stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2008/03/12/strip-338'
     prevSearch = '//img[@alt="previous"]/..'
     help = 'Index format: yyyy/mm/dd/stripname'
-
-
-class Champ2010(_BasicScraper):
-    baseUrl = 'http://jedcollins.com/champ2010/'
-    rurl = escape(baseUrl)
-    # the latest URL is hard coded since the comic is discontinued
-    url = baseUrl + 'champ-12-30-10.html'
-    stripUrl = baseUrl + '%s.html'
-    firstStripUrl = stripUrl % 'champ1-1-10-fuck'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               after="Previous"))
-    help = 'Index format: yy-dd-mm'
 
 
 class ChannelAte(_WPNavi):
@@ -244,8 +230,8 @@ class ChannelAte(_WPNavi):
 
 class ChasingTheSunset(_BasicScraper):
     url = 'http://www.fantasycomic.com/'
-    stripUrl = url + 'index.php?p=c%s'
-    firstStripUrl = stripUrl % '1'
+    stripUrl = url + 'index.php?p=%s'
+    firstStripUrl = stripUrl % 'c1'
     imageSearch = compile(r'(/cmsimg/.+?)".+?comic-img')
     prevSearch = compile(r'<a href="(.+?)" title="" ><img src="(images/eye-prev.png|images/cn-prev.png)"')
     help = 'Index format: n'
@@ -287,9 +273,9 @@ class ClanOfTheCats(_WordPressScraper):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'coming-home-2'
 
-    def getPrevUrl(self, url, data):
+    def link_modifier(self, fromurl, tourl):
         # Fix broken navigation link
-        return super(ClanOfTheCats, self).getPrevUrl(url, data).replace('/2954/', '/2002-06-22/')
+        return tourl.replace('/2954/', '/2002-06-22/')
 
 
 class ClanOfTheCatsReunion(_WordPressScraper):
@@ -307,15 +293,6 @@ class Cloudscratcher(_ParserScraper):
     prevSearch = '//a[./img[contains(@src, "previous-page")]]'
     latestSearch = '//a[@alt="Newest_Page"]'
     starter = indirectStarter
-
-
-class Collar6(_TumblrScraper):
-    url = 'http://collar6.tumblr.com/'
-    firstStripUrl = url + 'post/138117470810/the-very-first-strip-from-when-i-thought-it-was'
-    imageSearch = '//figure[@class="photo-hires-item"]//img'
-    prevSearch = '//a[@class="previous-button"]'
-    latestSearch = '//li[@class="timestamp"]/a'
-    adult = True
 
 
 class CollegeCatastrophe(_ParserScraper):
@@ -355,7 +332,7 @@ class CommitStrip(_ParserScraper):
     baseUrl = 'https://www.commitstrip.com/en/'
     url = baseUrl + '?setLocale=1'  # ensure the language cookie is set
     stripUrl = baseUrl + '%s/'
-    firstStripUrl = 'http://www.commitstrip.com/en/2012/02/22/interview/'  # non-TLS!
+    firstStripUrl = stripUrl % '2012/02/22/interview'
 
     latestSearch = '//section//a'
     starter = indirectStarter
@@ -367,12 +344,15 @@ class CommitStrip(_ParserScraper):
         parts = page_url.rstrip('/').rsplit('/')[-4:]
         return '-'.join(parts)
 
+    def link_modifier(self, fromurl, tourl):
+        return tourl.replace('http:', 'https:')
+
 
 class CommitStripFr(CommitStrip):
     baseUrl = 'https://www.commitstrip.com/fr/'
     url = baseUrl + '?setLocale=1'  # ensure the language cookie is set
     stripUrl = baseUrl + '%s/'
-    firstStripUrl = 'http://www.commitstrip.com/fr/2012/02/22/interview/'  # non-TLS!
+    firstStripUrl = stripUrl % '2012/02/22/interview'
     lang = 'fr'
 
 

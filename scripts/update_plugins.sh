@@ -11,10 +11,10 @@ d=$(dirname $0)
 if [ $# -ge 1 ]; then
     list="$*"
 else
-    list="arcamax comicfury comicgenesis creators gocomics keenspot smackjeeves tapastic webcomicfactory webtoons"
+    list="arcamax comicfury comicgenesis comicskingdom creators gocomics keenspot tapastic webcomicfactory webtoons"
 fi
 for script in $list; do
     target="${d}/../dosagelib/plugins/${script}.py"
     echo "Upating $target"
-    "${d}/${script}.py" $mincomics "$target"
+    python3 "${d}/${script}.py" $mincomics "$target"
 done

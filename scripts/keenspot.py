@@ -8,9 +8,8 @@
 Script to get a list of KeenSpot comics and save the info in a
 JSON file for further processing.
 """
-from __future__ import absolute_import, division, print_function
 
-from six.moves.urllib.parse import urlsplit
+from urllib.parse import urlsplit
 
 from scriptutil import ComicListUpdater
 from dosagelib.util import check_robotstxt
@@ -33,6 +32,7 @@ class KeenSpotUpdater(ComicListUpdater):
     extra = {
         'CrowScare': "last='20111031'",
         'Dreamless': "last='20100726'",
+        'GeneCatlow': "last='20170412'",
         'MysticRevolution': "path='?cid=%s'",
         'PunchAnPie': "path='daily/%s.html'",
         'ShockwaveDarkside': "path='2d/%s.html'",

@@ -4,27 +4,19 @@
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 
-from __future__ import absolute_import, division, print_function
-
+import codecs
+import json
 import os
 import re
 import sys
 import time
-import json
-import codecs
 
-try:
-    from os import replace as rename
-except ImportError:
-    from os import rename
-
-import requests
 from lxml import html
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))  # noqa
 
 from dosagelib.util import unescape, get_page
-from dosagelib import scraper
+from dosagelib import scraper, http
 
 
 def first_lower(x):
@@ -40,7 +32,7 @@ class ComicListUpdater(object):
 
     def __init__(self, name):
         self.json = name.replace(".py", ".json")
-        self.session = requests.Session()
+        self.session = http.default_session
         self.sleep = 0
 
     def get_url(self, url, expand=True, robot=True):
@@ -101,7 +93,7 @@ class ComicListUpdater(object):
             for name, entry in sorted(data.items(), key=first_lower):
                 self.write_entry(newf, name, entry, min_comics, indent)
             self.copy_after_end(oldf, newf)
-        rename(filename + '.new', filename)
+        os.replace(filename + '.new', filename)
 
     def copy_until_start(self, src, dest):
         for line in src:

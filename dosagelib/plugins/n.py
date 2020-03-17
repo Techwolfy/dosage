@@ -3,13 +3,10 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
@@ -78,21 +75,13 @@ class Newshounds(_ParserScraper):
         return super(Newshounds, self).getPrevUrl(url, data)
 
 
-class NewshoundsProjectionEdge(_ParserScraper):
-    name = 'Newshounds/ProjectionEdge'
-    url = 'http://newshounds.keenspot.com/'
-    stripUrl = url + 'd/%s.html'
-    firstStripUrl = stripUrl % '20180710'
-    imageSearch = '//img[@class="ksc"]'
-    prevSearch = '//a[./img[@alt="Previous comic"]]'
-
-
-class NewWorld(_BasicScraper):
-    url = 'http://www.tfsnewworld.com/'
+class NewWorld(_WordPressScraper):
+    url = ('https://web.archive.org/web/20190718012133/'
+        'http://www.tfsnewworld.com/')
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2007/08/30/63'
-    imageSearch = compile(r'<img src="(http://www.tfsnewworld.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
+    prevSearch = '//a[@rel="prev"]'
+    endOfLife = True
     help = 'Index format: yyyy/mm/dd/stripn'
 
 
@@ -100,7 +89,7 @@ class NichtLustig(_BasicScraper):
     url = 'http://www.nichtlustig.de/main.html'
     stripUrl = 'http://static.nichtlustig.de/toondb/%s.html'
     lang = 'de'
-    imageSearch = compile('background-image:url\((http://static\.nichtlustig\.de/comics/full/\d+\.jpg)')
+    imageSearch = compile(r'background-image:url\((http://static\.nichtlustig\.de/comics/full/\d+\.jpg)')
     prevSearch = compile(tagre("a", "href", r'(http://static\.nichtlustig\.de/toondb/\d+\.html)'))
     latestSearch = compile(tagre("a", "href", r'([^"]*toondb/\d+\.html)'))
     help = 'Index format: yymmdd'
@@ -108,7 +97,9 @@ class NichtLustig(_BasicScraper):
 
 
 class Nicky510(_WPNavi):
-    url = 'http://www.nickyitis.com/'
+    url = ('https://web.archive.org/web/20160510215718/'
+        'http://www.nickyitis.com/')
+    endOfLife = True
 
 
 class Nightshift(_ParserScraper):
@@ -130,13 +121,13 @@ class Nightshift(_ParserScraper):
         return chapter + '_' + page
 
 
-class Nimona(_BasicScraper):
-    url = 'http://gingerhaze.com/nimona/'
+class Nimona(_ParserScraper):
+    url = ('https://web.archive.org/web/20141008095502/'
+        'http://gingerhaze.com/nimona/')
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % "page-1"
-    imageSearch = compile(tagre("img", "src", r'(http://gingerhaze\.com/sites/default/files/nimona-pages/.+?)'))
-    prevSearch = compile(r'<a href="(/nimona/comic/[^"]+)"><img src="http://gingerhaze\.com/sites/default/files/comicdrop/comicdrop_prev_label_file\.png"')
-    help = 'Index format: stripname'
+    imageSearch = '//div[{}]//img'.format(xpath_class('field-name-field-comic-page'))
+    prevSearch = '//a[img[contains(@src, "/comicdrop_prev_label")]]'
     endOfLife = True
 
 
@@ -184,9 +175,7 @@ class NonPlayerCharacter(_ParserScraper):
     starter = indirectStarter
 
     def namer(self, imageUrl, pageUrl):
-        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
-        ext = imageUrl.rsplit('.', 1)[-1]
-        return page + '.' + ext
+        return pageUrl.rstrip('/').rsplit('/', 1)[-1]
 
 
 class NotAVillain(_WPWebcomic):

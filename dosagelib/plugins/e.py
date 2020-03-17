@@ -3,11 +3,8 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 import os
-from re import compile, escape, IGNORECASE
+from re import compile, IGNORECASE
 
 from ..helpers import bounceStarter, indirectStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
@@ -182,10 +179,11 @@ class EverybodyLovesEricRaymond(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
-# Seems to be GeoBlocked from Germany?
 class EvilDiva(_WordPressScraper):
-    url = 'http://www.evildivacomics.com/'
+    url = ('https://web.archive.org/web/20190221223751/'
+        'https://www.evildivacomics.com/')
     firstStripUrl = url + 'comic/evil-diva-issue-1-cover/'
+    endOfLife = True
 
 
 class EvilInc(_WordPressScraper):
@@ -210,11 +208,9 @@ class Evon(_WordPressScraper):
     adult = True
 
 
-class Exiern(_WPNavi):
+class Exiern(_WordPressScraper):
     url = 'http://www.exiern.com/'
     firstStripUrl = url + '2005/09/06/so-far/'
-    imageSearch = ('//div[@id="comic"]//img',
-                   '//div[%s]//img' % xpath_class('entry'))
 
 
 class ExploitationNow(_WPNavi):
@@ -233,10 +229,9 @@ class Exvulnerum(_ParserScraper):
 
 
 class ExtraFabulousComics(_WordPressScraper):
-    url = 'http://extrafabulouscomics.com/comic/buttfly/'
-    firstStripUrl = url
-    latestSearch = '//a[%s]' % xpath_class('navi-last')
-    starter = indirectStarter
+    url = 'https://extrafabulouscomics.com/'
+    firstStripUrl = url + 'comic/buttfly/'
+    starter = bounceStarter
     multipleImagesPerStrip = True
 
     def namer(self, image_url, page_url):
@@ -257,18 +252,9 @@ class ExtraLife(_BasicScraper):
 
 
 class ExtraOrdinary(_ParserScraper):
-    url = 'http://www.exocomics.com/'
+    url = 'https://www.exocomics.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '01'
     prevSearch = '//a[%s]' % xpath_class('prev')
     imageSearch = '//img[%s]' % xpath_class('image-style-main-comic')
     help = 'Index format: number'
-
-
-class EyeOfRamalach(_BasicScraper):
-    url = 'http://theeye.katbox.net/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s/'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/[^"]+)' % rurl, after="data-webcomic-parent"))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="previous"))
-    help = 'Index format: stripname'

@@ -3,9 +3,6 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from ..scraper import _ParserScraper
 
 
@@ -75,11 +72,9 @@ class KeenSpot(_ParserScraper):
             cls('HeadTrip', 'headtrip'),
             cls('HeroByNight', 'herobynight'),
             cls('HoaxHunters', 'hoaxhunters'),
-            cls('ProjectionEdge', 'newshounds'),
             cls('InHere', 'inhere'),
             cls('JadeWarriors', 'jadewarriors'),
             cls('Katrina', 'katrina'),
-            cls('Landis', 'landis'),
             cls('LutherStrode', 'lutherstrode'),
             cls('MakeshiftMiracle', 'makeshiftmiracle'),
             cls('Marksmen', 'marksmen'),
@@ -91,6 +86,7 @@ class KeenSpot(_ParserScraper):
             cls('NoRoomForMagic', 'noroomformagic'),
             cls('OutThere', 'outthere'),
             cls('Porcelain', 'porcelain'),
+            cls('ProjectionEdge', 'newshounds'),
             cls('PunchAnPie', 'punchanpie', path='daily/%s.html'),
             cls('QUILTBAG', 'quiltbag'),
             cls('RedSpike', 'redspike'),

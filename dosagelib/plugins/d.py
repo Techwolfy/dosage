@@ -3,30 +3,12 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, xpath_class
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn, _WPWebcomic
-
-
-class DamnLol(_ParserScraper):
-    url = 'http://www.damnlol.com/'
-    # Classes for next and previous seem to be swapped...
-    prevSearch = '//a[%s]' % xpath_class("next")
-    nextSearch = '//a[%s]' % xpath_class("previous")
-    imageSearch = '//img[@id="post-image"]'
-    starter = bounceStarter
-
-    def namer(self, image_url, page_url):
-        ext = image_url.rsplit('.', 1)[1]
-        path = page_url.rsplit('/', 1)[1][:-5]
-        stripname, number = path.rsplit('-', 1)
-        return '%s-%s.%s' % (number, stripname, ext)
 
 
 class Damonk(_BasicScraper):
@@ -121,7 +103,7 @@ class DelaTheHooda(_ParserScraper):
 
 
 class Delve(_WordPressScraper):
-    url = 'http://thisis.delvecomic.com/NewWP/'
+    url = 'https://thisis.delvecomic.com/NewWP/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'in-too-deep'
     adult = True
@@ -131,11 +113,11 @@ class Delve(_WordPressScraper):
         # Fix inconsistent filenames
         filename = imageUrl.rsplit('/', 1)[-1].rsplit('?', 1)[0]
         if (pageUrl == self.stripUrl % 'engagement' or
-            pageUrl == self.stripUrl % 'losing-it'):
+                pageUrl == self.stripUrl % 'losing-it'):
             self.maxLen = self.maxLen - 1
         if ('episode' in filename and
-            len(filename) - len('.jpg') > self.maxLen and
-            filename[self.maxLen] != '-'):
+                len(filename) - len('.jpg') > self.maxLen and
+                filename[self.maxLen] != '-'):
             filename = filename[:self.maxLen] + '-' + filename[self.maxLen:]
         return filename
 
@@ -151,7 +133,8 @@ class DemolitionSquad(_ParserScraper):
 
 
 class DerTodUndDasMaedchen(_ParserScraper):
-    url = 'http://www.cartoontomb.de/deutsch/tod2.php'
+    url = ('https://web.archive.org/web/20180106180134/'
+        'http://www.cartoontomb.de/deutsch/tod2.php')
     stripUrl = url + '?bild=%s.jpg'
     firstStripUrl = stripUrl % '00_01_01'
     imageSearch = '//img[contains(@src, "images/tod/teil2")]'
@@ -162,7 +145,7 @@ class DerTodUndDasMaedchen(_ParserScraper):
 
 class DesertFox(_WPWebcomic):
     url = 'https://www.desertfoxcomics.net/'
-    stripUrl = url + 'comics/%s/'
+    stripUrl = url + 'desertfox/comic/%s/'
     firstStripUrl = stripUrl % 'origins-1'
 
     def namer(self, imageUrl, pageUrl):
@@ -214,7 +197,7 @@ class DieselSweetiesOld(_ParserScraper):
 
 
 class Dilbert(_ParserScraper):
-    url = 'http://dilbert.com/'
+    url = 'https://dilbert.com/'
     stripUrl = url + 'strip/%s'
     firstStripUrl = stripUrl % '1989-04-16'
     starter = indirectStarter
@@ -228,24 +211,8 @@ class Dilbert(_ParserScraper):
         return "%s" % name
 
 
-class Djandora(_WordPressScraper):
-    url = 'https://web.archive.org/web/20170923062433/http://djandora.comicsbreak.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'intro'
-    endOfLife = True
-
-    def namer(self, imageUrl, pageUrl):
-        # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
-        filename = filename.replace('2014-10-31-Page70', 'Page70')
-        filename = filename.replace('a3p69eng', 'Page69')
-        if '2015/08/a4p57eng' in imageUrl:
-            filename = filename.replace('p57', 'p56')
-        return filename
-
-
 class DocRat(_WPWebcomic):
-    url = 'http://www.docrat.com.au/'
+    url = 'https://www.docrat.com.au/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'begin-with-eye-contact'
 
@@ -293,7 +260,7 @@ class DoghouseDiaries(_ParserScraper):
 
 
 class DominicDeegan(_ParserScraper):
-    url = 'http://www.dominic-deegan.com/'
+    url = 'https://www.dominic-deegan.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '0001-20020521'
     imageSearch = '//img[contains(@class, "wp-post-image")]'
@@ -306,6 +273,18 @@ class DorkTower(_ParserScraper):
     firstStripUrl = url + '1997/01/01/shadis-magazine-strip-1/'
     imageSearch = '//div[%s]//a/img' % xpath_class('entry-content')
     prevSearch = '//a[%s][text()="Previous"]' % xpath_class('btn')
+
+
+class DoomsdayMyDear(_ParserScraper):
+    url = 'http://doomsdaymydear.com/'
+    imageSearch = '//img[{}]'.format(xpath_class('attachment-full'))
+    prevSearch = '//a[{}]'.format(xpath_class('previous-webcomic-link'))
+
+
+class Draconia(_WPWebcomic):
+    url = 'https://www.draconiachronicles.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-page-1'
 
 
 class Dracula(_BasicScraper):
@@ -350,16 +329,17 @@ class DresdenCodak(_ParserScraper):
         return not data.xpath(self.imageSearch)
 
 
-class DrFun(_BasicScraper):
-    baseUrl = 'http://www.ibiblio.org/Dave/'
-    url = baseUrl + 'ar00502.htm'
+class DrFun(_ParserScraper):
+    baseUrl = ('https://web.archive.org/web/20180726145737/'
+        'http://www.ibiblio.org/Dave/')
     stripUrl = baseUrl + 'ar%s.htm'
+    url = stripUrl % '00502'
     firstStripUrl = stripUrl % '00001'
-    imageSearch = compile(tagre("a", "href", r'(Dr-Fun/df\d+/df[^"]+)'))
+    imageSearch = '//a[contains(@href, "Dr-Fun/df")]'
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + 'Previous Week,')
-    help = 'Index format: nnnnn'
+    prevSearch = '//a[contains(text(), "Previous Week")]'
     endOfLife = True
+    help = 'Index format: nnnnn'
 
 
 class Drive(_BasicScraper):

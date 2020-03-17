@@ -4,13 +4,9 @@
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 
-from __future__ import absolute_import, division, print_function
-
-import time
-import random
 import os
 import re
-from six.moves.urllib.parse import urljoin
+from urllib.parse import urljoin
 
 from lxml import html, etree
 from lxml.html.defs import link_attrs as html_link_attrs
@@ -25,13 +21,15 @@ try:
 except ImportError:
     pycountry = None
 
-from . import loader, configuration, languages
-from .util import (get_page, makeSequence, get_system_uid, urlopen,
-                   unescape, tagre, normaliseURL, prettyMatcherList,
-                   requests_session, uniq)
+from . import configuration, http, languages, loader
+from .util import (get_page, makeSequence, get_system_uid, unescape, tagre,
+    normaliseURL, prettyMatcherList, uniq)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
+
+
+ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
 
 
 class Scraper(object):
@@ -80,9 +78,9 @@ class Scraper(object):
     # usually the index format help
     help = ''
 
-    # A list of HTTP error codes which should be handled as a successful
-    # request. This is a workaround for some comics which return regular
-    # pages with strange HTTP codes. By default, all HTTP errors raise
+    # Specifing a list of HTTP error codes which should be handled as a
+    # successful request. This is a workaround for some comics which return
+    # regular pages with strange HTTP codes. By default, all HTTP errors raise
     # exceptions.
     allow_errors = ()
 
@@ -94,7 +92,7 @@ class Scraper(object):
     ignoreRobotsTxt = False
 
     # HTTP session for configuration & cookies
-    session = requests_session()
+    session = http.default_session
 
     @classmethod
     def getmodules(cls):
@@ -119,17 +117,6 @@ class Scraper(object):
         self._indexes = tuple()
         self.skippedUrls = set()
         self.hitFirstStripUrl = False
-
-    def __cmp__(self, other):
-        """Compare scraper by name and index list."""
-        if not isinstance(other, Scraper):
-            return 1
-        # first, order by name
-        d = cmp(self.name, other.name)
-        if d != 0:
-            return d
-        # then by indexes
-        return cmp(self.indexes, other.indexes)
 
     def __hash__(self):
         """Get hash value from name and index list."""
@@ -205,7 +192,7 @@ class Scraper(object):
                 except ValueError as msg:
                     # image not found
                     out.exception(msg)
-            if self.firstStripUrl == url:
+            if self.isfirststrip(url):
                 out.debug(u"Stop at first URL %s" % url)
                 self.hitFirstStripUrl = True
                 break
@@ -220,9 +207,17 @@ class Scraper(object):
                 out.warn(u"Already seen previous URL %r" % prevUrl)
                 break
             url = prevUrl
-            if url:
-                # wait up to 2 seconds for next URL
-                time.sleep(1.0 + random.random())
+
+    def isfirststrip(self, url):
+        """Check if the specified URL is the first strip of a comic. This is
+        specially for comics taken from archive.org, since the base URL of
+        archive.org changes whenever pages are taken from a different
+        snapshot."""
+        if not self.firstStripUrl:
+            return False
+        firsturl = ARCHIVE_ORG_URL.sub('', self.firstStripUrl)
+        currenturl = ARCHIVE_ORG_URL.sub('', url)
+        return firsturl == currenturl
 
     def getPrevUrl(self, url, data):
         """Find previous URL."""
@@ -267,11 +262,10 @@ class Scraper(object):
 
     def vote(self):
         """Cast a public vote for this comic."""
-        url = configuration.VoteUrl + 'count/'
         uid = get_system_uid()
         data = {"name": self.name.replace('/', '_'), "uid": uid}
-        page = urlopen(url, self.session, data=data)
-        return page.text
+        response = self.session.post(configuration.VoteUrl, data=data)
+        response.raise_for_status()
 
     def get_download_dir(self, basepath):
         """Try to find the corect download directory, ignoring case

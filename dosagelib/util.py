@@ -4,51 +4,27 @@
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 
-from __future__ import absolute_import, division, print_function
-
-from six.moves.urllib.parse import (
-    quote as url_quote, unquote as url_unquote, urlparse, urlunparse, urlsplit)
-from six.moves.urllib_robotparser import RobotFileParser
-import requests
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
-import sys
+import html
 import os
-import cgi
 import re
-import traceback
-import time
 import subprocess
+import sys
+import time
+import traceback
 
-try:
-    import html
-except ImportError:
-    # Python 2.7
-    from HTMLParser import HTMLParser
-    html = HTMLParser()
-from six.moves import range
-import six
+from functools import lru_cache
+from urllib.parse import (parse_qs, quote as url_quote, unquote as url_unquote,
+        urlparse, urlunparse, urlsplit)
+from urllib.robotparser import RobotFileParser
 
-try:
-    from functools import lru_cache
-except ImportError:
-    from backports.functools_lru_cache import lru_cache
+import requests
 
 from .output import out
-from .configuration import UserAgent, AppName, App, SupportUrl
+from .configuration import UserAgent, App, SupportUrl
+from . import AppName
 
 # Maximum content size for HTML pages
 MaxContentBytes = 1024 * 1024 * 3  # 3 MB
-
-# Default number of retries
-MaxRetries = 3
-
-# Factor for retry backoff (see urllib3.util.retry, this default means
-# 2s, 4s, 8s)
-RetryBackoffFactor = 2
-
-# Default connection timeout
-ConnectionTimeoutSecs = 60
 
 # The character set to encode non-ASCII characters in a URL. See also
 # http://tools.ietf.org/html/rfc2396#section-2.1
@@ -57,14 +33,6 @@ ConnectionTimeoutSecs = 60
 # else they use the page encoding for followed link. See als
 # http://code.google.com/p/browsersec/wiki/Part1#Unicode_in_URLs
 UrlEncoding = "utf-8"
-
-
-def requests_session():
-    s = requests.Session()
-    retry = Retry(MaxRetries, backoff_factor=RetryBackoffFactor)
-    s.mount('http://', HTTPAdapter(max_retries=retry))
-    s.mount('https://', HTTPAdapter(max_retries=retry))
-    return s
 
 
 def get_system_uid():
@@ -83,13 +51,10 @@ def get_system_uid():
 
 
 def get_nt_system_uid():
-    """Get the MachineGuid from
+    r"""Get the MachineGuid from
     HKEY_LOCAL_MACHINE\Software\Microsoft\Cryptography\MachineGuid
     """
-    try:
-        import _winreg as winreg
-    except ImportError:
-        import winreg
+    import winreg
     lm = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
     try:
         key = winreg.OpenKey(lm, r"Software\Microsoft\Cryptography")
@@ -127,7 +92,7 @@ def backtick(cmd, encoding='utf-8'):
 
 def unicode_safe(text, encoding=UrlEncoding, errors='ignore'):
     """Decode text to Unicode if not already done."""
-    if isinstance(text, six.text_type):
+    if isinstance(text, str):
         return text
     return text.decode(encoding, errors)
 
@@ -276,18 +241,15 @@ def get_robotstxt_parser(url, session=None):
 
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
-            allow_errors=(), useragent=UserAgent, **kwargs):
+            allow_errors=(), **kwargs):
     """Open an URL and return the response object."""
     out.debug(u'Open URL %s' % url)
     if 'headers' not in kwargs:
         kwargs['headers'] = {}
-    kwargs['headers']['User-Agent'] = useragent
     if referrer:
         kwargs['headers']['Referer'] = referrer
     out.debug(u'Sending headers %s' % kwargs['headers'], level=3)
     out.debug(u'Sending cookies %s' % session.cookies)
-    if 'timeout' not in kwargs:
-        kwargs['timeout'] = ConnectionTimeoutSecs
     if 'data' not in kwargs:
         method = 'GET'
     else:
@@ -345,9 +307,9 @@ def getRelativePath(basepath, path):
 
 def getQueryParams(url):
     """Get URL query parameters."""
-    query = urlsplit(url)[3]
+    query = urlsplit(url).query
     out.debug(u'Extracting query parameters from %r (%r)...' % (url, query))
-    return cgi.parse_qs(query)
+    return parse_qs(query)
 
 
 def internal_error(out=sys.stderr, etype=None, evalue=None, tb=None):

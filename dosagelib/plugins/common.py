@@ -3,9 +3,6 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-
-from __future__ import absolute_import, division, print_function
-
 from ..scraper import _ParserScraper
 from ..helpers import indirectStarter, xpath_class
 
@@ -31,10 +28,10 @@ class _WPNaviIn(_WordPressScraper):
 
 
 class _WPWebcomic(_WordPressScraper):
-    imageSearch = '//div[contains(@class, "webcomic-image")]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
-    nextSearch = '//a[contains(@class, "next-webcomic-link")]'
-    latestSearch = '//a[contains(@class, "last-webcomic-link")]'
+    imageSearch = '//div[{}]//img'.format(xpath_class('webcomic-image'))
+    prevSearch = '//a[{}]'.format(xpath_class('previous-webcomic-link'))
+    nextSearch = '///a[{}]'.format(xpath_class('next-webcomic-link'))
+    latestSearch = '//a[{}]'.format(xpath_class('last-webcomic-link'))
 
 
 class _ComicControlScraper(_ParserScraper):
