@@ -73,7 +73,7 @@ class ComicGenesis(_ParserScraper):
             cls('FancyThat', 'fancythat'),
             cls('FantasyQwest', 'creatorauthorman'),
             cls('Fantazine', 'fantazin'),
-            cls('FaultyLogic', 'faultylogic', ignoreRobotsTxt=True),
+            cls('FaultyLogic', 'faultylogic', last='20111210', ignoreRobotsTxt=True),
             cls('FightCastOrEvade', 'fightcastorevade', ignoreRobotsTxt=True),
             cls('Flounderville', 'flounderville'),
             cls('GEM', 'keltzy'),
