@@ -175,14 +175,6 @@ def prettyMatcherList(things):
     return "('%s')" % "', '".join(norm)
 
 
-def unescape(text):
-    """Replace HTML entities and character references."""
-    return html.unescape(text)
-
-
-_nopathquote_chars = "-;/=,~*+()@!"
-
-
 def normaliseURL(url):
     """Normalising
     - strips and leading or trailing whitespace,
@@ -191,7 +183,7 @@ def normaliseURL(url):
     """
     url = unicode_safe(url).strip()
     # XXX: brutal hack
-    url = unescape(url)
+    url = html.unescape(url)
 
     pu = list(urlparse(url))
     segments = pu[2].split('/')
