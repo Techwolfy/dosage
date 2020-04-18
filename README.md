@@ -1,9 +1,10 @@
 # Dosage
 
-[![Build Status](https://travis-ci.org/webcomics/dosage.svg?branch=master)](https://travis-ci.org/webcomics/dosage)
+[![Build Status](https://travis-ci.com/webcomics/dosage.svg?branch=master)](https://travis-ci.com/webcomics/dosage)
 [![Code Climate](https://codeclimate.com/github/webcomics/dosage/badges/gpa.svg)](https://codeclimate.com/github/webcomics/dosage)
 [![codecov](https://codecov.io/gh/webcomics/dosage/branch/master/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
-[![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)]()
+![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)
+![License](https://img.shields.io/github/license/webcomics/dosage)
 
 Dosage is designed to keep a local copy of specific webcomics and other
 picture-based content such as Picture of the Day sites. With the dosage
@@ -13,6 +14,8 @@ the webcomic's site layout allows this).
 
 Multiple webcomics can be downloaded in parallel, making the update of comic
 strips faster.
+
+Dosage is licensed under the [MIT license](COPYING)
 
 ## Notice
 
@@ -84,11 +87,11 @@ Windows users can download a complete binary (including Python) from the
 The simplest way to install and upgrade dosage is with [pipx]. To install the
 newest stable version with all optional features use:
 
-    pipx install --spec dosage[css,bash] dosage
+    pipx install dosage[css,bash]
 
 To install the newest development version, use:
 
-    pipx install --spec "dosage[css,bash] @ git+https://github.com/webcomics/dosage.git" dosage
+    pipx install "dosage[css,bash] @ git+https://github.com/webcomics/dosage.git"
 
 To upgrade such installations, just run:
 

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
@@ -22,7 +22,7 @@ class TestRegex(object):
 
     ValuePrefix = '/bla/'
 
-    @pytest.mark.parametrize("tag,value,domatch", [
+    @pytest.mark.parametrize(('tag', 'value', 'domatch'), [
         ('<img src="%s">', ValuePrefix + 'foo', True),
         ('< img  src = "%s" >', ValuePrefix, True),
         ('<img class="prev" src="%s">', ValuePrefix + '...', True),

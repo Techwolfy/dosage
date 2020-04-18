@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
@@ -26,7 +26,7 @@ def cmd_err(*options):
     assert cmd(*options) == 1
 
 
-@pytest.mark.usefixtures("nosleep")
+@pytest.mark.usefixtures("_nosleep")
 class TestDosage(object):
     """Test the dosage commandline client."""
 

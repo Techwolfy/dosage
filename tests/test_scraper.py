@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 # Copyright (C) 2013-2014 Bastian Kleineidam
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 import pytest
@@ -22,5 +22,5 @@ class TestScraper(object):
         assert len(result) > 1
 
     def test_find_scrapers_error(self):
-        with pytest.raises(ValueError):
-            scraper.find_scrapers("")
+        with pytest.raises(ValueError, match='empty comic name'):
+            scraper.find_scrapers('')
