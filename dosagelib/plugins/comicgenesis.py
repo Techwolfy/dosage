@@ -21,7 +21,7 @@ class ComicGenesis(_ParserScraper):
     )
     help = 'Index format: yyyymmdd'
 
-    def __init__(self, name, sub=None, last=None, baseUrl=None, lang=None, ignoreRobotsTxt=False):
+    def __init__(self, name, sub=None, last=None, baseUrl=None, lang=None, adult=False, ignoreRobotsTxt=False):
         super(ComicGenesis, self).__init__('ComicGenesis/' + name)
 
         if sub:
@@ -36,6 +36,9 @@ class ComicGenesis(_ParserScraper):
 
         if lang:
             self.lang = lang
+
+        if adult:
+            self.adult = adult
 
         if ignoreRobotsTxt:
             self.ignoreRobotsTxt = True
@@ -114,7 +117,7 @@ class ComicGenesis(_ParserScraper):
             cls('SarahZero', 'plughead'),
             cls('SixByNineCollege', 'sixbyninecollege'),
             cls('SpoononHighandFireontheMountian', 'spoon'),
-            cls('SuicideForHire', 'suicideforhire', ignoreRobotsTxt=True),
+            cls('SuicideForHire', 'suicideforhire', adult=True, ignoreRobotsTxt=True),
             cls('SynapticMisfires', 'synapticmisfires'),
             cls('TakingStock', 'mapaghimagsik'),
             cls('TemplarArizona', 'templaraz'),
@@ -129,7 +132,7 @@ class ComicGenesis(_ParserScraper):
             cls('Unconventional', 'unconventional'),
             cls('WarMageNC17', 'warmage'),
             cls('WebcomicTheWebcomicWebcomicWebcomicWebcomic', 'dannormnsanidey'),
-            cls('Wereworld', 'wereworld', ignoreRobotsTxt=True),
+            cls('Wereworld', 'wereworld', adult=True, ignoreRobotsTxt=True),
             cls('WhatYouDontSee', 'phantomlady4'),
             cls('Wierdman', 'asa'),
         )
