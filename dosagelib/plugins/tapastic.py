@@ -42,6 +42,7 @@ class Tapastic(_ParserScraper):
     def getmodules(cls):
         return (
             # Manually-added comics
+            cls('AmpleTime', 'Ample-Time'),
             cls('NoFuture', 'NoFuture'),
             cls('OrensForge', 'OrensForge'),
             cls('RavenWolf', 'RavenWolf'),
