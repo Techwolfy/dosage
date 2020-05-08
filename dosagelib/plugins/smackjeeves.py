@@ -241,7 +241,6 @@ class SmackJeeves(_ParserScraper):
             cls('FromnowonImagirl', 99018),
             cls('FruitloopAndMrDownbeat', 82798),
             cls('FullSpectrumTherapy', 156285),
-            cls('FurryExperience', 62354),
             cls('GamerCafe', 138841),
             cls('GamesPeoplePlayUpdatedWeekly', 72207),
             cls('GardenofHearts', 106504),
