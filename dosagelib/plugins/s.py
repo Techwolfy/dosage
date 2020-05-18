@@ -155,13 +155,12 @@ class SeelPeel(_WPNaviIn):
     multipleImagesPerStrip = True
 
 
-class SequentialArt(_BasicScraper):
+class SequentialArt(_ParserScraper):
     url = 'http://www.collectedcurios.com/sequentialart.php'
     stripUrl = url + '?s=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'([^"]+)', before="strip"))
-    prevSearch = compile(tagre("a", "href", r'(/sequentialart\.php\?s=\d+)') +
-                         tagre("img", "src", r'Nav_BackOne\.gif'))
+    imageSearch = '//img[@class="w3-image"]'
+    prevSearch = '//a[@id="backOne"]'
     help = 'Index format: name'
 
 
