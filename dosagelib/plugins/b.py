@@ -7,7 +7,7 @@ from re import compile, escape
 
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
@@ -71,7 +71,7 @@ class Baroquen(_BasicScraper):
 class Bearmageddon(_WordPressScraper):
     url = 'http://bearmageddon.com/bearmo/page-1/'
     firstStripUrl = url
-    latestSearch = '//a[%s]' % xpath_class('comic-nav-last')
+    latestSearch = '//a[d:class("comic-nav-last")]'
     starter = indirectStarter
 
 
@@ -188,8 +188,8 @@ class BlankIt(_ParserScraper):
     url = 'http://blankitcomics.com/'
     firstStripUrl = url + 'comic/well-what-would-you-do'
     imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[%s]' % xpath_class('comic-nav-previous')
-    latestSearch = '//a[%s]' % xpath_class('comic-nav-last')
+    prevSearch = '//a[d:class("comic-nav-previous")]'
+    latestSearch = '//a[d:class("comic-nav-last")]'
     starter = indirectStarter
 
 
@@ -236,7 +236,7 @@ class BMovieComic(_BasicScraper):
 
 class BobWhite(_ParserScraper):
     url = 'http://www.bobwhitecomics.com/'
-    imageSearch = '//span[%s]/img' % xpath_class('webcomic-object')
+    imageSearch = '//span[d:class("webcomic-object")]/img'
     prevSearch = '//a[@rel="previous"]'
 
 
@@ -295,7 +295,6 @@ class ButImACatPerson(_WordPressScraper):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = 'sketches-1'
     endOfLife = True
-
 
 
 class ButtercupFestival(_ParserScraper):
