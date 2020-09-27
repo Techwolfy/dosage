@@ -56,6 +56,7 @@ class CarryOnAliceBlueAndTheGardensOfQ(CarryOn):
     url = 'http://www.hirezfox.com/km/abgq/abgq1024/'
     stripUrl = url + 'd/%s.html'
     firstStripUrl = stripUrl % '20050401'
+    endOfLife = True
 
     def namer(self, imageUrl, pageUrl):
         # Fix filenames
@@ -67,6 +68,7 @@ class CarryOnLegendOfAnneBunny(CarryOn):
     url = 'http://www.hirezfox.com/km/loab/loab1024/'
     stripUrl = url + 'd/%s.html'
     firstStripUrl = stripUrl % '20040701'
+    endOfLife = True
 
     def namer(self, imageUrl, pageUrl):
         # Fix filenames of early comics
@@ -80,6 +82,7 @@ class CarryOnOfMouseAndMoon(CarryOn):
     name = 'CarryOn/OfMouseAndMoon'
     url = 'http://www.hirezfox.com/km/omam/omam1024/'
     firstStripUrl = url + 'd/20031101.html'
+    endOfLife = True
     ignoreRobotsTxt = True
 
 
@@ -87,6 +90,7 @@ class CarryOnPiratesOfPenumbra(CarryOn):
     name = 'CarryOn/PiratesOfPenumbra'
     url = 'http://www.hirezfox.com/km/pop/pop1024/'
     firstStripUrl = url + 'd/20040117.html'
+    endOfLife = True
     ignoreRobotsTxt = True
 
 
