@@ -44,7 +44,7 @@ class WebToons(_ParserScraper):
         return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             # START AUTOUPDATE
             cls('1000', 'action/one-thousand', 1217),
@@ -89,6 +89,7 @@ class WebToons(_ParserScraper):
             cls('Blessed', 'drama/blessed', 1193),
             cls('BloodInk', 'action/blood-ink', 1490),
             cls('BloodlessWars', 'sf/bloodless-wars', 1622),
+            cls('BloopBloopRelationshipComic', 'challenge/bloop-bloop-relationship-comic', 239970),
             cls('Bluechair', 'slice-of-life/bluechair', 199),
             cls('BOOItsSex', 'slice-of-life/boo-its-sex', 1413),
             cls('BoyfriendOfTheDead', 'comedy/boyfriend-of-the-dead', 1102),
@@ -112,6 +113,7 @@ class WebToons(_ParserScraper):
             cls('ClusterFudge', 'slice-of-life/cluster-fudge', 355),
             cls('CodeAdam', 'action/code-adam', 1657),
             cls('CookingComically', 'tiptoon/cooking-comically', 622),
+            cls('CrapIDrewOnMyLunchBreak', 'challenge/crap-i-drew-on-my-lunch-break', 124756),
             cls('Crumbs', 'romance/crumbs', 1648),
             cls('CupidsArrows', 'romance/cupids-arrows', 1538),
             cls('CursedPrincessClub', 'comedy/cursed-princess-club', 1537),
@@ -163,6 +165,7 @@ class WebToons(_ParserScraper):
             cls('FourLeaf', 'fantasy/four-leaf', 1454),
             cls('FreakingRomance', 'romance/freaking-romance', 1467),
             cls('FridayForbiddenTales', 'thriller/friday', 388),
+            cls('GenshinImpact', 'challenge/genshin-impact', 242646),
             cls('Gepetto', 'sf/gepetto', 81),
             cls('GhostsAmongTheWildFlowers', 'fantasy/ghosts-over-wild-flowers', 718),
             cls('GhostTeller', 'horror/ghost-teller', 1307),
@@ -330,6 +333,7 @@ class WebToons(_ParserScraper):
             cls('SpaceVixen', 'challenge/space-vixen-deep-space-k9', 207049),
             cls('SpiritFingers', 'drama/spirit-fingers', 1577),
             cls('Spirits', 'fantasy/spirits-re', 1348),
+            cls('StalkerXStalker', 'challenge/stalker-x-stalker', 245662),
             cls('STARCROSS', 'super-hero/star-cross', 1599),
             cls('StayingHealthyTogether', 'tiptoon/staying-healthy-together', 1963),
             cls('StrawberrySeafoam', 'fantasy/strawberry-seafoam', 1248),

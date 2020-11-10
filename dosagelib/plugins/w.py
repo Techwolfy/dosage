@@ -7,7 +7,7 @@ from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..helpers import bounceStarter, indirectStarter
+from ..helpers import bounceStarter
 from .common import _ComicControlScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
@@ -15,15 +15,18 @@ class WapsiSquare(_WPNaviIn):
     url = 'http://wapsisquare.com/'
     firstStripUrl = url + 'comic/09092001/'
 
+    def shouldSkipUrl(self, url, data):
+        """Skip pages without images."""
+        return data.xpath('//iframe')  # videos
 
-class WastedTalent(_BasicScraper):
+
+class WastedTalent(_ParserScraper):
     url = 'http://www.wastedtalent.ca/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'anime-crack'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.wastedtalent\.ca/sites/default/files/imagecache/comic_full/comics/\d+/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)',
-                               after="comic_prev"))
-    help = 'Index format: stripname'
+    imageSearch = '//div[d:class("comic_content")]/img'
+    prevSearch = '//li[d:class("previous")]/a'
+    multipleImagesPerStrip = True
 
 
 class WebcomicName(_ParserScraper):
@@ -31,26 +34,6 @@ class WebcomicName(_ParserScraper):
     imageSearch = '//figure[d:class("tmblr-full")]//img'
     prevSearch = '//a[d:class("next")]'
     multipleImagesPerStrip = True
-
-
-class WebDesignerCOTW(_ParserScraper):
-    baseUrl = 'https://www.webdesignerdepot.com/'
-    url = baseUrl + 'category/comics/'
-    starter = indirectStarter
-    firstStripUrl = baseUrl + '2009/11/comics-of-the-week-1/'
-    imageSearch = '//article[d:class("article-content")]//img'
-    multipleImagesPerStrip = True
-    prevSearch = '//a[span[d:class("icon-right-small")]]'
-    latestSearch = '//a[d:class("anim-link")]'
-
-    def shouldSkipUrl(self, url, data):
-        """Skip non-comic URLs."""
-        return 'comics-of-the-week' not in url
-
-    def namer(self, image_url, page_url):
-        imagename = image_url.rsplit('/', 1)[1]
-        week = compile(r'week-(\d+)').search(page_url).group(1)
-        return "%s-%s" % (week, imagename)
 
 
 class Weregeek(_ParserScraper):

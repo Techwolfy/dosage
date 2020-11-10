@@ -1,13 +1,18 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 import argparse
+import contextlib
 import os
+from pathlib import Path
 
-from . import events, configuration, singleton, director, scraper
+import appdirs
+
+from . import events, configuration, singleton, director
 from . import AppName, __version__
 from .output import out
+from .scraper import scrapers as allscrapers
 from .util import internal_error, strlimit
 
 
@@ -33,6 +38,10 @@ If you already have downloaded several comics and want to get the latest
 strips of all of them:
   dosage --continue @
 """
+
+
+# Making our config roaming seems sensible
+userdirs = appdirs.AppDirs(appname=AppName, appauthor=False, roaming=True)
 
 
 def setup_options():
@@ -229,6 +238,7 @@ def run(options):
     if not options.comic:
         out.warn(u'No comics specified, bailing out!')
         return 1
+    add_user_scrapers()
     if options.modulehelp:
         return display_help(options)
     if options.vote:
@@ -236,14 +246,43 @@ def run(options):
     return director.getComics(options)
 
 
+def add_user_scrapers():
+    """Add extra comic modules from the user data directory. This uses two
+    different locations: The "system-native" location and paths matching the
+    XDG basedir spec. While XDG isn't a thing on macOS and Windows, some users
+    (and developers) like to use these paths cross-plattform, therefore we
+    support both."""
+    dirs = set()
+    dirs.add(userdirs.user_data_dir)
+    with xdg_system():
+        dirs.add(userdirs.user_data_dir)
+    dirs = (Path(x) / 'plugins' for x in dirs)
+    for d in dirs:
+        allscrapers.adddir(d)
+
+
+@contextlib.contextmanager
+def xdg_system():
+    """context manager to do something with appdirs while forcing the system to
+    be "linux2", which implements the XDG base dir spec.
+    """
+    oldsys = appdirs.system
+    appdirs.system = 'linux2'
+    try:
+        yield
+    finally:
+        appdirs.system = oldsys
+
+
 def do_list(column_list=True, verbose=False, listall=False):
     """List available comics."""
+    add_user_scrapers()
     with out.pager():
         out.info(u'Available comic scrapers:')
         out.info(u'Comics tagged with [{}] require age confirmation'
             ' with the --adult option.'.format(TAG_ADULT))
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
-        scrapers = sorted(scraper.get_scrapers(listall),
+        scrapers = sorted(allscrapers.get(listall),
                           key=lambda s: s.name.lower())
         if column_list:
             num, disabled = do_column_list(scrapers)
@@ -262,12 +301,12 @@ def do_list(column_list=True, verbose=False, listall=False):
 def do_single_list(scrapers, verbose=False):
     """Get list of scraper names, one per line."""
     disabled = {}
-    for num, scraperobj in enumerate(scrapers):
+    for scraperobj in scrapers:
         if verbose:
             display_comic_help(scraperobj)
         else:
             out.info(get_tagged_scraper_name(scraperobj, reasons=disabled))
-    return num + 1, disabled
+    return len(scrapers) + 1, disabled
 
 
 def do_column_list(scrapers):
@@ -320,11 +359,10 @@ def main(args=None):
     try:
         options = setup_options().parse_args(args=args)
         options.basepath = os.path.expanduser(options.basepath)
-        res = run(options)
+        return run(options)
     except KeyboardInterrupt:
         print("Aborted.")
-        res = 1
+        return 1
     except Exception:
         internal_error()
-        res = 2
-    return res
+        return 2

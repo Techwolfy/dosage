@@ -268,8 +268,8 @@ class CigarroAndCerveja(_ParserScraper):
     url = 'http://www.cigarro.ca/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'reacquaintance'
-    imageSearch = '//div[@id="comic"]//img',
-    prevSearch = '//a[contains(text()," Prev")]',
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[contains(text()," Prev")]'
 
 
 class ClanOfTheCats(_WordPressScraper):
@@ -396,15 +396,6 @@ class CourtingDisaster(_WordPressScraper):
 class CraftedFables(_WordPressScraper):
     url = 'http://www.caf-fiends.net/comicpress/'
     prevSearch = '//a[@rel="prev"]'
-
-
-class CrapIDrewOnMyLunchBreak(_BasicScraper):
-    url = 'http://crap.jinwicked.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2003/07/30/jin-and-josh-decide-to-move'
-    imageSearch = compile(tagre("img", "src", r'(http://crap\.jinwicked\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
-    help = 'Index format: yyyy/mm/dd/name'
 
 
 class CrimsonDark(_BasicScraper):
@@ -541,3 +532,6 @@ class CynWolf(_ParserScraper):
     prevSearch = '//a[text()="\u2190"]'
     multipleImagesPerStrip = True
     endOfLife = True
+
+    def shouldSkipUrl(self, url, data):
+        return '2016/the-end' in url  # video

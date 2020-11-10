@@ -29,6 +29,9 @@ class SmackJeeves(_ParserScraper):
         response = self.session.post(self.apiBase + 'articleList',
             params={'titleNo': self._comicid})
         response.raise_for_status()
+        if ('text/html' in response.headers['content-type'] and
+                'available in your area' in response.text):
+            self.geoblocked()
         return response.json()['result']['list'][self.lastid]['articleUrl']
 
     def fetchUrls(self, url, data, urlsearch):
@@ -58,7 +61,7 @@ class SmackJeeves(_ParserScraper):
                 'titleNo': self._comicid,
                 'articleNo': url.rsplit('=', 1)[1],
                 'page': 1,
-                'order': 'new'
+                'order': 'new',
             })
             response.raise_for_status()
             comments = response.json()['result']['list']
@@ -67,10 +70,10 @@ class SmackJeeves(_ParserScraper):
                     return comment['commentText']
             return None
         else:
-            super(SmackJeeves, self).fetchText(url, data, textSearch, optional)
+            return super().fetchText(url, data, textSearch, optional)
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             cls('20TimesKirby', 91583),
             cls('2Kingdoms', 112096, endOfLife=True),
@@ -586,6 +589,7 @@ class SmackJeeves(_ParserScraper):
             cls('ThornsComic', 131578),
             cls('ThornTopia', 54482),
             cls('TLAAOK', 92316, adult=True),
+            cls('ToddAllisonAndThePetuniaViolet', 50018),
             cls('TosiHuonoYaoiSarjis', 141725, adult=True),
             cls('TotallyCrossover', 73445),
             cls('TPTruePower', 13199),

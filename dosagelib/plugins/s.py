@@ -6,6 +6,8 @@
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
 
+from requests.exceptions import HTTPError
+
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer
 from ..util import tagre
@@ -36,6 +38,11 @@ class SabrinaOnline(_BasicScraper):
 class SafelyEndangered(_WPNavi):
     url = 'http://www.safelyendangered.com/'
     firstStripUrl = url + 'comic/ignored/'
+
+
+class SaffronAndSage(_WordPressScraper):
+    url = 'https://www.saffroncomic.com/'
+    firstStripUrl = url + 'comic/p0001/'
 
 
 class SailorsunOrg(_WordPressScraper):
@@ -209,7 +216,7 @@ class Sheldon(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-class ShipInABottle(_WPNavi):
+class ShipInABottle(_WordPressScraper):
     url = 'http://shipinbottle.pepsaga.com/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '281'
@@ -239,6 +246,11 @@ class SinFest(_ParserScraper):
     textSearch = imageSearch + '/@alt'
     prevSearch = '//a[./img[contains(@src, "images/prev")]]'
     help = 'Index format: yyyy-mm-dd'
+
+
+class SisterClaire(_ComicControlScraper):
+    url = 'https://www.sisterclaire.com/comic/'
+    firstStripUrl = url + 'book-one'
 
 
 class SixGunMage(_ComicControlScraper):
@@ -359,7 +371,7 @@ class SoloLeveling(_ParserScraper):
         '88-0_5d9e0dedb942e/03.': '88-0_5d9e0dedb942e/03b.',
         '88-0_5d9e0dedb942e/05.': '88-0_5d9e0dedb942e/05a.',
         '88-0_5d9e0dedb942e/30.': '88-0_5d9e0dedb942e/30a.',
-        '87-0_5d94cdebd9df7/01a.': '87-0_5d94cdebd9df7/01c.'
+        '87-0_5d94cdebd9df7/01a.': '87-0_5d94cdebd9df7/01c.',
     }
 
     def imageUrlModifier(self, imageUrl, data):
@@ -374,6 +386,16 @@ class SoloLeveling(_ParserScraper):
         self.imageUrls = super(SoloLeveling, self).fetchUrls(url, data, urlSearch)
         self.imageUrls = [self.imageUrlModifier(x, data) for x in self.imageUrls]
         return self.imageUrls
+
+    def getPage(self, url):
+        try:
+            return super().getPage(url)
+        except HTTPError as e:
+            # CloudFlare WAF
+            if e.response.status_code == 403 and '1020' in e.response.text:
+                self.geoblocked()
+            else:
+                raise e
 
     def getPrevUrl(self, url, data):
         return self.stripUrl % str(int(url.strip('/').rsplit('-', 1)[-1]) - 1)
@@ -511,7 +533,7 @@ class SSDD(_ParserScraper):
             self.stripUrl % '20050504',
             self.stripUrl % '20040705',
             self.stripUrl % '20030418',
-            self.stripUrl % '20030214'
+            self.stripUrl % '20030214',
         )
 
 
@@ -576,6 +598,7 @@ class StarfireAgency(_WPWebcomic):
             self.currentChapter = self.currentChapter - 1
         return filename
 
+
 class StarTrip(_ComicControlScraper):
     url = 'https://www.startripcomic.com/'
 
@@ -629,44 +652,6 @@ class StrongFemaleProtagonist(_ParserScraper):
         )
 
 
-class StuffNoOneToldMe(_BasicScraper):
-    url = 'http://www.snotm.com/'
-    stripUrl = url + '%s.html'
-    firstStripUrl = stripUrl % '2010/05/01'
-    olderHref = r"(http://www\.snotm\.com/\d+/\d+/[^']+\.html)"
-    starter = indirectStarter
-    imageSearch = (
-        compile(tagre("img", "src", r'(http://i\.imgur\.com/[^"]+)') +
-                r"(?:</a>|<br />)"),
-        compile(tagre("img", "src", r'(http://\d+\.bp\.blogspot\.com/[^"]+)') +
-                r"(?:(?:&nbsp;)?</a>|<span |<br />)"),
-        compile(tagre("img", "src", r'(https://lh\d+\.googleusercontent\.com/[^"]+)') + r"</a>"),
-    )
-    prevSearch = compile(tagre("a", "href", olderHref, quote="'",
-                               before="older-link"))
-    latestSearch = compile(tagre("a", "href", olderHref, quote="'"))
-    multipleImagesPerStrip = True
-    help = 'Index format: yyyy/mm/stripname'
-
-    def namer(self, image_url, page_url):
-        """Use page URL to construct meaningful image name."""
-        parts, year, month, stripname = page_url.rsplit('/', 3)
-        stripname = stripname.rsplit('.', 1)[0]
-        parts, imagename = image_url.rsplit('/', 1)
-        return '%s-%s-%s-%s' % (year, month, stripname, imagename)
-
-    def shouldSkipUrl(self, url, data):
-        """Skip pages without images."""
-        return url in (
-            self.stripUrl % '2016/05/so-you-would-like-to-share-my-comics',  # no comic
-            self.stripUrl % '2012/08/self-rant',  # no comic
-            self.stripUrl % '2012/06/if-you-wonder-where-ive-been',  # video
-            self.stripUrl % '2011/10/i-didnt-make-this-nor-have-anything-to',  # video
-            self.stripUrl % '2010/12/first-snotm-fans-in-sao-paulo',  # no comic
-            self.stripUrl % '2010/11/ear-infection',  # no comic
-        )
-
-
 class SuburbanJungle(_ParserScraper):
     url = 'http://suburbanjungleclassic.com/'
     stripUrl = url + '?p=%s'
@@ -700,11 +685,11 @@ class SurvivingTheWorld(_ParserScraper):
     imageSearch = (
         '//div[@class="img"]/img',      # When there's one image per strip
         '//div[@class="img"]/p/img',    # When there's multiple images per strip
-        '//td/img'                      # Special case for Lesson1296.html
+        '//td/img',                     # Special case for Lesson1296.html
     )
     prevSearch = (
         '//li[@class="previous"]/a',
-        '//td/a'                        # Special case for Lesson1296.html
+        '//td/a',                       # Special case for Lesson1296.html
     )
     multipleImagesPerStrip = True
     help = 'Index format: name'

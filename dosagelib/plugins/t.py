@@ -38,6 +38,11 @@ class Tamberlane(_WPWebcomic):
     prevSearch = '//a[@class="previous-link"]'
 
 
+class TheBoyWhoFell(_ComicControlScraper):
+    url = 'https://www.boywhofell.com/'
+    firstStripUrl = url + 'comic/ch00p00'
+
+
 class TheBrads(_ParserScraper):
     url = ('https://web.archive.org/web/20171211154809/'
         'http://bradcolbow.com/archive/C4/')
@@ -86,6 +91,11 @@ class TheDreamlandChronicles(_WordPressScraper):
     url = 'http://www.thedreamlandchronicles.com/'
 
 
+class TheForgottenOrder(_ComicControlScraper):
+    url = 'http://www.forgottenordercomic.com/'
+    firstStripUrl = url + 'comic/prolouge-01-book-1'
+
+
 class TheGamerCat(_ParserScraper):
     url = 'https://thegamercat.com/'
     stripUrl = url + 'comic/%s/'
@@ -110,6 +120,11 @@ class TheGentleWolf(_WordPressScraper):
         if pageUrl == self.stripUrl % 'tgw-271':
             filename = filename.replace('272', '271')
         return filename
+
+
+class TheGlassScientists(_ComicControlScraper):
+    url = 'https://www.theglassscientists.com/'
+    firstStripUrl = url + 'comic/chapter-i'
 
 
 class TheJunkHyenasDiner(_WordPressScraper):

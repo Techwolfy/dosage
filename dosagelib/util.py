@@ -2,8 +2,6 @@
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
-
 import html
 import os
 import re
@@ -17,7 +15,7 @@ from urllib.parse import (parse_qs, quote as url_quote, unquote as url_unquote,
         urlparse, urlunparse, urlsplit)
 from urllib.robotparser import RobotFileParser
 
-import requests
+import lxml
 
 from .output import out
 from .configuration import UserAgent, App, SupportUrl
@@ -247,16 +245,12 @@ def urlopen(url, session, referrer=None, max_content_bytes=None,
     else:
         method = 'POST'
         out.debug(u'Sending POST data %s' % kwargs['data'], level=3)
-    try:
-        req = session.request(method, url, **kwargs)
-        out.debug(u'Response cookies: %s' % req.cookies)
-        check_content_size(url, req.headers, max_content_bytes)
-        if req.status_code not in allow_errors:
-            req.raise_for_status()
-        return req
-    except requests.exceptions.RequestException as err:
-        msg = 'URL retrieval of %s failed: %s' % (url, err)
-        raise IOError(msg)
+    req = session.request(method, url, **kwargs)
+    out.debug(u'Response cookies: %s' % req.cookies)
+    check_content_size(url, req.headers, max_content_bytes)
+    if req.status_code not in allow_errors:
+        req.raise_for_status()
+    return req
 
 
 def check_content_size(url, headers, max_content_bytes):
@@ -356,6 +350,7 @@ def print_app_info(out=sys.stderr):
     print(App, file=out)
     print("Python %(version)s on %(platform)s" %
           {"version": sys.version, "platform": sys.platform}, file=out)
+    print("libxml2 version: %i.%i.%i" % lxml.etree.LIBXML_VERSION, file=out)
     stime = strtime(time.time())
     print("Local time:", stime, file=out)
     print("sys.argv", sys.argv, file=out)

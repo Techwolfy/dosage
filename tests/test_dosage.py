@@ -26,16 +26,22 @@ def cmd_err(*options):
     assert cmd(*options) == 1
 
 
-@pytest.mark.usefixtures("_nosleep")
+@pytest.mark.usefixtures('_nosleep', '_noappdirs')
 class TestDosage(object):
     """Test the dosage commandline client."""
 
     # This shouldn't hit the network at all, so add responses without mocks to
     # make sure it doesn't do that
     @responses.activate
-    def test_list_comics(self):
-        for option in ("-l", "--list", "--singlelist"):
-            cmd_ok(option)
+    @pytest.mark.parametrize(('option'), [
+        ('-l'),
+        ('--list'),
+        ('--singlelist'),
+    ])
+    def test_list_comics(self, option, capfd):
+        cmd_ok(option)
+        out, err = capfd.readouterr()
+        assert 'ADummyTestScraper' in out
 
     @responses.activate
     def test_display_version(self):
@@ -83,8 +89,10 @@ class TestDosage(object):
             with pytest.raises(SystemExit):
                 cmd(option)
 
-    def test_module_help(self):
-        cmd_ok("-m", "xkcd")
+    def test_module_help(self, capfd):
+        cmd_ok("-m", "-t", "xkcd")
+        out, err = capfd.readouterr()
+        assert re.match(r'([0-9][0-9]:){2}.. xkcd>', out)
 
     def test_no_comics_specified(self):
         cmd_err()
@@ -135,6 +143,17 @@ class TestDosage(object):
         cmd_ok("-n", "2", "-v", "-b", str(tmpdir), "xkcd:303")
 
     @responses.activate
+    def test_fetch_all_existing(self, tmp_path):
+        httpmocks.xkcd()
+        xkcd = tmp_path / 'xkcd'
+        xkcd.mkdir()
+        other = tmp_path / 'randomdir'
+        other.mkdir()
+        cmd_ok('-v', '-b', str(tmp_path), '@')
+        assert len(list(xkcd.glob('*'))) == 2
+        assert len(list(other.glob('*'))) == 0
+
+    @responses.activate
     def test_json_page_key_bounce_and_multi_image(self, tmpdir):
         httpmocks.page('https://zenpencils.com/', 'zp-home')
         httpmocks.page('https://zenpencils.com/comic/missing/', 'zp-223')
@@ -157,5 +176,5 @@ class TestDosage(object):
         images = data['pages'][page]['images']
         assert len(images) == 2
 
-        for imgurl, imgfile in images.items():
+        for imgfile in images.values():
             assert directory.join(imgfile).check(file=1)

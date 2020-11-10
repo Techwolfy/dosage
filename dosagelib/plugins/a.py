@@ -57,13 +57,12 @@ class AcademyVale(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class Achewood(_BasicScraper):
-    url = 'http://www.achewood.com/'
+class Achewood(_ParserScraper):
+    url = 'https://www.achewood.com/'
     stripUrl = url + 'index.php?date=%s'
-    firstStripUrl = stripUrl % '00000000'
-    imageSearch = compile(tagre("img", "src", r'(/comic\.php\?date=\d+)'))
-    prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)',
-                               after="Previous"))
+    firstStripUrl = stripUrl % '10012001'
+    imageSearch = '//p[@id="comic_body"]//img'
+    prevSearch = '//span[d:class("left")]/a[d:class("dateNav")]'
     help = 'Index format: mmddyyyy'
     namer = regexNamer(compile(r'date=(\d+)'))
 
@@ -123,7 +122,7 @@ class AHClub(_WPNaviIn):
     nav = {
         'ah-club-2-cover': 'ah-club-1-page-24',
         'ah-club-3-cover': 'ah-club-2-page-28',
-        'ah-club-4-cover': 'ah-club-3-page-22'
+        'ah-club-4-cover': 'ah-club-3-page-22',
     }
 
     def getPrevUrl(self, url, data):

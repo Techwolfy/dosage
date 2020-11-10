@@ -1,21 +1,18 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 '''update languages.py from pycountry'''
 import os
-import sys
 import codecs
 
-basepath = os.path.dirname(os.path.dirname(__file__))
-sys.path.insert(0, basepath)
-
-from dosagelib.scraper import get_scrapers  # noqa
+from dosagelib.scraper import scrapers
 
 
 def main():
     """Update language information in dosagelib/languages.py."""
+    basepath = os.path.dirname(os.path.dirname(__file__))
     fn = os.path.join(basepath, 'dosagelib', 'languages.py')
     with codecs.open(fn, 'w', 'utf-8') as f:
         f.write('# SPDX-License-Identifier: MIT\n')
@@ -27,18 +24,18 @@ def main():
 
 def get_used_languages():
     languages = {}
-    for scraperobj in get_scrapers():
+    for scraperobj in scrapers.get():
         lang = scraperobj.lang
         if lang not in languages:
             languages[lang] = scraperobj.language()
     return languages
 
 
-def write_languages(f, l):
+def write_languages(f, langs):
     """Write language information."""
     f.write("Languages = {%s" % os.linesep)
-    for lang in sorted(l):
-        f.write("    %r: %r,%s" % (lang, l[lang], os.linesep))
+    for lang in sorted(langs):
+        f.write("    %r: %r,%s" % (lang, langs[lang], os.linesep))
     f.write("}%s" % os.linesep)
 
 

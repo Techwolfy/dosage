@@ -27,7 +27,7 @@ class Removed(Scraper):
         return {'rem-' + self.reason: self.REASONS[self.reason]}
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             # Removed in 2.16
             cls('AbleAndBaker'),
@@ -358,7 +358,6 @@ class Removed(Scraper):
             cls('GoComics/Putz'),
             cls('GoComics/QuestionsForKids'),
             cls('GoComics/RandomActsofNancy'),
-            cls('GoComics/RedMeat'),
             cls('GoComics/RicigsToonTrivia'),
             cls('GoComics/RogueSymmetry'),
             cls('GoComics/Sabine'),
@@ -608,6 +607,52 @@ class Removed(Scraper):
             cls('WotNow'),
 
             # Removed in 3.0
+            cls('GoComics/2CowsAndAChicken'),
+            cls('GoComics/Bewley'),
+            cls('GoComics/Biographic'),
+            cls('GoComics/CapsulasMedicas'),
+            cls('GoComics/ClearBlueWater'),
+            cls('GoComics/Committed'),
+            cls('GoComics/DorrisMcComics'),
+            cls('GoComics/DragonGirl'),
+            cls('GoComics/DudeAndDude'),
+            cls('GoComics/EricTheCircle'),
+            cls('GoComics/FacesOfTheNewsByKerryWaghorn'),
+            cls('GoComics/FortKnox'),
+            cls('GoComics/GarfieldMinusGarfield'),
+            cls('GoComics/Gaturro'),
+            cls('GoComics/Graffiti'),
+            cls('GoComics/HaikuEwe'),
+            cls('GoComics/HealthCapsules'),
+            cls('GoComics/JerryHolbert'),
+            cls('GoComics/KidSpot'),
+            cls('GoComics/KidTown'),
+            cls('GoComics/KitNCarlyle'),
+            cls('GoComics/LostSideOfSuburbia'),
+            cls('GoComics/MagicInAMinute'),
+            cls('GoComics/MazeToonsPuzzle'),
+            cls('GoComics/MegClassics'),
+            cls('GoComics/MichaelAndrew'),
+            cls('GoComics/Microcosm'),
+            cls('GoComics/PaulSzep'),
+            cls('GoComics/PicturesInBoxes'),
+            cls('GoComics/PieComic'),
+            cls('GoComics/ReplyAll'),
+            cls('GoComics/ReplyAllLite'),
+            cls('GoComics/Shortcuts'),
+            cls('GoComics/ThatsLife'),
+            cls('GoComics/TheBestMedicineCartoon'),
+            cls('GoComics/TheConjurers'),
+            cls('GoComics/TheCreeps'),
+            cls('GoComics/TheGentlemansArmchair'),
+            cls('GoComics/TheLostBear'),
+            cls('GoComics/TheSunshineClub'),
+            cls('GoComics/UncleArtsFunland'),
+            cls('GoComics/USAcres'),
+            cls('GoComics/WorldOfWonder'),
+            cls('StuffNoOneToldMe'),
+            cls('VictimsOfTheSystem'),
+            cls('WebDesignerCOTW'),
         )
 
 
@@ -629,7 +674,7 @@ class Renamed(Scraper):
         return {'ren-%i' % self.i: self.MSG % self.newname}
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             # Renamed in 2.16
             cls('1997', '1977'),
@@ -657,7 +702,6 @@ class Renamed(Scraper):
             cls('GoComics/Anecdote', 'ComicSherpa/Anecdote'),
             cls('GoComics/AppleCreekComics', 'ComicSherpa/AppleCreekComics'),
             cls('GoComics/BarkingCrayon', 'ComicFury/BarkingCrayon'),
-            cls('GoComics/BatchRejection', 'ComicSherpa/BatchRejection'),
             cls('GoComics/Bazoobee', 'ComicSherpa/Bazoobee'),
             cls('GoComics/Bluebonnets', 'ComicSherpa/Bluebonnets'),
             cls('GoComics/BlueSkiesToons', 'ComicSherpa/BlueSkiesToons'),
@@ -695,7 +739,6 @@ class Renamed(Scraper):
             cls('GoComics/ONIONAndPEA', 'ComicSherpa/ONIONAndPEA'),
             cls('GoComics/PaddedCell', 'ComicSherpa/PaddedCell'),
             cls('GoComics/Peeples', 'ComicSherpa/Peeples'),
-            cls('GoComics/PirateMike', 'ComicSherpa/PirateMike'),
             cls('GoComics/PoliceLimit', 'ComicSherpa/PoliceLimit'),
             cls('GoComics/RonWarren', 'ComicSherpa/RonWarren'),
             cls('GoComics/SignGarden', 'ComicSherpa/SignGarden'),
@@ -770,6 +813,12 @@ class Renamed(Scraper):
             cls('ZebraGirl', 'ComicFury/ZebraGirl'),
 
             # Renamed in 3.0
+            cls('CrapIDrewOnMyLunchBreak', 'WebToons/CrapIDrewOnMyLunchBreak'),
+            cls('GoComics/BloomCounty2017', 'GoComics/BloomCounty2019'),
+            cls('GoComics/Cathy', 'GoComics/CathyClassics'),
+            cls('GoComics/Owlturd', 'GoComics/ShenComix'),
+            cls('GoComics/PeanutsEnEspanol', 'GoComics/SnoopyEnEspanol'),
+            cls('GoComics/RipleysBelieveItOrNotSpanish', 'GoComics/RipleysAunqueUstedNoLoCrea'),
             cls('SmackJeeves/BlackTapestries', 'ComicFury/BlackTapestries'),
             cls('SmackJeeves/FurryExperience', 'ComicFury/FurryExperience'),
             cls('SmackJeeves/GrowingTroubles', 'ComicFury/GrowingTroubles'),

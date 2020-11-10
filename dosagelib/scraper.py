@@ -6,6 +6,7 @@
 import html
 import os
 import re
+import warnings
 from urllib.parse import urljoin
 
 import lxml
@@ -31,6 +32,15 @@ from .xml import NS
 
 
 ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
+
+
+if lxml.etree.LIBXML_VERSION < (2, 9, 3):
+    warnings.warn('Your libxml2 is very old (< 2.9.3), some dosage modules might missbehave')
+
+
+class GeoblockedException(IOError):
+    def __init__(self):
+        super().__init__('It seems your current location is geo-blocked.')
 
 
 class Scraper(object):
@@ -115,7 +125,7 @@ class Scraper(object):
         """Initialize internal variables."""
         self.name = name
         self.urls = set()
-        self._indexes = tuple()
+        self._indexes = ()
         self.skippedUrls = set()
         self.hitFirstStripUrl = False
 
@@ -245,7 +255,7 @@ class Scraper(object):
 
     def namer(self, image_url, page_url):
         """Return filename for given image and page URL."""
-        return None
+        return
 
     def link_modifier(self, fromurl, tourl):
         """Optional modification of parsed link (previous/back/latest) URLs.
@@ -343,19 +353,22 @@ class Scraper(object):
         Return language of the comic as a human-readable language name instead
         of a 2-character ISO639-1 code.
         """
-        lang = 'Unknown (%s)' % self.lang
         if pycountry is None:
             if self.lang in languages.Languages:
-                lang = languages.Languages[self.lang]
+                return languages.Languages[self.lang]
         else:
             try:
-                lang = pycountry.languages.get(alpha_2=self.lang).name
+                return pycountry.languages.get(alpha_2=self.lang).name
             except KeyError:
                 try:
-                    lang = pycountry.languages.get(alpha2=self.lang).name
+                    return pycountry.languages.get(alpha2=self.lang).name
                 except KeyError:
                     pass
-        return lang
+        return 'Unknown (%s)' % self.lang
+
+    def geoblocked(self):
+        """Helper method to indicate that the user is most probably geo-blocked."""
+        raise GeoblockedException()
 
 
 class _BasicScraper(Scraper):
@@ -440,8 +453,6 @@ class _ParserScraper(Scraper):
     of the HTML element and returns that.
     """
 
-    BROKEN_NOT_OPEN_TAGS = re.compile(r'(<+)([ =0-9])')
-
     # Taken directly from LXML
     XML_DECL = re.compile(
         r'^(<\?xml[^>]+)\s+encoding\s*=\s*["\'][^"\']*["\'](\s*\?>|)', re.U)
@@ -449,11 +460,6 @@ class _ParserScraper(Scraper):
     # Switch between CSS and XPath selectors for this class. Since CSS needs
     # another Python module, XPath is the default for now.
     css = False
-
-    # Activate a workaround for unescaped < characters on libxml version older
-    # then 2.9.3. This is disabled by default since most sites are not THAT
-    # broken ;)
-    broken_html_bugfix = False
 
     def getPage(self, url):
         page = super(_ParserScraper, self).getPage(url)
@@ -471,16 +477,7 @@ class _ParserScraper(Scraper):
         return tree
 
     def _parse_page(self, data):
-        if self.broken_html_bugfix and lxml.etree.LIBXML_VERSION < (2, 9, 3):
-            def fix_not_open_tags(match):
-                fix = (len(match.group(1)) * '&lt;') + match.group(2)
-                out.warn("Found possibly broken HTML '%s', fixing as '%s'" % (
-                         match.group(0), fix), level=2)
-                return fix
-            data = self.BROKEN_NOT_OPEN_TAGS.sub(fix_not_open_tags, data)
-
-        tree = lxml.html.document_fromstring(data)
-        return tree
+        return lxml.html.document_fromstring(data)
 
     def fetchUrls(self, url, data, urlSearch):
         """Search all entries for given XPath in a HTML page."""
@@ -548,68 +545,103 @@ class _ParserScraper(Scraper):
         return res
 
 
-def find_scrapers(comic, multiple_allowed=False):
-    """Get a list comic scraper objects.
-
-    Can return more than one entry if multiple_allowed is True, else it raises
-    a ValueError if multiple modules match. The match is a case insensitive
-    substring search.
+class Cache:
+    """Cache for comic scraper objects. The cache is initialized on first use.
+    This is cached, since iterating & loading a complete package might be quite
+    slow.
     """
-    if not comic:
-        raise ValueError("empty comic name")
-    candidates = []
-    cname = comic.lower()
-    for scrapers in get_scrapers(include_removed=True):
-        lname = scrapers.name.lower()
-        if lname == cname:
-            # perfect match
-            if not multiple_allowed:
-                return [scrapers]
-            else:
+    def __init__(self):
+        self.data = []
+
+    def find(self, comic, multiple_allowed=False):
+        """Get a list comic scraper objects.
+
+        Can return more than one entry if multiple_allowed is True, else it raises
+        a ValueError if multiple modules match. The match is a case insensitive
+        substring search.
+        """
+        if not comic:
+            raise ValueError("empty comic name")
+        candidates = []
+        cname = comic.lower()
+        for scrapers in self.get(include_removed=True):
+            lname = scrapers.name.lower()
+            if lname == cname:
+                # perfect match
+                if not multiple_allowed:
+                    return [scrapers]
+                else:
+                    candidates.append(scrapers)
+            elif cname in lname and scrapers.url:
                 candidates.append(scrapers)
-        elif cname in lname and scrapers.url:
-            candidates.append(scrapers)
-    if len(candidates) > 1 and not multiple_allowed:
-        comics = ", ".join(x.name for x in candidates)
-        raise ValueError('multiple comics found: %s' % comics)
-    elif not candidates:
-        raise ValueError('comic %r not found' % comic)
-    return candidates
+        if len(candidates) > 1 and not multiple_allowed:
+            comics = ", ".join(x.name for x in candidates)
+            raise ValueError('multiple comics found: %s' % comics)
+        elif not candidates:
+            raise ValueError('comic %r not found' % comic)
+        return candidates
+
+    def load(self):
+        out.debug("Loading comic modules...")
+        modules = 0
+        classes = 0
+        for module in loader.get_plugin_modules():
+            modules += 1
+            classes += self.addmodule(module)
+        self.validate()
+        out.debug("... %d scrapers loaded from %d classes in %d modules." % (
+            len(self.data), classes, modules))
+
+    def adddir(self, path):
+        """Add an additional directory with python modules to the scraper list.
+        These are handled as if the were part of the plugins package.
+        """
+        if not self.data:
+            self.load()
+        modules = 0
+        classes = 0
+        out.debug("Loading user scrapers from '{}'...".format(path))
+        for module in loader.get_plugin_modules_from_dir(path):
+            modules += 1
+            classes += self.addmodule(module)
+        self.validate()
+        if classes > 0:
+            out.debug("Added %d user classes from %d modules." % (
+                classes, modules))
+
+    def addmodule(self, module):
+        """Adds all valid plugin classes from the specified module to the cache.
+        @return: number of classes added
+        """
+        classes = 0
+        for plugin in loader.get_module_plugins(module, Scraper):
+            classes += 1
+            self.data.extend(plugin.getmodules())
+        return classes
+
+    def get(self, include_removed=False):
+        """Find all comic scraper classes in the plugins directory.
+        @return: list of Scraper classes
+        @rtype: list of Scraper
+        """
+        if not self.data:
+            self.load()
+        if include_removed:
+            return self.data
+        else:
+            return [x for x in self.data if x.url]
+
+    def validate(self):
+        """Check for duplicate scraper names."""
+        d = {}
+        for scraper in self.data:
+            name = scraper.name.lower()
+            if name in d:
+                name1 = scraper.name
+                name2 = d[name].name
+                raise ValueError('duplicate scrapers %s and %s found' %
+                                 (name1, name2))
+                d[name] = scraper
 
 
-_scrapers = None
-
-
-def get_scrapers(include_removed=False):
-    """Find all comic scraper classes in the plugins directory.
-    The result is cached.
-    @return: list of Scraper classes
-    @rtype: list of Scraper
-    """
-    global _scrapers
-    if _scrapers is None:
-        out.debug(u"Loading comic modules...")
-        modules = loader.get_modules('plugins')
-        plugins = list(loader.get_plugins(modules, Scraper))
-        _scrapers = sorted([m for x in plugins for m in x.getmodules()],
-                           key=lambda p: p.name)
-        check_scrapers()
-        out.debug(u"... %d modules loaded from %d classes." % (
-            len(_scrapers), len(plugins)))
-    if include_removed:
-        return _scrapers
-    else:
-        return [x for x in _scrapers if x.url]
-
-
-def check_scrapers():
-    """Check for duplicate scraper names."""
-    d = {}
-    for scraper in _scrapers:
-        name = scraper.name.lower()
-        if name in d:
-            name1 = scraper.name
-            name2 = d[name].name
-            raise ValueError('duplicate scrapers %s and %s found' %
-                             (name1, name2))
-        d[name] = scraper
+scrapers = Cache()

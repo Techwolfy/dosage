@@ -1,21 +1,21 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 import re
 import os
 
 import pytest
 from xdist.dsession import LoadScopeScheduling
 
-from dosagelib import scraper
+from dosagelib.scraper import scrapers
 
 
 def get_test_scrapers():
     """Return scrapers that should be tested."""
     if "TESTALL" in os.environ:
         # test all comics (this will take some time)
-        return scraper.get_scrapers()
+        return scrapers.get()
     if 'TESTCOMICS' in os.environ:
         scraper_pattern = re.compile(os.environ['TESTCOMICS'])
     else:
@@ -26,12 +26,12 @@ def get_test_scrapers():
             # complex _ParserScraper
             'GoComics/CalvinAndHobbes',
             # _WordPressScraper
-            'GrrlPower'
+            'GrrlPower',
         ]
         scraper_pattern = re.compile('^(' + '|'.join(testscrapernames) + ')$')
 
     return [
-        scraperobj for scraperobj in scraper.get_scrapers()
+        scraperobj for scraperobj in scrapers.get()
         if scraper_pattern.match(scraperobj.name)
     ]
 
@@ -39,7 +39,7 @@ def get_test_scrapers():
 def pytest_generate_tests(metafunc):
     if 'scraperobj' in metafunc.fixturenames:
         scrapers = get_test_scrapers()
-        scraperids = list(x.name for x in scrapers)
+        scraperids = [x.name for x in scrapers]
         metafunc.parametrize('scraperobj', scrapers, ids=scraperids)
 
 
