@@ -71,6 +71,7 @@ class MangaDex(_ParserScraper):
         return (
             cls('AttackonTitan', 429),
             cls('Beastars', 20523),
+            cls('BokuNoKokoroNoYabaiYatsu', 23811),
             cls('DeliciousinDungeon', 13871),
             cls('DrStone', 20882),
             cls('DragonDrive', 5165),
