@@ -49,7 +49,7 @@ class ComicFury(_ParserScraper):
     help = 'Index format: n'
     starter = bounceStarter
 
-    def __init__(self, name, sub, lang=None, adult=False):
+    def __init__(self, name, sub, lang=None, adult=False, endOfLife=False):
         super(ComicFury, self).__init__('ComicFury/' + name)
         self.prefix = name
         self.url = 'http://%s.webcomic.ws/comics/' % sub
@@ -59,6 +59,8 @@ class ComicFury(_ParserScraper):
             self.lang = lang
         if adult:
             self.adult = adult
+        if endOfLife:
+            self.endOfLife = endOfLife
 
     def namer(self, image_url, page_url):
         parts = page_url.split('/')
@@ -666,7 +668,7 @@ class ComicFury(_ParserScraper):
             cls('MaxFuture', 'maxfuture'),
             cls('MAYBELOVE', 'emmacomics'),
             cls('MayonakaDensha', 'mayonakadensha'),
-            # MayTheRainCome has a duplicate in SmackJeeves/MaytheRainCome
+            cls('MayTheRainCome', 'maytheraincome', endOfLife=True),
             cls('MegaMaidenVSTheChopChopPrincess', 'megamaiden'),
             cls('MegamanComic', 'megamancomic'),
             cls('MeganKearneysBeautyAndTheBeast', 'batb'),

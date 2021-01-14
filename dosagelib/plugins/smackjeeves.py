@@ -352,7 +352,6 @@ class SmackJeeves(_ParserScraper):
             cls('MarXistemTWC', 100651),
             cls('Mascara', 59912),
             cls('MatildasSweetCakeCafe', 115251, adult=True),
-            cls('MayTheRainCome', 119715, endOfLife=True),
             cls('Mazscara', 12456),
             cls('MegaManTales', 6516),
             cls('MegaPain', 88178),
