@@ -11,10 +11,12 @@ from ..helpers import regexNamer, bounceStarter, indirectStarter
 from .common import _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
-class AbbysAgency(_WordPressScraper):
+class AbbysAgency(_ParserScraper):
     url = 'https://abbysagency.us/'
     stripUrl = url + 'blog/comic/%s/'
     firstStripUrl = stripUrl % 'a'
+    imageSearch = '//div[@id="one-comic-option"]//img'
+    prevSearch = '//a[@class="previous-comic"]'
 
 
 class AbstruseGoose(_ParserScraper):
@@ -169,10 +171,12 @@ class Alice(_WordPressScraper):
     starter = indirectStarter
 
 
-class AlienDice(_WordPressScraper):
+class AlienDice(_ParserScraper):
     url = 'https://aliendice.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '05162001'
+    imageSearch = '//div[@id="one-comic-option"]//img'
+    prevSearch = '//a[@class="previous-comic"]'
 
     def getPrevUrl(self, url, data):
         # Fix broken navigation
@@ -185,11 +189,18 @@ class AlienDice(_WordPressScraper):
         return imageUrl.rsplit('/', 1)[-1].replace('20010831', '2001-08-31')
 
 
-class AlienDiceLegacy(_WordPressScraper):
+class AlienDiceLegacy(_ParserScraper):
     name = 'AlienDice/Legacy'
-    stripUrl = 'https://aliendice.com/comic/%s/'
-    url = stripUrl % 'legacy-2-15'
+    baseUrl = 'https://aliendice.com/'
+    url = baseUrl + 'series/legacy/'
+    stripUrl = baseUrl + 'comic/%s/'
     firstStripUrl = stripUrl % 'legacy-1'
+    imageSearch = '//div[@id="one-comic-option"]//img'
+    prevSearch = '//a[@class="previous-comic"]'
+
+    def isfirststrip(self, url):
+        # Strip series identifier
+        return super(AlienDiceLegacy, self).isfirststrip(url.rsplit('?', 1)[0])
 
 
 class AlienLovesPredator(_BasicScraper):

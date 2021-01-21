@@ -651,6 +651,8 @@ class Removed(Scraper):
             cls('GoComics/USAcres'),
             cls('GoComics/WorldOfWonder'),
             cls('StuffNoOneToldMe'),
+            cls('TheCyantianChronicles/CookieCaper'),
+            cls('TheCyantianChronicles/Pawprints'),
             cls('VictimsOfTheSystem'),
             cls('WebDesignerCOTW'),
         )
@@ -819,6 +821,7 @@ class Renamed(Scraper):
             cls('GoComics/Owlturd', 'GoComics/ShenComix'),
             cls('GoComics/PeanutsEnEspanol', 'GoComics/SnoopyEnEspanol'),
             cls('GoComics/RipleysBelieveItOrNotSpanish', 'GoComics/RipleysAunqueUstedNoLoCrea'),
+            cls('Shivae/BlackRose', 'BlackRose'),
             cls('SmackJeeves/BlackTapestries', 'ComicFury/BlackTapestries'),
             cls('SmackJeeves/ByTheBook', 'ByTheBook'),
             cls('SmackJeeves/FurryExperience', 'ComicFury/FurryExperience'),

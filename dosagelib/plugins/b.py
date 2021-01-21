@@ -166,6 +166,14 @@ class BittersweetCandyBowl(_ParserScraper):
         return filename[1] + '_' + filename[2]
 
 
+class BlackRose(_ParserScraper):
+    url = 'https://www.blackrose.monster/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '2004-11-01'
+    imageSearch = '//div[@id="one-comic-option"]//img'
+    prevSearch = '//a[@class="previous-comic"]'
+
+
 class BlankIt(_ParserScraper):
     url = 'http://blankitcomics.com/'
     firstStripUrl = url + 'comic/well-what-would-you-do'
