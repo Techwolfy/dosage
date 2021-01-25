@@ -304,7 +304,7 @@ class CollegeCatastrophe(_ParserScraper):
     stripUrl = url + '/%s'
     firstStripUrl = stripUrl % '2000-11-10'
     imageSearch = '//img[@class="comic-image"]'
-    prevSearch = '//a[@class="prev"]'
+    prevSearch = '//a[./span[contains(text(), "Previous")]]'
     endOfLife = True
     multipleImagesPerStrip = True
 
