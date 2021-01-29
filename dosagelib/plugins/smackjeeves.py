@@ -148,7 +148,6 @@ class SmackJeeves(_ParserScraper):
             cls('BoogeyDancingMonkeyPot', 128196),
             cls('BreachOfAgency', 82923, endOfLife=True),
             cls('Burn', 93761),
-            cls('ByTheBook', 98401, adult=True),
             cls('CafeSuada', 80707),
             cls('Cambion', 112560, adult=True),
             cls('CaptiveSoul', 115786),
