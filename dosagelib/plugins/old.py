@@ -650,6 +650,8 @@ class Removed(Scraper):
             cls('GoComics/UncleArtsFunland'),
             cls('GoComics/USAcres'),
             cls('GoComics/WorldOfWonder'),
+            cls('Shivae/CafeAnime'),
+            cls('Shivae/Extras'),
             cls('StuffNoOneToldMe'),
             cls('TheCyantianChronicles/CookieCaper'),
             cls('TheCyantianChronicles/Pawprints'),

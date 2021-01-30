@@ -2,7 +2,6 @@
 # Copyright (C) 2019-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from ..scraper import _ParserScraper
-from .common import _WordPressScraper
 
 
 class TheCyantianChronicles(_ParserScraper):
@@ -51,36 +50,34 @@ class Shivae(_ParserScraper):
     imageSearch = '//div[@id="one-comic-option"]//img'
     prevSearch = '//a[@class="previous-comic"]'
 
+    def isfirststrip(self, url):
+        # Strip series identifier
+        return super(Shivae, self).isfirststrip(url.rsplit('?', 1)[0])
 
-class ShivaeComics(_WordPressScraper):
+
+class ShivaeComics(_ParserScraper):
     baseUrl = 'https://shivae.net/'
+    stripUrl = baseUrl + 'comic/%s/'
+    imageSearch = '//div[@id="one-comic-option"]//img'
+    prevSearch = '//a[@class="previous-comic"]'
 
-    def __init__(self, name, story, first, last=None, nav=None):
+    def __init__(self, name, series, first, last=None, nav=None):
         super(ShivaeComics, self).__init__('Shivae/' + name)
 
-        self.url = self.baseUrl + story + '/'
-        self.stripUrl = self.url + 'comic/%s/'
+        self.url = self.baseUrl + 'series/' + series + '/'
         self.firstStripUrl = self.stripUrl % first
 
-        self.nav = nav
-
         if last:
-            self.url = self.stripUrl % last
             self.endOfLife = True
 
-    def getPrevUrl(self, url, data):
-        # Missing/broken navigation links
-        url = url.rstrip('/').rsplit('/', 1)[-1]
-        if self.nav and url in self.nav:
-            return self.stripUrl % self.nav[url]
-        return super(ShivaeComics, self).getPrevUrl(url, data)
+    def isfirststrip(self, url):
+        # Strip series identifier
+        return super(ShivaeComics, self).isfirststrip(url.rsplit('?', 1)[0])
 
     @classmethod
     def getmodules(cls):
         return (
-            cls('CafeAnime', 'cafeanime', '08172004', last='09192009'),
-            cls('Extras', 'extras', '01012012', nav={'12302012': '08152013'}),
-            cls('Pure', 'pure', '04082002', last='chapter-6-page-1'),
-            cls('SerinFairyHunter', 'serin', 'character-serin'),
-            cls('SivineBlades', 'sivine', '06302002', last='10242008'),
+            cls('Pure', 'pure', '2002-02-27', last='chapter-6-page-1'),
+            cls('SerinFairyHunter', 'pure', 'character-serin'),
+            cls('SivineBlades', 'sivine', '2002-06-30', last='2008-10-24'),
         )
