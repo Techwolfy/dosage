@@ -448,7 +448,10 @@ class CtrlAltDel(_ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
-        return imageUrl.rsplit('/', 1)[-1].replace('ENG_', 'cad-')
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('ENG_', 'cad-')
+        filename = filename.rsplit('.', 2)[0] + '.' + filename.rsplit('.', 2)[2]
+        return filename
 
 
 class CucumberQuest(_BasicScraper):
