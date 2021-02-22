@@ -146,6 +146,7 @@ class WebToons(_ParserScraper):
             cls('DownToEarth', 'romance/down-to-earth', 1817),
             cls('Dragnarok', 'fantasy/dragnarok', 1018),
             cls('DragnarokDescendants', 'fantasy/dragnarok-descendants', 1433),
+            cls('DrawnToYou', 'challenge/drawn-to-you', 172022),
             cls('DrFrost', 'drama/dr-frost', 371),
             cls('Dustinteractive', 'comedy/dustinteractive', 907),
             cls('DutyAfterSchool', 'sf/duty-after-school', 370),
