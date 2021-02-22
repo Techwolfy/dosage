@@ -78,6 +78,7 @@ class MangaDex(_ParserScraper):
             cls('DrStone', 20882),
             cls('DragonDrive', 5165),
             cls('FuguushokuKajishiDakedoSaikyouDesu', 56319),
+            cls('GanbareDoukiChan', 46585),
             cls('HangingOutWithAGamerGirl', 42490),
             cls('HeavensDesignTeam', 27811),
             cls('HoriMiya', 6770),
