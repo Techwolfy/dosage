@@ -173,6 +173,7 @@ class WebToons(_ParserScraper):
             cls('FourLeaf', 'fantasy/four-leaf', 1454),
             cls('FreakingRomance', 'romance/freaking-romance', 1467),
             cls('FridayForbiddenTales', 'thriller/friday', 388),
+            cls('FutureYou', 'challenge/future-you', 288439),
             cls('GenshinImpact', 'challenge/genshin-impact', 242646),
             cls('Gepetto', 'sf/gepetto', 81),
             cls('GhostsAmongTheWildFlowers', 'fantasy/ghosts-over-wild-flowers', 718),
