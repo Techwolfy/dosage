@@ -80,6 +80,7 @@ class WebToons(_ParserScraper):
             cls('AverageAdventuresOfAnAverageGirl', 'slice-of-life/average-adventures-of-an-average-girl', 401),
             cls('AXED', 'comedy/axed', 1558),
             cls('Backchannel', 'super-hero/backchannel', 1456),
+            cls('BackToYou', 'drama/back-to-you', 2113),
             cls('BadSigns', 'comedy/bad-signs', 1623),
             cls('Bastard', 'thriller/bastard', 485),
             cls('BeforeWeKnewIt', 'romance/before-we-knew-it', 1972),
