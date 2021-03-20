@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from ..scraper import _ParserScraper
 
@@ -19,8 +19,9 @@ class WebToons(_ParserScraper):
         self.firstStripUrl = self.stripUrl % '1'
 
     def starter(self):
-        # Set age-check cookie
-        self.session.cookies.set('ageGatePass', 'true', domain='webtoons.com')
+        # Avoid age/GDPR gate
+        for cookie in ('needGDPR', 'needCCPA', 'needCOPPA'):
+            self.session.cookies.set(cookie, 'false', domain='webtoons.com')
         # Find current episode number
         listPage = self.getPage(self.listUrl)
         currentEpisode = listPage.xpath('//div[@class="detail_lst"]/ul/li')[0].attrib['data-episode-no']
@@ -148,6 +149,7 @@ class WebToons(_ParserScraper):
             cls('DragnarokDescendants', 'fantasy/dragnarok-descendants', 1433),
             cls('DrawnToYou', 'challenge/drawn-to-you', 172022),
             cls('DrFrost', 'drama/dr-frost', 371),
+            cls('DungeonMinis', 'challenge/dungeonminis', 64132),
             cls('Dustinteractive', 'comedy/dustinteractive', 907),
             cls('DutyAfterSchool', 'sf/duty-after-school', 370),
             cls('EatFighter', 'sports/eat-fighter', 1460),
@@ -174,6 +176,7 @@ class WebToons(_ParserScraper):
             cls('FreakingRomance', 'romance/freaking-romance', 1467),
             cls('FridayForbiddenTales', 'thriller/friday', 388),
             cls('FutureYou', 'challenge/future-you', 288439),
+            cls('GameMasters', 'challenge/game-masters', 237252),
             cls('GenshinImpact', 'challenge/genshin-impact', 242646),
             cls('Gepetto', 'sf/gepetto', 81),
             cls('GhostsAmongTheWildFlowers', 'fantasy/ghosts-over-wild-flowers', 718),
@@ -294,6 +297,7 @@ class WebToons(_ParserScraper):
             cls('NothingSpecial', 'fantasy/nothing-special', 1188),
             cls('OddGirlOut', 'drama/odd-girl-out', 1420),
             cls('OhHoly', 'romance/oh-holy', 809),
+            cls('OmniscientReader', 'action/omniscient-reader', 2154),
             cls('ORANGEMARMALADE', 'romance/orange-marmalade', 97),
             cls('Outrage', 'super-hero/outrage', 1450),
             cls('OVERPOWERED', 'challenge/overpowered', 85292),
@@ -387,6 +391,7 @@ class WebToons(_ParserScraper):
             cls('TheStoriesOfThoseAroundMe', 'romance/the-stories-of-those-around-me', 96),
             cls('TheStrangeTalesOfOscarZahn', 'fantasy/the-strange-tales-of-oscar-zahn', 685),
             cls('TheVaultOfHorrorACollectionOfNightmares', 'horror/the-vault-of-horror-a-collection-of-nightmares', 295),
+            cls('TheWeeklyRoll', 'challenge/the-weekly-roll', 358889),
             cls('TheWeightOfOurSky', 'historical/the-weight-of-our-sky', 1739),
             cls('TheWitchAndTheBull', 'fantasy/the-witch-and-the-bull', 1892),
             cls('TheWolfmanOfWulvershire', 'mystery/the-wolfman-of-wulvershire', 1784),

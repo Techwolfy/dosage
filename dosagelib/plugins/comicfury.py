@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import os
 
@@ -133,7 +133,6 @@ class ComicFury(_ParserScraper):
             cls('Ampre', 'ampere'),
             cls('AmyOok', 'amyook'),
             cls('AndroidFiles', 'androidfiles'),
-            # AngelGuardian has a duplicate in SmackJeeves/AngelGuardian
             cls('AngelGuardianEnEspanol', 'angelguardianespanol', 'es'),
             cls('AngelsOfIblis', 'angelsofiblis'),
             cls('AngryFaerie', 'angryfaerie'),
@@ -156,7 +155,6 @@ class ComicFury(_ParserScraper):
             cls('Arcane', 'rbsarcane'),
             cls('Archibald', 'archibald'),
             cls('ArchiNinja', 'archininja'),
-            # ArchportCityChronicles has a duplicate in SmackJeeves/ArchportCityChronicles
             cls('AreYouDoneYet', 'areyoudoneyet'),
             cls('ArmlessAmy', 'armlessamy'),
             cls('ArmlessAmyExtraEdition', 'armlessamyextraedition'),
@@ -183,7 +181,6 @@ class ComicFury(_ParserScraper):
             cls('AutumnBayExtraEdition', 'autumnbayextra'),
             cls('Avatars', 'avatars'),
             cls('AvengersRollInitiative', 'avengersrollinitiative'),
-            cls('AWAKENING', 'awakeningstory'),
             cls('AwkwardPaws', 'awkwardpaws'),
             cls('AwkwardShelby', 'awkwardshelby'),
             cls('BabesOfDongaria', 'dongaria'),
@@ -191,14 +188,12 @@ class ComicFury(_ParserScraper):
             cls('BabyBatman', 'babybatman'),
             cls('BackToTheRefridgerator', 'bttf'),
             cls('BadAdjectives', 'badadjectives'),
-            # BallAndChain has a duplicate in SmackJeeves/BallandChain
             cls('BananaCreamCake', 'bananacreamcake'),
             cls('BarkingCrayon', 'barkingcrayon'),
             cls('BASKERVILLE', 'baskerville'),
             cls('BASO', 'baso'),
             cls('BattleOfTheRobofemoids', 'battle-of-the-robofemoids'),
             cls('BeatStuffUpMan', 'beatstuffupman'),
-            cls('Beebleville', 'beebleville'),
             cls('BeepClub', 'beepclub'),
             cls('BeePolice', 'beepolice'),
             cls('Beezwax', 'beezwax'),
@@ -206,11 +201,9 @@ class ComicFury(_ParserScraper):
             cls('Being', 'being'),
             cls('BELECOMICS', 'belecomics'),
             cls('BentElbows', 'bentelbows'),
-            # Bestbrosforever has a duplicate in SmackJeeves/Bestbrosforever
             cls('BetaParticles', 'betaparticles'),
             cls('BetweenTheFrames', 'betweentheframes'),
             cls('BetweenTheInterval', 'betweentheinterval'),
-            # BeyondTheOrdinary has a duplicate in SmackJeeves/BeyondTheOrdinary
             cls('BibleBelt', 'biblebelt'),
             cls('BilateralComics', 'bilateralcomics'),
             cls('BionicleTales', 'bionicletales'),
@@ -249,7 +242,6 @@ class ComicFury(_ParserScraper):
             cls('CAFEGRUESOME', 'cafegruesome'),
             cls('Cagegirl', 'cagegirl'),
             cls('CastOfMadness', 'castofmadness'),
-            # Cataclysm has a duplicate in SmackJeeves/Cataclysm
             cls('CatHerosEpicCatventuresAsAnHero', 'cathero'),
             cls('CatosApprenticeship', 'cato'),
             cls('CattDogg', 'cattdogg'),
@@ -264,7 +256,6 @@ class ComicFury(_ParserScraper):
             cls('ChampionOfKatara', 'championofkatara'),
             cls('ChanpuruSaga', 'chanpuru'),
             cls('CharacterBattleBetweenRounds', 'between-rounds'),
-            cls('CharlesAndViktor', 'charlesandviktor'),
             cls('CHLOE', 'chloe'),
             cls('ChocoLavaCOMICScom', 'chocolava'),
             cls('Chosen', 'chosentheultimatecliche'),
@@ -278,7 +269,6 @@ class ComicFury(_ParserScraper):
             cls('CKarrus', 'ckarrus'),
             cls('ClassicElsewhere', 'classicelsewhere'),
             cls('ClassicMissJAndTheAmComics19842006', 'missjandtheam'),
-            # ClockworkAtrium has a duplicate in SmackJeeves/ClockworkAtrium
             cls('ClydeNOwen', 'clydenowen'),
             cls('COCHLEAAndEUSTACHIA', 'chromefetus'),
             cls('CockeyedComix', 'cockeyed'),
@@ -301,7 +291,6 @@ class ComicFury(_ParserScraper):
             cls('CoolstarComicsMasterFiles', 'coolstarcomicsmasterfiles'),
             cls('CopyPasteAndMrBenjy', 'copypasteandmrbenjy'),
             cls('Corpses', 'corpses'),
-            # CosmicDash has a duplicate in SmackJeeves/CosmicDash
             cls('Cosmos', 'planetcosmos'),
             # CourageousManAdventures has a duplicate in ComicSherpa/CourageousManAdventures
             cls('CowboysAndCrossovers', 'cowboysandcrossovers'),
@@ -334,7 +323,6 @@ class ComicFury(_ParserScraper):
             cls('Darklings', 'darklings'),
             cls('DarkSisters', 'darksisters'),
             cls('DarVal', 'murghcomics'),
-            # Dasien has a duplicate in SmackJeeves/Dasien
             cls('Datachasers', 'datachasers'),
             cls('DaughterOfDarkness', 'honeyvenom'),
             cls('DaxTapu', 'daxtapu'),
@@ -347,10 +335,7 @@ class ComicFury(_ParserScraper):
             cls('DefineHero', 'definehero'),
             cls('DELIA', 'delia'),
             cls('DemasPokmonAdventure', 'nuzlocke-dema'),
-            # DEMENTED has a duplicate in SmackJeeves/DEMENTED
-            # DemonEater has a duplicate in SmackJeeves/DemonEater
             cls('DemonWings', 'demonwings'),
-            # DenizensAttention has a duplicate in SmackJeeves/DenizensAttention
             cls('DesertGrey', 'desertgrey'),
             cls('DesertShark', 'desertshark'),
             cls('Dictatorship', 'dictatorship'),
@@ -363,14 +348,12 @@ class ComicFury(_ParserScraper):
             cls('Dogstar', 'dogstar'),
             cls('Domain', 'domain'),
             cls('DonutsForSharks', 'donutsforsharks'),
-            cls('DoodlelandComics', 'doodlelandcomics'),
             cls('DotComic', 'dotcomic'),
             cls('DotX', 'dotx'),
             cls('DoubleJumpGameComics', 'doublejump'),
             cls('Draginbeard', 'draginbeard'),
             cls('DragonballZElsewhere', 'dbzelsewhere'),
             cls('DragonCity', 'dragoncity'),
-            # Dragonet has a duplicate in SmackJeeves/Dragonet
             cls('DragonsAndSilk', 'dragonsandsilk'),
             cls('DragonsOfAzuma', 'dragonsofazuma'),
             cls('DrApocalyptosSurvivorama', 'docapoc'),
@@ -394,7 +377,6 @@ class ComicFury(_ParserScraper):
             cls('EightBitAdventuresOfCaptainA', 'eightbitadventures'),
             cls('ElektrosComicAnthology', 'elektroanthology'),
             cls('Element8', 'element8'),
-            cls('Elements', 'elements-maoko'),
             cls('ElementsOfEve', 'elementsofeve'),
             cls('Elf', 'elf-comic'),
             cls('Elsewhere', 'elsewhere'),
@@ -403,7 +385,6 @@ class ComicFury(_ParserScraper):
             cls('enoZone', 'xenozone'),
             cls('EpicsOfNoche', 'epicsofnoche'),
             cls('Equilibrium', 'equilibrists'),
-            # Equsopia has a duplicate in SmackJeeves/Equsopia
             cls('Ergosphere', 'ergosphereworld'),
             cls('Eros', 'eros'),
             cls('ErraticElegance', 'erratice'),
@@ -415,7 +396,6 @@ class ComicFury(_ParserScraper):
             cls('EWMIC', 'ewmic'),
             cls('ExperiMentalTheatre', 'emt'),
             cls('FacesOfFire', 'facesofire'),
-            cls('FairyDust', 'fairydust'),
             cls('Fallacy', 'fallacy-harha'),
             cls('FandomMisadventures', 'eatabaguette'),
             cls('Fannicklas', 'fannicklas'),
@@ -472,7 +452,6 @@ class ComicFury(_ParserScraper):
             cls('Grandify', 'grandify'),
             cls('Gratz', 'gratz'),
             cls('Grayling', 'grayling'),
-            cls('GreenerGrass', 'greenergrass'),
             cls('GreenEyes', 'greeneyes'),
             cls('GreysterJemp', 'greysterjemp'),
             cls('GrimReaperSchool', 'grimreaperschool'),
@@ -496,7 +475,6 @@ class ComicFury(_ParserScraper):
             cls('Hellbent', 'hellbent'),
             cls('Hellbound', 'hellboundarchive'),
             cls('HellCar', 'hellcar'),
-            cls('HelloWanderingStar', 'hello-wandering-star'),
             cls('HenriettaLamb', 'henriettalamb'),
             cls('HeraclesKnot', 'heraclesknot'),
             cls('HeroesAtWork', 'heroesatwork'),
@@ -505,7 +483,6 @@ class ComicFury(_ParserScraper):
             cls('HitmanPiranha', 'hitmanpiranha'),
             cls('HitmenForDestiny', 'hitmen'),
             cls('HobGoblinAdventure', 'hobgoblin'),
-            cls('Hodgemosh', 'hodgemosh'),
             cls('Holon', 'holon'),
             cls('HolyBibble', 'holy-bibble'),
             cls('HolyCowComics', 'holycowcomics'),
@@ -558,7 +535,6 @@ class ComicFury(_ParserScraper):
             cls('JackitAndFriends', 'jackitandfriends'),
             cls('JakeBone', 'jakebone'),
             cls('JamieJupiter', 'jamiejupiter'),
-            # Jantar has a duplicate in SmackJeeves/Jantar
             cls('JaquieNovemberAndTheSpookiness', 'november-spookiness'),
             cls('JaysInternetFightClub', 'jaysinternetfightclub'),
             cls('JellyfishStew', 'yppcomic'),
@@ -573,7 +549,6 @@ class ComicFury(_ParserScraper):
             cls('JoostsDailyDealings', 'joostdailies'),
             cls('JournalComics', 'jordansjournal'),
             cls('JourneyToRaifina', 'journeytoraifina'),
-            # JoyToTheWorld has a duplicate in SmackJeeves/JoyToTheWorld
             cls('JudeAndMaria', 'judeandmaria'),
             cls('Jump', 'jump2'),
             cls('Junk', 'junk'),
@@ -611,12 +586,10 @@ class ComicFury(_ParserScraper):
             cls('LaserBrigade', 'laserbrigade'),
             cls('LastCall', 'lastcallcomic'),
             cls('LastTaxi', 'lasttaxi'),
-            cls('LaszloAndEdgar', 'laszloedgar'),
             cls('Latchkey', 'latchkey'),
             cls('LatchkeyKingdom', 'latchkeykingdom'),
             cls('Lately', 'lately'),
             cls('Lauras24HourComics', 'lauras24hourcomics'),
-            # LavenderLegend has a duplicate in SmackJeeves/LavenderLegend
             cls('LazyComics', 'lazy'),
             cls('LeahClearwaterFancomic', 'leahclearwaterfancomic'),
             cls('LegendOfPaean', 'legend-of-paean'),
@@ -661,7 +634,6 @@ class ComicFury(_ParserScraper):
             cls('MariosCastleTales', 'mariocastletales', 'it'),
             cls('MarriedToATransformersFan', 'marriedtoatransformersfan'),
             cls('MARS', 'mars'),
-            # Mascara has a duplicate in SmackJeeves/Mascara
             cls('MaskOfTheAryans', 'mask-of-the-aryans'),
             cls('MassEffectMinarga', 'minarga'),
             cls('Mateys', 'mateys'),
@@ -670,7 +642,6 @@ class ComicFury(_ParserScraper):
             cls('MayonakaDensha', 'mayonakadensha'),
             cls('MayTheRainCome', 'maytheraincome', endOfLife=True),
             cls('MegaMaidenVSTheChopChopPrincess', 'megamaiden'),
-            cls('MegamanComic', 'megamancomic'),
             cls('MeganKearneysBeautyAndTheBeast', 'batb'),
             cls('MelancholyGoRound', 'melancholygoround'),
             cls('MerelyMortal', 'merelymortal'),
@@ -725,7 +696,6 @@ class ComicFury(_ParserScraper):
             cls('NarutoJutsuAndJinchuriki', 'jutsuandjinchuriki'),
             cls('NatureDEEP', 'naturedeep'),
             cls('Necreshaw', 'nartopia'),
-            # Negligence has a duplicate in SmackJeeves/Negligence
             cls('Neighbors', 'neighborscomic'),
             cls('NeverMindTheGap', 'nmg'),
             cls('Newheimburg', 'newheimburg'),
@@ -740,7 +710,6 @@ class ComicFury(_ParserScraper):
             cls('NothingMen', 'nothing-men'),
             cls('NoTitleRequired', 'ntr'),
             cls('NotSinceYou', 'notsinceyou'),
-            # NotYoursAmI has a duplicate in SmackJeeves/NotyoursamI
             cls('NyxInTheOverworld', 'nyx'),
             cls('OceanLabyrinth', 'oceanlabyrinth'),
             cls('Oeight', 'oeight'),
@@ -770,7 +739,6 @@ class ComicFury(_ParserScraper):
             cls('PARKER', 'parker'),
             cls('Parmeshen', 'parmeshen'),
             cls('ParoxysmTemporal', 'pt'),
-            cls('PatchworkPeople', 'patchworkpeople'),
             cls('PateEmpire', 'pateempire'),
             cls('PCMS20', 'pcms'),
             cls('PeeInTheMorningREBOOTED', 'holy-hecking-balls-rebooted', 'pt'),
@@ -793,13 +761,10 @@ class ComicFury(_ParserScraper):
             cls('PokmonShadowStories', 'shadowstories'),
             cls('PoldaAPolda', 'poldove'),
             cls('PopCulturesKids', 'pop-cultures-kids'),
-            cls('PornographyInFiveActs', 'pi5a'),
-            cls('PoussireDeFe', 'poussiere', 'fr'),
             cls('Powertrip', 'powertrip'),
             cls('POWRightInTheNostalgia', 'powrightinthenostalgia'),
             cls('PrimalWarsAftermath', 'primalwars'),
             cls('PrinceOfCats', 'princeofcats'),
-            # PrincessChroma has a duplicate in SmackJeeves/PrincessChroma
             cls('ProfessorAstonishing', 'professorastonishing'),
             cls('ProfessorAmazingAndTheIncredibleGoldenFox', 'paigf'),
             cls('ProjectArc', 'projectarc'),
@@ -818,16 +783,13 @@ class ComicFury(_ParserScraper):
             cls('RandomlyAssembled', 'randomlyassembled'),
             cls('RandomThoughts', 'randomthoughts'),
             cls('RapturousArcane', 'rapturousarcane'),
-            # RavenWolf has a duplicate in SmackJeeves/RavenWolf
             cls('RawLatex', 'rawlatex'),
             cls('RaytoonsKids', 'raytoonskids'),
             cls('ReadershipOfOne', 'readershipofone'),
             cls('RebelYell', 'rebelyell'),
             cls('RebuildOfGenericMangaShippuden', 'rebuildofgenericmanga'),
             cls('RecklessComix', 'recklesscomix'),
-            cls('RED', 'redthecomic'),
             cls('RedSpot', 'redspot'),
-            # RedVelvetRequiem has a duplicate in SmackJeeves/RedVelvetRequiem
             cls('RegardingDandelions', 'regardingdandelions'),
             cls('Remedy', 'remedy'),
             cls('RememberBedlam', 'bedlam'),
@@ -849,10 +811,8 @@ class ComicFury(_ParserScraper):
             cls('Rozak', 'rozak'),
             cls('RPSLARPComic', 'rps'),
             cls('RumfAdventures', 'rumfadventures'),
-            # RuneSpark has a duplicate in SmackJeeves/RuneSpark
             cls('RunningRiot', 'runningriot'),
             cls('SailorMoonTheEnemyNextDoor', 'sailormoontheenemynextdoor'),
-            # SakuraDAY has a duplicate in SmackJeeves/SakuraDAY
             cls('Saluna', 'saluna'),
             cls('SanctaTerra', 'sanctaterra'),
             cls('SanityProtectionFactor', 'spf1337'),
@@ -866,7 +826,6 @@ class ComicFury(_ParserScraper):
             cls('SEAAOMSagaArchive', 'seaaom'),
             cls('SECRETLOVE', 'secretlove'),
             cls('SecretSanta2013', 'secretsanta2013'),
-            cls('Seed', 'seed'),
             cls('SeeYourFeels', 'seeyourfeels'),
             cls('SenatorSurprise', 'senatorsurprise'),
             cls('Sentiments', 'sentiments'),
@@ -881,7 +840,6 @@ class ComicFury(_ParserScraper):
             cls('ShakingOffSorcery', 'shakingoffsorcery'),
             cls('ShakingOffSorceryPL', 'shakingoffsorcery-pl'),
             cls('ShamanQuest', 'shamanquest'),
-            # Shameless has a duplicate in SmackJeeves/Shameless
             cls('ShatteredSkies', 'shatteredskies'),
             cls('Shenanigans', 's'),
             cls('ShenaniganSquares', 'ss-comic'),
@@ -889,16 +847,11 @@ class ComicFury(_ParserScraper):
             cls('ShiroAndKuro', 'shiroandkuro'),
             cls('ShutUpDiarybyBarbaraHolm', 'shutupdiary'),
             cls('Sigh', 'sigh'),
-            # Signifikat has a duplicate in SmackJeeves/Signifikat
             cls('Silver', 'sil-ver'),
             cls('SilverNights', 'silvernights'),
-            # SimplySarah has a duplicate in SmackJeeves/SimplySarah
             cls('SixteenCandlesHuntersAgency', 'sixteencandles'),
             cls('Skeeter', 'herecomesskeeter'),
             cls('Sketchy', 'sketchy'),
-            # Slackmatic has a duplicate in SmackJeeves/Slackmatic
-            # SLightlyAbOVeAvErage has a duplicate in SmackJeeves/SLightlyabOVeavErage
-            # SlipstreamSingularity has a duplicate in SmackJeeves/SlipstreamSingularity
             cls('SlugMan', 'slug-man'),
             cls('SmallTownValues', 'smalltownvalues'),
             cls('SmitheeZombieHunter', 'smitheezombiehunter'),
@@ -916,7 +869,6 @@ class ComicFury(_ParserScraper):
             cls('SpicyDesu', 'desu'),
             cls('SpiderManShadowsOfNight', 'shadowsofnight'),
             cls('SpiritSquireTheQuestForTheUltimateKnight', 'spiritsquire-1'),
-            # SplitScreen has a duplicate in SmackJeeves/SplitScreen
             cls('Spooky', 'spooky'),
             cls('SPOON', 'spooncomic'),
             cls('StampedeJessicasStory', 'stampedegirl'),
@@ -936,7 +888,6 @@ class ComicFury(_ParserScraper):
             cls('Sunray', 'sunray'),
             cls('SuperGalaxyKnightsDeluxeR', 'sgkdr'),
             cls('SuperheroTales', 'superherobeingsuper'),
-            # SupermassiveBlackHoleA has a duplicate in SmackJeeves/SupermassiveBlackHoleA
             cls('SuperShashi', 'supershashi'),
             cls('Supervillainous', 'supervillainous'),
             cls('SurrealScience', 'surrealscience'),
@@ -956,7 +907,6 @@ class ComicFury(_ParserScraper):
             cls('TerwilligersCafe', 'terwilligers'),
             cls('TheAccidentalSpaceSpy', 'spacespy'),
             cls('TheAccidentalWitch', 'theaccidentalwitch'),
-            cls('TheAcryden', 'acryden'),
             cls('TheAdventuresOfAquilaAndTeren', 'aquilateren'),
             cls('TheAdventuresOfBaldy', 'adventuresofbaldy'),
             cls('TheAdventuresOfBidoof', 'bidoof'),
@@ -983,7 +933,6 @@ class ComicFury(_ParserScraper):
             cls('TheCrepusculars', 'crepusculars'),
             cls('TheCrumpletonExperiments', 'thecrumpletonexperiments'),
             cls('TheDailyDoodle', 'tdd'),
-            # TheDemonicAdventuresOfAngelWitchPita has a duplicate in SmackJeeves/TheDemonicAdventuresofAngelWitchPita
             cls('TheDevilsHorn', 'thedevilshorn'),
             cls('TheDragonFistsOfSmortySmythe', 'thedragonfistsofsmortysmythe'),
             cls('TheDrongos', 'thedrongos'),
@@ -1003,7 +952,6 @@ class ComicFury(_ParserScraper):
             cls('TheHobbit', 'hobbit'),
             cls('TheHolidayDoctor', 'holidaydoctor'),
             cls('TheHorrifyingExperimentsOfDrPleasant', 'thehorrifyingexperimentsofdrpleasant'),
-            cls('TheHourlyComic', 'hourlycomic'),
             cls('TheHub', 'cbbrthehub'),
             cls('TheHubBook', 'thehubbook'),
             cls('TheHumanBattery', 'thehumanbattery'),
@@ -1037,10 +985,7 @@ class ComicFury(_ParserScraper):
             cls('TheORIGINALShonenPunk', 'shonenpunk'),
             cls('TheOtherGreyMeat', 'togm'),
             cls('TheOverture', 'theoverture'),
-            # ThePirateBalthasar has a duplicate in SmackJeeves/ThePirateBalthasar
             cls('ThePresident', 'president'),
-            # ThePrincessAndTheGiant has a duplicate in SmackJeeves/ThePrincessandtheGiant
-            # ThePropertyOfHate has a duplicate in SmackJeeves/ThePropertyofHate
             cls('TheQuantumKid', 'thequantumkid'),
             cls('TheQuestForCoitus', 'acomicstudios'),
             cls('TheRathNexus', 'rath'),
@@ -1066,7 +1011,6 @@ class ComicFury(_ParserScraper):
             cls('TheTenTailorsOfWestonCourt', 'tentailors'),
             cls('TheTrialsOfMannack', 'mannack'),
             cls('TheUnclean', 'theunclean'),
-            cls('TheUnthinkableHybrid', 'theunthinkablehybrid'),
             cls('TheWayOfTheMetagamer', 'wayofthemetagamer'),
             cls('TheWellkeeper', 'thewellkeeper'),
             cls('TheWesternGang', 'thewesterngang'),
@@ -1107,7 +1051,6 @@ class ComicFury(_ParserScraper):
             cls('TransformersNexus', 'tfnexus'),
             cls('TransientPulseNotIntentionallyObsessive', 'niotp'),
             cls('Transmission', 'transmission'),
-            # TransUman has a duplicate in SmackJeeves/TransUMan
             cls('TransUmanSUbterran', 'sub-terran'),
             cls('Traveler', 'clioyorokobi'),
             cls('TreeScratches', 'treescratches'),
@@ -1124,8 +1067,6 @@ class ComicFury(_ParserScraper):
             cls('TurnerAndHercules', 'turnerandhercules'),
             cls('TussenKatersEnSpraakwater', 'tussenkatersenspraakwater'),
             cls('TvQuest', 'tvquest'),
-            cls('TwentyFourSeven', 'twentyfourseven'),
-            cls('TwentyFourSevenFans', '247fans'),
             cls('TwilightTrust', 'twilighttrust'),
             cls('TwinsAgony', 'twinsagony'),
             cls('TwistedPeel', 'twistedpeel'),
@@ -1175,7 +1116,6 @@ class ComicFury(_ParserScraper):
             cls('WhiteOut', 'whiteout'),
             cls('WhiteSpace', 'whitespace'),
             cls('WhoseLineIsItAnyhoo', 'whoseline'),
-            # Wildflowers has a duplicate in SmackJeeves/Wildflowers
             cls('WilfordTheWalrus', 'wilfordthewalrus'),
             cls('Willem', 'willem'),
             cls('WindRiders', 'windriders'),

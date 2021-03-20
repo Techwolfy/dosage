@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import html
 import os
@@ -552,6 +552,7 @@ class Cache:
     """
     def __init__(self):
         self.data = []
+        self.userdirs = set()
 
     def find(self, comic, multiple_allowed=False):
         """Get a list comic scraper objects.
@@ -596,6 +597,8 @@ class Cache:
         """Add an additional directory with python modules to the scraper list.
         These are handled as if the were part of the plugins package.
         """
+        if path in self.userdirs:
+            return
         if not self.data:
             self.load()
         modules = 0
@@ -605,6 +608,7 @@ class Cache:
             modules += 1
             classes += self.addmodule(module)
         self.validate()
+        self.userdirs.add(path)
         if classes > 0:
             out.debug("Added %d user classes from %d modules." % (
                 classes, modules))
@@ -641,7 +645,7 @@ class Cache:
                 name2 = d[name].name
                 raise ValueError('duplicate scrapers %s and %s found' %
                                  (name1, name2))
-                d[name] = scraper
+            d[name] = scraper
 
 
 scrapers = Cache()

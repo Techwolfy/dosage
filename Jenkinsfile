@@ -46,10 +46,12 @@ pys.each { py ->
                     }
                 }
 
-                archiveArtifacts artifacts: '.tox/dist/*.zip', fingerprint: true
                 if (py.main) {
                     archiveArtifacts artifacts: 'dist/*', fingerprint: true
                     stash includes: 'dist/*.tar.gz', name: 'bin'
+                    dir('.tox') {
+                        stash includes: 'allure-*/**', name: 'allure'
+                    }
                     def buildVer = findFiles(glob: 'dist/*.tar.gz')[0].name.replaceFirst(/\.tar\.gz$/, '')
                     currentBuild.description = buildVer
 
@@ -69,11 +71,14 @@ pys.each { py ->
     }
 }
 
-timestamps {
-    ansiColor('xterm') {
-        parallel(tasks)
-        windowsBuild()
-    }
+// MAIN //
+
+parallel(tasks)
+stage('Windows binary') {
+    windowsBuild()
+}
+stage('Allure report') {
+    processAllure()
 }
 
 def buildDockerfile(image) {
@@ -86,11 +91,9 @@ def buildDockerfile(image) {
 }
 
 def windowsBuild() {
-    stage('Windows binary') {
-        warnError('windows build failed') {
-            node {
-                windowsBuildCommands()
-            }
+    warnError('windows build failed') {
+        node {
+            windowsBuildCommands()
         }
     }
 }
@@ -98,7 +101,8 @@ def windowsBuild() {
 def windowsBuildCommands() {
     deleteDir()
     unstash 'bin'
-    def img = docker.image('tobix/pywine')
+    // Keep 3.8 for now, so we are still compatible with Windows 7
+    def img = docker.image('tobix/pywine:3.8')
     img.pull()
     img.inside {
         sh '''
@@ -112,6 +116,24 @@ def windowsBuildCommands() {
                 wineserver -w" 2>&1 | tee log.txt
         '''
         archiveArtifacts '*/scripts/dist/*'
+    }
+}
+
+def processAllure() {
+    warnError('allure report failed') {
+        node {
+            deleteDir()
+            unstash 'allure'
+            sh 'mv allure-* allure-data'
+            copyArtifacts filter: 'allure-history.zip', optional: true, projectName: JOB_NAME, selector: lastWithArtifacts()
+            if (fileExists('allure-history.zip')) {
+                unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'
+                sh 'rm -f allure-history.zip'
+            }
+            sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-data'
+            zip archive: true, dir: 'allure-report', glob: 'history/**', zipFile: 'allure-history.zip'
+            publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
+        }
     }
 }
 
