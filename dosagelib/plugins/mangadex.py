@@ -8,6 +8,7 @@ from ..scraper import _ParserScraper
 
 class MangaDex(_ParserScraper):
     multipleImagesPerStrip = True
+    ignoreRobotsTxt = True
 
     def __init__(self, name, mangaId):
         super(MangaDex, self).__init__('MangaDex/' + name)
