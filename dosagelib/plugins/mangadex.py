@@ -8,7 +8,6 @@ from ..scraper import _ParserScraper
 
 class MangaDex(_ParserScraper):
     multipleImagesPerStrip = True
-    ignoreRobotsTxt = True
 
     def __init__(self, name, mangaId):
         super(MangaDex, self).__init__('MangaDex/' + name)
@@ -35,7 +34,7 @@ class MangaDex(_ParserScraper):
             chapterBlock = chapterData.json()
             chapterTotal = chapterBlock['total']
             chapterOffset = chapterBlock['offset'] + chapterBlock['limit']
-            chapterList.extend(map(lambda c: c['data'], chapterBlock['results']))
+            chapterList.extend(chapterBlock['data'])
 
         # Determine if manga is complete and/or adult
         if manga['attributes']['lastChapter'] != '0':
