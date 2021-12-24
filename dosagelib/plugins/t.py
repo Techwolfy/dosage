@@ -171,6 +171,7 @@ class TheOldVictorian(_ParserScraper):
     firstStripUrl = stripUrl % 'the-old-victorian-cover'
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[contains(@class, "comic-nav-previous")]'
+    ignoreRobotsTxt = True
 
     def namer(self, imageUrl, pageUrl):
         filename = imageUrl.rsplit('/', 1)[-1].replace('_', '-')
