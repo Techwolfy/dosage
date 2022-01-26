@@ -413,6 +413,7 @@ class WebToons(_ParserScraper):
             cls('UndeadEd', 'supernatural/undeaded', 468),
             cls('UnderPrin', 'supernatural/underprin', 78),
             cls('UnderTheAegis', 'fantasy/under-the-aegis', 436),
+            cls('UnintentionalGame', 'challenge/unintentional-game', 162674),
             cls('UnknownCaller', 'thriller/ar-toon', 775),
             cls('UnlovableReplacement', 'romance/unlovable-replacement', 1762),
             cls('UnluckyIsAsLuckyDoes', 'comedy/unlucky-is-as-lucky-does', 1554),
