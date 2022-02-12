@@ -11,7 +11,6 @@ class Tapastic(_ParserScraper):
     prevSearch = '//a[contains(@class, "js-prev-ep-btn")]'
     latestSearch = '//ul[contains(@class, "js-episode-list")]//a'
     multipleImagesPerStrip = True
-    ignoreRobotsTxt = True
 
     def __init__(self, name, url):
         super(Tapastic, self).__init__('Tapastic/' + name)
