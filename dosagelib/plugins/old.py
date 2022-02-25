@@ -1440,6 +1440,7 @@ class Renamed(Scraper):
             cls('ZebraGirl', 'ComicFury/ZebraGirl'),
 
             # Renamed in 3.0
+            cls('AHClub', 'RickGriffinStudios/AHClub'),
             cls('CrapIDrewOnMyLunchBreak', 'WebToons/CrapIDrewOnMyLunchBreak'),
             cls('DeerMe', 'ComicFury/DeerMe'),
             cls('GoComics/BloomCounty2017', 'GoComics/BloomCounty2019'),
@@ -1456,4 +1457,6 @@ class Renamed(Scraper):
             cls('SmackJeeves/GrowingTroubles', 'ComicFury/GrowingTroubles'),
             cls('SmackJeeves/TheRealmOfKaerwyn', 'ComicFury/TheRealmOfKaerwyn'),
             cls('StudioKhimera/Draconia', 'Draconia'),
+            cls('TracesOfThePast', 'RickGriffinStudios/TracesOfThePast'),
+            cls('TracesOfThePast/NSFW', 'RickGriffinStudios/TracesOfThePastNSFW'),
         )

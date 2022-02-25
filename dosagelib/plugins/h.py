@@ -69,15 +69,6 @@ class HavocInc(_WordPressScraper):
     firstStripUrl = stripUrl % 'havoc-cover'
 
 
-class HayvenCelestia(_WPNaviIn):
-    baseUrl = 'http://rickgriffinstudios.com/'
-    url = baseUrl + 'hayven-celestia/'
-    stripUrl = baseUrl + 'comic-post/%s/'
-    firstStripUrl = stripUrl % 'skinchange-p1'
-    latestSearch = '//a[contains(@title, "Permanent Link")]'
-    starter = indirectStarter
-
-
 class HeadlessBliss(_ComicControlScraper):
     url = 'http://headlessbliss.com/'
 
@@ -180,12 +171,6 @@ class Holystone(_WordPressScraper):
             page[0] = str(int(page[0]) + 10)
             page = page[0] + '-' + page[1]
         return page + '.' + imageUrl.rsplit('.', 1)[-1]
-
-
-class Housepets(_WordPressScraper):
-    url = 'http://www.housepetscomic.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = '2008/06/02/when-boredom-strikes'
 
 
 class HowToBeAWerewolf(_ComicControlScraper):
