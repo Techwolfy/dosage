@@ -69,6 +69,15 @@ class HavocInc(_WordPressScraper):
     firstStripUrl = stripUrl % 'havoc-cover'
 
 
+class HayvenCelestia(_WPNaviIn):
+    baseUrl = 'http://rickgriffinstudios.com/'
+    url = baseUrl + 'hayven-celestia/'
+    stripUrl = baseUrl + 'comic-post/%s/'
+    firstStripUrl = stripUrl % 'skinchange-p1'
+    latestSearch = '//a[contains(@title, "Permanent Link")]'
+    starter = indirectStarter
+
+
 class HeadlessBliss(_ComicControlScraper):
     url = 'http://headlessbliss.com/'
 
