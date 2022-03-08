@@ -103,12 +103,3 @@ class UrgentTransformationCrisis(_WordPressScraper):
         # Fix inconsistent filenames
         filename = imageUrl.rsplit('/', 1)[-1].rsplit('?', 1)[0]
         return filename.replace('FVLYHD', 'LYHDpage').replace('UTC084web', '20091218c')
-
-
-class UserFriendly(_ParserScraper):
-    url = 'http://ars.userfriendly.org/cartoons/'
-    stripUrl = url + '?id=%s'
-    firstStripUrl = stripUrl % '19971117'
-    imageSearch = '//img[contains(@src, "cartoons/")]'
-    prevSearch = '//area[@alt="Previous Cartoon"]'
-    ignoreRobotsTxt = True
