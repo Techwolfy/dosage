@@ -1,0 +1,11 @@
+# Project initiators and past maintainers
+Tristan Seligmann
+Jonathan Jacobs
+Bastian Kleineidam
+
+# Current maintainer
+Tobias Gruetzmacher
+
+# Patches and other contributions
+Daniel Ring
+Dirk Reiners

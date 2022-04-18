@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<!--
+    Design based on "Prologue" by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    Botched and adapted to StaticSite by @TobiX
+-->
+<html>
+<head>
+    <title>dosage - Adding a comic to Dosage</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/css/main.css" />
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header">
+    <div class="top">
+
+        <!-- Logo -->
+        <div id="logo">
+            
+            <h1 id="title"><a href="/">dosage</a></h1>
+            
+            <p>a comic downloader and archiver</p>
+        </div>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                
+                <li><a href="https://github.com/webcomics/dosage/releases/latest"><span class="icon fa-download">Downloads</span></a></li>
+                
+                <li><a href="https://github.com/webcomics/dosage/issues/new"><span class="icon fa-bug">Report Issue</span></a></li>
+                
+                <li><a href="/CHANGELOG"><span class="icon fa-bug">ChangeLog</span></a></li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    <div class="bottom">
+        <!-- Social Icons -->
+        <ul class="icons">
+            
+            <li><a href="https://github.com/webcomics/dosage" class="icon fa-github"><span class="label">GitHub</span></a></li>
+            
+        </ul>
+    </div>
+    </div>
+
+    <!-- Main -->
+    <div id="main">
+
+
+    <!-- Intro -->
+    <section class="one cover">
+        <div class="container">
+            <header>
+            
+            <h3>Adding a comic to Dosage</h3>
+            
+            </header>
+        </div>
+    </section>
+
+
+
+    <section id="content" class="two dark">
+        <div class="container">
+            
+            <p>To add a new comic, add a new class in one of the *.py files
+in the dosagelib/plugins module.</p>
+<p>The files in dosagelib/plugin and the classes inside those files are
+sorted alphabetically. Add your comic to the appropriate filename.
+For example if the comic name is "Super duper comic", the new class
+should be added to dosagelib/plugins/s.py.</p>
+<p>Here is a complete example which is explained in detail below.</p>
+<pre class="codehilite"><code>class SuperDuperComic(_BasicScraper):
+    url = 'http://superdupercomic.com/'
+    rurl = escape(url)
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre(&quot;img&quot;, &quot;src&quot;, r'(%scomicimg/[^&quot;]+)' % rurl))
+    prevSearch = compile(tagre(&quot;a&quot;, &quot;href&quot;, r'(%scomic/\d+)' % rurl, after=&quot;prev&quot;))
+    help = 'Index format: n (unpadded)'
+</code></pre>
+
+<p>Let's look at each line in detail.</p>
+<p><code>class SuperDuperComic(_BasicScraper):</code></p>
+<p>All comic plugin classes inherit from <code>_BasicScraper</code>.
+The classname (<code>SuperDuperComic</code> in our example) must be unique,
+regardless of upper/lower characters.
+The user finds comics with this classname, so be sure to select
+something descriptive and easy to remember.</p>
+<p><code>url = 'http://superdupercomic.com/'</code></p>
+<p>The URL must display the latest comic picture. This is where the
+comic image search will start. See below for some special cases.</p>
+<p><code>rurl = escape(url)</code></p>
+<p>This defines a variable <code>rurl</code> which is used in the search patterns
+below. It properly escapes all regular expression special characters
+like dots or question marks.</p>
+<p><code>stripUrl = url + 'comic/%s'</code></p>
+<p>This defines how a comic strip URL looks like. In our example, all
+comic strip URLs look like <code>http://superdupercomic.com/comics/NNN</code>
+where NNN is the increasing comic number.</p>
+<p><code>firstStripUrl = stripUrl % '1'</code></p>
+<p>This tells Dosage what the earliest comic strip URL looks like. Dosage
+stops searching for more comics when it is encounterd. In our example
+comic numbering starts with <code>1</code>, so the oldest comic URL is
+<code>http://superdupercomic.com/comics/1</code></p>
+<p><code>imageSearch = compile(tagre("img", "src", r'(%simg/[^"]+)' % rurl))</code></p>
+<p>Each comic page URL has one or more comic strip images. The imageSearch
+pattern must match those images in the HTML content of the page URL.
+To make it easy to match HTML tags, the <code>tagre()</code> function is
+helpful. The first parameter is the tag name, the second the attribute
+name and the third the attribute value. So in our example the given
+pattern whould match a tag like
+``<img src="http://superdupercomic.com/img/comic1.jpg" />``` .</p>
+<p><code>prevSearch = compile(tagre("a", "href", r'(%scomic/\d+)' % rurl, after="prev"))</code></p>
+<p>To search for more comics, Dosage has to look for the previous comic URL.
+The <code>after=</code> value in <code>tagre()</code> matches anything between the
+attribute value and the end of the tag.
+So this pattern assumes each comic page URL has a link to the previous
+comic, for example <code>http://superdupercomic.com/comic/100</code> has a
+link <code>&lt;a href="http://superdupercomic.com/comic/99" class="prev"&gt;</code>.</p>
+<p><code>help = 'Index format: n (unpadded)'</code></p>
+<p>Since the user can search comics from a given start point, the help
+must describe how the comic is numbered. Running
+<code>dosage superdupercomic:100</code> would start getting comics from number
+100 and earlier.</p>
+            
+        </div>
+    </section>
+
+    </div>
+
+    
+    <!-- Footer -->
+    <div id="footer">
+        <ul class="copyright">
+            <li>Generated with <a
+                href="https://github.com/spanezz/staticsite">staticsite</a>,
+                last change: 2022-04-18 21:19:39Z</li>
+            <li>&copy; Tobias Gruetzmacher. Some rights reserved.</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+    
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.scrolly.min.js"></script>
+    <script src="/static/js/jquery.scrollzer.min.js"></script>
+    <script src="/static/js/skel.min.js"></script>
+    <script src="/static/js/util.js"></script>
+    <script src="/static/js/main.js"></script>
+
+</body>
+</html>

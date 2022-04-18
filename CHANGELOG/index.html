@@ -1,0 +1,948 @@
+<!DOCTYPE HTML>
+<!--
+    Design based on "Prologue" by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    Botched and adapted to StaticSite by @TobiX
+-->
+<html>
+<head>
+    <title>dosage - Changelog</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/css/main.css" />
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header">
+    <div class="top">
+
+        <!-- Logo -->
+        <div id="logo">
+            
+            <h1 id="title"><a href="/">dosage</a></h1>
+            
+            <p>a comic downloader and archiver</p>
+        </div>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                
+                <li><a href="https://github.com/webcomics/dosage/releases/latest"><span class="icon fa-download">Downloads</span></a></li>
+                
+                <li><a href="https://github.com/webcomics/dosage/issues/new"><span class="icon fa-bug">Report Issue</span></a></li>
+                
+                <li><a href="/CHANGELOG"><span class="icon fa-bug">ChangeLog</span></a></li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    <div class="bottom">
+        <!-- Social Icons -->
+        <ul class="icons">
+            
+            <li><a href="https://github.com/webcomics/dosage" class="icon fa-github"><span class="label">GitHub</span></a></li>
+            
+        </ul>
+    </div>
+    </div>
+
+    <!-- Main -->
+    <div id="main">
+
+
+    <!-- Intro -->
+    <section class="one cover">
+        <div class="container">
+            <header>
+            
+            <h3>Changelog</h3>
+            
+            </header>
+        </div>
+    </section>
+
+
+
+    <section id="content" class="two dark">
+        <div class="container">
+            
+            <p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on
+<a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>.</p>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.17...HEAD">Unreleased</a></h2>
+<h3>Removed</h3>
+<ul>
+<li>Python 2 support</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.16...2.17">2.17</a> - 2020-02-02</h2>
+<p>This will be the last release with Python 2 support. This comes shortly after
+the 2.16 release to fix the broken update check in that release.</p>
+<h3>Added</h3>
+<ul>
+<li>Comic SmackJeeves/WhatWeRememberTheMost</li>
+<li>Engine for WebToons (big thanks to Daniel Ring)</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Update check now always shows assets instead of the repo tarball.</li>
+<li>Fixes Wapsi Square (#149).</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.15...2.16">2.16</a> - 2020-01-12</h2>
+<h3>Added</h3>
+<ul>
+<li>Many, many comics :D</li>
+<li>Comic modules can now use a proper HTML parser (based on <a href="https://lxml.de/">lxml</a>) with XPath
+  or CSS expressions.</li>
+<li>Users are notified if they are using modules which were
+  removed/moved/renamed.</li>
+<li>Use <a href="https://codeclimate.com/github/webcomics/dosage">CodeClimate</a> to analyse source code quality and <a href="https://codecov.io/gh/webcomics/dosage">CodeCov</a> to track test
+  coverage.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Annotation text can now be optional (Fetching a comic doesn't fail if it
+  doesn't appear on every page).</li>
+<li>When using HTML output, next and previous links are now also at the end of
+  the page.</li>
+<li>Use the Python import system (previously PEP-302) instead of the file system
+  to find modules.</li>
+<li>Remove embedded colorama, depend on it instead.</li>
+<li>Replace homegrown PY2/3 compatibility with six.</li>
+<li>Build dosage <a href="https://dosage.rocks/">website</a> with staticsite.</li>
+<li>Reworked comic module structure. Webcomics are now class instances instead of
+  classes. While this doesn't change that much for single comic modules,
+  "virtual" modules covering multiple comics can now be written much more
+  concise. See issue #42 for details.</li>
+<li>Windows build is now one standalone EXE file (thanks to <a href="https://www.pyinstaller.org/">PyInstaller</a>).</li>
+<li>Allow combining -n with -c or -a (related to #90). This allows to set an
+  upper bound to normally "unconstrained" fetch modes.</li>
+<li>Replace forced "sleep" between requests with a simple host-based throttling
+  mechanism.</li>
+<li>Uses <a href="https://pypi.org/project/imagesize/">imagesize</a> instead of Pillow to get image sizes. (Pillow is a very big
+  libary with many binary dependencies and we were using only this feature from
+  it)</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>Many, many broken/disappered comics :(</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Many, many comics :D</li>
+<li>Let Requests figure out encodings.</li>
+<li>Don't crash when HTML output is run more than once per day. Closes: wummel#78</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.14...2.15">2.15</a> - 2014-07-03</h2>
+<h3>Added</h3>
+<ul>
+<li>TheThinHLine, Whomp. Closes: wummel#64, wummel#67</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>DungeonsAndDenizens, GirlGenius, GirlsWithSlingshots, LookingForGroup,
+  ScandinaviaAndTheWorld. Closes: wummel#63, wummel#66</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.13...2.14">2.14</a> - 2014-06-08</h2>
+<h3>Changed</h3>
+<ul>
+<li>Source releases are now available from PyPI.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>LoadingArtist, PennyArcade, ZenPencils. Closes: wummel#62</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.12...2.13">2.13</a> - 2014-03-03</h2>
+<h3>Added</h3>
+<ul>
+<li>OhJoySexToy, TheGentlemansArmchair, Underling, DongeonsAndDenizens,
+  GrimTalesFromDownBelow, TheLandscaper, DieFruehreifen, MonsieurLeChien.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>EvilInc, FredoAndPidjin.</li>
+<li>Make download threads interruptable with Ctrl-C.</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.11...2.12">2.12</a> - 2014-01-24</h2>
+<h3>Changed</h3>
+<ul>
+<li>The --basepath option now replaces "~" or "~user" with the users home
+  directory.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>AbstruseGoose, AxeCop, BardsWorth, DemolitionSquad.</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>ChugWorth (broken).</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.10...2.11">2.11</a> - 2014-01-15</h2>
+<h3>Added</h3>
+<ul>
+<li>CampComic, EatThatToast, FoulLanguage, PoorlyDrawnLines and
+  StandStillStaySilent.</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.9...2.10">2.10</a> - 2014-01-05</h2>
+<h3>Added</h3>
+<ul>
+<li>Comic strips are downloaded in parallel. To prevent overload of comic sites,
+  no more than one download thread per host is allowed.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Ensure only one instance of dosage is running to prevent accidental DoS when
+  fetching multiple comics of one site.</li>
+<li>Wait up to 1 second between two URL page downloads.</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.8...2.9">2.9</a> - 2013-12-22</h2>
+<h3>Added</h3>
+<ul>
+<li>EdmundFinney, Gaia, GaiaGerman, InternetWebcomic, NotInventedHere,
+  RedsPlanet, RomanticallyApocalyptic, ScandinaviaAndTheWorld, TheGamerCat,
+  Weregeek. Thanks to Null000 for the patches.
+  Closes: wummel#48</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Ensure maximum display width on images in RSS and HTML output.</li>
+<li>Get larger images from GoComics.</li>
+<li>AbstruseGoose and QuestionabelContent.  Closes: wummel#50</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.7...2.8">2.8</a> - 2013-12-08</h2>
+<h3>Added</h3>
+<ul>
+<li>Added image text saving for comic strips. Used in xkcd and AbstruseGoose
+  comics to store the image title text. Closes: wummel#42</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>ForLackOfABetterComic.</li>
+<li>Store large xkcd images if available. Closes: wummel#43</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.6...2.7">2.7</a> - 2013-11-24</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed GoComic image URL matcher.</li>
+<li>Fixed AxeCop, PensAndTales_FireflyCross.</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>ComicFury_Rosie, InsideOut, SodiumEyes (broken).</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.5...2.6">2.6</a> - 2013-11-12</h2>
+<h3>Added</h3>
+<ul>
+<li>DarthsAndDroid.</li>
+<li>Document how to add new comics. Closes: wummel#39</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed all DrunkDuck comics since the domain has moved.</li>
+<li>Fixed AllTheGrowingThings, AxeCop, BookOfBiff, BroodHollow, Carciphona,
+  CatAndGirl, CatsAndCameras, ChainsawSuit, ElGoonishShive, EvilInc, Garanos,
+  GleefulNihilism, LeastICouldDo, MysteriesOfTheArcana, NineteenNinetySeven,
+  NoNeedForBushido, Oglaf, OneQuestion, OverCompensating,
+  ScenesFromAMultiverse, Shivae, Spinnerette, Wigu, Wonderella,
+  Wulffmorgenthaler. Closes: wummel#41</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>AetheriaEpics, ChuckBrain, Fallen, HMHigh, IanJay, InsideOut, Nodwick,
+  WebcomicsNation_ClownSamurai (broken).</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Display genres in module help (dosage -m).</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.4...2.5">2.5</a> - 2013-07-18</h2>
+<h3>Added</h3>
+<ul>
+<li>EatLiver, ICanBarelyDraw, JimBenton, MarriedToTheSea and NatalieDee.
+  Closes: wummel#37</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>AxeCop, GoblinsComic, KevinAndKell and other comics.</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.3...2.4">2.4</a> - 2013-06-24</h2>
+<h3>Added</h3>
+<ul>
+<li>LinuxComFridayFunnies and OnTheFasttrack.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>The <code>--continue</code> option fetched only one image. Closes: wummel#32</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.2...2.3">2.3</a> - 2013-05-26</h2>
+<h3>Added</h3>
+<ul>
+<li>Script to create a CBZ archive for a given comic directory.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>LookingForGroup and other comics. Closes: wummel#31</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.1...2.2">2.2</a> - 2013-04-30</h2>
+<h3>Added</h3>
+<ul>
+<li>ARedTailsDream, Carciphona, Curtailed, GirlGenius, Lackadaisy, SabrinaOnline,
+  TheDreamlandChronicles, TwoGuysAndGuy and Unsound. Patches by Dirk Reiners.
+  Closes: wummel#29</li>
+<li>Comics which are not updated anymore can now be marked. Closes: wummel#30</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Ignore trailing '/' at end of comic names. Useful when using shell completion
+  to pick comics. Patch by Dirk Reiners.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>DorkTower, MadamAndEve and Saturday Morning Breakfast Cereal, and improve
+  image filenames of CtrlAltDel. Patches by Dirk Reiners.</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/2.0...2.1">2.1</a> - 2013-04-14</h2>
+<h3>Added</h3>
+<ul>
+<li>Some comic descriptions from their webpages.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fix output encoding errors on comic listing. Closes: wummel#24</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/1.15...2.0">2.0</a> - 2013-04-11</h2>
+<h3>Added</h3>
+<ul>
+<li>DamnLol, EverydayBlues, ExtraOrdinary, ForLackOfABetterComic, GoblinsComic,
+  RealmOfAtland, Science, SnowFlakes, StuffNoOneToldMe, WebDesignerCOTW and
+  ZenPencils.</li>
+<li>Added the <code>--vote</code> option to vote for popular comics.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Add <code>install_requires</code> to setup.py to fix pip install. Closes: wummel#22</li>
+<li>Curvy, DasLebenIstKeinPonyhof, ExtraLife, EyeOfRamalach,
+  KatzenfutterGeleespritzer, Oglaf, Precocious, SnowFlame. Closes: wummel#23</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>Remove deprecated mainline script.</li>
+<li>CaribbeanBlue, GreystoneInn, SarahZero.</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/1.14...1.15">1.15</a> - 2013-04-01</h2>
+<h3>Added</h3>
+<ul>
+<li>DrMcNinja, Schuelert.</li>
+<li>Added a new JSON output logger.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Add better source for HagarTheHorrible. Closes: wummel#21</li>
+<li>Display error traceback information in verbose mode.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed GoComics by downloading zoomed images.</li>
+<li>Fixed WorlWorldSaga* and Eriadan.</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>DerFlix.</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/1.13...1.14">1.14</a> - 2013-03-21</h2>
+<h3>Added</h3>
+<ul>
+<li>Added KeenSpot comic strips and enable ComicGenesis comic strips.</li>
+<li>CucumberQuest, DasLebenIstKeinPonyHof, DemolitionSquad, DerFlix,
+  DerTodUndDasMaedchen, DogHouseDiaries, FonFlatter, FullFrontalNerdity,
+  GeeksNextDoor, Hipsters, KatzenfutterGeleespritzer, KickInTheHead,
+  MyCartoons, OrnerBoy, ParallelUniversum, Ruthe, SandraAndWooGerman,
+  WormWorldSaga. Closes: wummel#15, #19</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>The scraper can check a list of previous and image link regular expressions,
+  not only a single one.</li>
+<li>Continue searching for images if one image is not found. Closes: wummel#18</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fix Dilbert image naming. Closes: wummel#20</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/1.12...1.13">1.13</a> - 2013-03-11</h2>
+<h3>Added</h3>
+<ul>
+<li>AhoiPolloi, AxeCop, Bearmageddon, DeadWinter, HarkAVagrant, IAmArg,
+  LoadingArtist, Nnewts, PHDComics, PokeyThePenguin, SnowFlame, WorldOfMrToast
+  and Zwarwald.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Comic lists are displayed one page at a time.</li>
+<li>HTML output embeds the images in the page and show the page URLs.</li>
+<li>The <code>--output</code> option can be given multiple times.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Catch error when piping output to another program or file under Windows.
+  Closes: wummel#13</li>
+<li>Catch error when multiple comics match.  Closes: wummel#16</li>
+<li>Retry download on empty content to reduce empty file errors.</li>
+<li>Don't save thumbnails in LookingForGroup. Closes: wummel#17</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/1.11...1.12">1.12</a> - 2013-03-04</h2>
+<h3>Added</h3>
+<ul>
+<li>AlphaLuna, AlphaLunaSpanish, BrentalFloss, BrentalFlossFit,
+  BrentalFlossGuest, DangerouslyChloe, MagickChicks, MenageA3, Namesake,
+  ShadowGirls, StickyDillyBuns.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fix option parsing for <code>-l</code>, <code>--singlelist</code> and <code>--version</code>.
+  Closes: wummel#10</li>
+<li>Ensure the file is written to disk on save and detect empty files as an
+  error. Closes: wummel#11</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/1.10...1.11">1.11</a> - 2013-03-01</h2>
+<h3>Added</h3>
+<ul>
+<li>Caggage, ManlyGuysDoingManlyThings, SandraAndWoo and SupernormalStep.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Always use connection pooling when downloading pages or files.</li>
+<li>Replace the deprecated argument parser optparse with argparse.</li>
+<li>The Windows installer now adds a help entry to the start menu and has a flag
+  to add dosage.exe to the PATH.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Correct the list of characters not to quote for URL path encoding.  This
+  fixes a lot of download errors of DrunkDuck comics.</li>
+<li>Fixed a lot of comic strips. Closes: wummel#8</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/1.9...1.10">1.10</a> - 2013-02-10</h2>
+<h3>Added</h3>
+<ul>
+<li>SequentialArt, VampireCheerleader, GrrlPower, Spinnerette, HijinksEnsue,
+  Nedroid, Antics, ChannelAte, ToonHole, ThisIsIndexed, WastedTalent,
+  ChainsawSuit, ThreePanelSoul, SpaceTrawler, ScenesFromAMultiverse,
+  BroodHollow, BoxerHockey, Wonderella, BadMachinery, TheBrads,
+  FirstWorldProblems, OmakeTheater, SkinDeep, ParadigmShift.</li>
+<li>Added the <code>--continue</code> option.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Add encoding, inline images and guid tags to RSS output.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Gunnerkrigcourt.</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/1.8...1.9">1.9</a> - 2013-01-28</h2>
+<h3>Added</h3>
+<ul>
+<li>AmazingSuperPowers, PandyLand.</li>
+<li>Added all comic strips from Arcamax (including Hagar the horrible).</li>
+<li>Document parallel download example with xargs on Unix systems.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>CyanideAndHappiness image filename now has the strip number prefixed.</li>
+<li>Indexed retrieval can now retrieve all (<code>-a</code>) or some (<code>-n</code>) strips, not only
+  one.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fixed LeastICouldDo image URL.  Closes: wummel#1</li>
+<li>Fix URL norming. Closes: wummel#2</li>
+<li>Fix wrong option name in docs: it's <code>-a</code> instead of <code>-c</code>. Closes: wummel#3</li>
+<li>Fix UnboundLocalError when using indexed retrieval. Closes: wummel#4</li>
+<li>Ensure the generated comic names do not exceed 100 characters so they do not
+  cause problems with path length restrictions.</li>
+<li>Set correct homepage url so "pip install dosage" works. Closes: wummel#5</li>
+</ul>
+<h2><a href="https://github.com/webcomics/dosage/compare/1.7...1.8">1.8</a> - 2012-12-20</h2>
+<h3>Changed</h3>
+<ul>
+<li>Add compatibility to requests module &gt;= 1.0.</li>
+<li>Updated the comic list with the generator scripts.</li>
+</ul>
+<h2>1.7 - 2012-12-18</h2>
+<h3>Added</h3>
+<ul>
+<li>Added proper return codes for error conditions.</li>
+<li>Added more robust regular expressions for HTML tags. They match case
+  insensitive and ignore whitespaces now.</li>
+<li>Respect the robots.txt of downloaded HTML pages</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Use the python-requests module for HTTP requests.</li>
+<li>Added support for dynamic configuration values.</li>
+<li>Require and use Python 2.7</li>
+<li>Removed the zope dependencies by adding an internal plugin search mechanism.</li>
+<li>Replace the disable mechanism with an adult option.</li>
+<li>Add scripts to automate comic listings for Creators, Universal, KeenSpot,
+  GoComics and DrunkDuck.</li>
+<li>Refactored the test comic routine into fully automatic and complete tests
+  cases for every comic.</li>
+<li>Improved terminal feature detection.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Fix all comics!</li>
+<li>Don't add empty URLs to the list of found URLs.</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>Download progress bars</li>
+</ul>
+<h2>1.6.0</h2>
+<ul>
+<li>The "Not Dead Yet" release.</li>
+</ul>
+<h3>Added</h3>
+<ul>
+<li>Too many comics to list, really.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Revamped plugin system, the first step on the road to Twisted (Needs twisted
+  and zope.interface).</li>
+</ul>
+<h2>1.5.8</h2>
+<h3>Added</h3>
+<ul>
+<li>BonoboConspiracy, ChasingTheSunset, Comedity, GoneWithTheBlastwave,
+  <code>KeenSpot/*</code> (a <em>LOT</em> of KeenSpot submodules), NichtLustig, OtenbaFiles,
+  Wulffmorgenthaler, Y.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>AbstractGender, AlienLovesPredator, AppleGeeks, EarthsongSaga, NewWorld,
+  WhiteNinja.</li>
+<li>Renamed CatLegend to KeenSpot/CatLegend.</li>
+<li>All <code>KeenSpot/*</code> comic subnames no longer have "The" prefixes.</li>
+<li>All <code>UComics/*</code> and <code>UComicsEspanol/*</code> are now <code>UClick/*</code>.</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>KeenSpot/TheDevilsPanties (duplicate of KeenSpot/DevilsPanties)</li>
+</ul>
+<h2>1.5.7</h2>
+<h3>Added</h3>
+<ul>
+<li>AbleAndBaker, AcademyVale, Aikida, Angels2200, BetterDays, BlankLabel
+  (virtual module), BoredAndEvil, Catharsis, ChuckAndElmo,
+  CloneManga/PennyTribute, CourtingDisaster, DeathToTheExtremist, DogComplex,
+  DownToEarth, Dracula, DragonTails, DrFun, DungeonCrawlInc, ExtraLife,
+  FalconTwin, FightCastOrEvade, Flipside, Housd, JerkCity, JoeAndMonkey,
+  KeenSpot/SuicideForHire, LasLindas, Nekobox, Nervillsaga, NewAdventures,
+  NewAdventuresOfBobbin, Nihilism, Nukees, OkayPants, PartiallyClips,
+  PensAndTales, RWWR, WebcomicsNation (virtual module), Yirmumah.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Important SmackJeeves module fix. Catchup used to loop around from the first
+  strip to the last one, thus potentially hammering the SmackJeeves servers
+  with floods of requests from neverending catchups.</li>
+<li>Asif, CatLegend, CloneManga/NanasEverydayLife, CloneManga/PaperEleven,
+  DrunkDuck, EarthsongSaga, ErrantStory, InkTank, KiagiSwordscat, Qwantz, SGVY,
+  SmackJeeves, Smamusement, SnafuComics, UComicsEspanol.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Renamed KeenSpot/Stubble to Stubble.</li>
+<li><code>KeenSpot/&lt;various&gt;</code> (ComicGenesis migration).</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>Various DrunkDuck comics.</li>
+</ul>
+<h2>1.5.6</h2>
+<h3>Added</h3>
+<ul>
+<li>CandyCartoon, CloneManga/Kanami, Drowtales, KeenSpot/FoxTails, Krakow,
+  SmackJeeves (virtual module).</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>CrapIDrewOnMyLunchBreak, CtrlAltDel, DMFA, EarthsongSaga,
+  EverybodyLovesEricRaymond, GirlsWithSlingshots, KeenSpot,
+  KeenSpot/WapsiSquare, NewWorld, PennyArcade, PiledHigherAndDeeper,
+  QuestionableContent, SluggyFreelance, SnafuComics, Sokora, UComicsEspanol
+  (updated submodules), UComics (updated submodules).</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Renamed KeenSpot/CatLegend to CatLegend.</li>
+<li>Renamed KeenSpot/DominicDeegan to DominicDeegan.</li>
+<li>Renamed DrunkDuck/TriquetraCats to KeenSpot/TriquetraCats.</li>
+<li>Renamed KeenSpot/NekoTheKitty to NekoTheKitty.</li>
+<li>Renamed KeenSpot/TheNoob to TheNoob.</li>
+</ul>
+<h2>1.5.5</h2>
+<h3>Added</h3>
+<ul>
+<li>AbstractGender, AnimeArcadia, CaptainSNES, DrunkDuck/Holy_Zen, EarthsongSaga,
+  NinthElsewhere (9th Elsewhere), PebbleVersion, SGVY (Sparkling Generation
+  Valkyrie Yuuki), SuccubusJustice.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Renamed KeenSpot/ErrantStory to ErrantStory.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>DrunkDuck, PvPonline, SluggyFreelance.</li>
+</ul>
+<h2>1.5.4</h2>
+<h3>Added</h3>
+<ul>
+<li>Andiwear, DrunkDuck (virtual), EverybodyLovesEricRaymond, FantasyRealms,
+  KeenSpot/2WayMirror, KeenSpot/ANT, KeenSpot/AngelTheDemoness,
+  KeenSpot/Apotheosis, KeenSpot/Aquatica, KeenSpot/BadlyDrawnKitties,
+  KeenSpot/BobAndFred, KeenSpot/BrunoTheBandit, KeenSpot/CatLegend,
+  KeenSpot/EdibleDirt, KeenSpot/FelicityFlint, KeenSpot/Flem,
+  KeenSpot/GreenAvenger, KeenSpot/LangLang, KeenSpot/Picatrix,
+  KeenSpot/ScandalSheet, KeenSpot/Shifters, KeenSpot/SoapOnARope,
+  KeenSpot/SuburbanJungle, KeenSpot/TheClassMenagerie,
+  KeenSpot/TheDevilsPanties, KeenSpot/ToddAndPenguin, KeenSpot/TwoLumps,
+  KeenSpot/Wereworld, KeenSpot/YouDamnKid, SokoraRefugees.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>AbsurdNotions, CloneManga, PastelDefender, PennyArcade, SluggyFreelance.</li>
+</ul>
+<h2>1.5.3</h2>
+<h3>Added</h3>
+<ul>
+<li>CatAndGirl, CloneManga, Commissioned, JoyOfTech, KeenSpot/AlphaLuna,
+  KeenSpot/Lowroad75, KeenSpot/Werechild, TheWotch, TonjaSteele.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>DieselSweeties, LittleGamers, PennyArcade, StarCrossdDestiny, VGCats.</li>
+<li>Fixed a bug that caused RSS output to crash if the file already existed, but
+  had no items.</li>
+</ul>
+<h2>1.5.2</h2>
+<h3>Added</h3>
+<ul>
+<li>KeenSpot/TheNoob, PiledHigherAndDeeper.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>ALessonIsLearned, Misfile, RealLife, UComics, UComicsEspanol.</li>
+<li>Removed some debugging cruft that slipped through in the last release.</li>
+</ul>
+<h2>1.5.1</h2>
+<h3>Added</h3>
+<ul>
+<li>BadBlood, BetterYouThanMe, Marilith, MyWarWithCulture.</li>
+<li>AModestDestiny, AbsurdNotions, Altermeta, Evercrest, GUComics,
+  KeenSpot/BoomerExpress, KevinAndKell, LethalDoses, LethalDosesClassic,
+  ListeningTo11975MHz, MyPrivateLittleHell, PerkiGoth, WhyTheLongFace, Winter
+  (contributed by TobiX).</li>
+<li>Bhag, ChroniclesOfGaras, CrapIDrewOnMyLunchBreak, EternalVenture, Frump,
+  MinesBigger, NeoGreenwood, NuklearPower, PreludesEnd, ShadowInTheMirror
+  (contributed by Shrimp).</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Creators, PennyArcade, UnicornJelly.</li>
+<li>RSS output tweaked.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li><code>--list</code> now outputs in columns; pass <code>--single-list</code> to get the old
+  behaviour (thanks TobiX).</li>
+<li>Split UComics/UComicsEspanol (and removed comics no longer supported)</li>
+<li>Output event modules now generate proper URLs. You can now pass a base URL
+  with --base-url, which should correspond to --base-path. If not passed,
+  Dosage will try to generate a working file:/// URL, but this may not work in
+  some circumstances.</li>
+</ul>
+<h2>1.5.0</h2>
+<h3>Added</h3>
+<ul>
+<li>Creators/Archie, Creators/AskShagg, Creators/ForHeavensSake,
+  Creators/Rugrats, Creators/StateOfTheUnion, Creators/TheDinetteSet,
+  Creators/TheMeaningOfLila, Creators/WeePals, Creators/ZackHill,
+  DoemainOfOurOwn, JamesFrancis/gonzo, JamesFrancis/psycindom0,
+  JamesFrancis/psycindom1, JamesFrancis/psycindom2, KeenSpot/AlienDice,
+  KeenSpot/Avalon, KeenSpot/CountYourSheep, KeenSpot/DominicDeegan,
+  KeenSpot/ElGoonishShive, KeenSpot/ElfLife, KeenSpot/ErrantStory,
+  KeenSpot/EverythingJake, KeenSpot/FriendlyHostility, KeenSpot/FunnyFarm,
+  KeenSpot/GamingGuardians, KeenSpot/GeneCatlow, KeenSpot/GreystoneInn,
+  KeenSpot/NaughtFramed, KeenSpot/PastelDefender, KeenSpot/RoadWaffles,
+  KeenSpot/Scatterplot, KeenSpot/SchlockMercenary, KeenSpot/UberSoft,
+  KeenSpot/UnicornJelly, KeenSpot/ZebraGirl, Spamusement, TheOrderOfTheStick,
+  UComics/animatedoliphant, UComics/anntelnaes, UComics/askcaptainribman,
+  UComics/baldoespanol, UComics/barbarabrandon, UComics/bensargent,
+  UComics/billdeore, UComics/brewsterrockit, UComics/brucehammond,
+  UComics/calvinandhobbesespanol, UComics/cathyespanol, UComics/chanlowe,
+  UComics/condorito, UComics/danasummers, UComics/danwasserman,
+  UComics/davidhorsey, UComics/dicklocher, UComics/dickwright,
+  UComics/donwright, UComics/dougmarlette, UComics/drewsheneman,
+  UComics/facesinthenews, UComics/foxtrotespanol, UComics/fredbassetespanol,
+  UComics/garfieldespanol, UComics/garyvarvel, UComics/gaturro,
+  UComics/glennmccoy, UComics/hubertandabby, UComics/jackhiggins,
+  UComics/jackohman, UComics/jeffdanziger, UComics/laloalcaraz,
+  UComics/mattdavies, UComics/modestyblaise, UComics/muttandjeffespanol,
+  UComics/neurotica, UComics/overboardespanol, UComics/patoliphant,
+  UComics/paulconrad, UComics/pepe, UComics/poochcafeespanol,
+  UComics/pricklycity, UComics/sigmund, UComics/smallworld, UComics/stevesack,
+  UComics/stuartcarlson, UComics/tedrall, UComics/thebigpicture,
+  UComics/theelderberries, UComics/thefifthwave, UComics/thefuscobrothers,
+  UComics/themiddletons, UComics/thequigmans, UComics/tomtoles,
+  UComics/tonyauth, UComics/tutelandia, UComics/walthandelsman,
+  UComics/waynestayskal, UComics/ziggyespanol, WiguTV.</li>
+<li>AlienLovesPredator, AllGrownUp, AsylumOn5thStreet, BizarreUprising,
+  DoctorRoboto, EntertainDome, LessThanKate, OurHomePlanet, Sternstaub,
+  TheLounge (contributed by Shrimp).</li>
+<li>DMFA, FauxPas, IrregularWebcomic, KeenSpot/DexLives, KeenSpot/GoblinHollow,
+  KeenSpot/InAPerfectWorld, KeenSpot/JoeAverage, KeenSpot/MariposaRevelation,
+  KeenSpot/NekoTheKitty, KeenSpot/NipAndTuck, KeenSpot/OneOverZero,
+  KeenSpot/TalesOfTheQuestor, KeenSpot/WorldOfFenninRo (contributed by TobiX).</li>
+<li>Added an RSS output event. (contributed by Colin Alston)</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Dosage now sends a more descriptive User-Agent HTTP header.</li>
+<li>Specific modules can now be disabled by specifying them in
+  /etc/dosage/disabled (global) and ~/.dosage/disabled (local).</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Dominion, SluggyFreelance, UserFriendly, Wigu.</li>
+<li>KeenSpot/GeneralProtectionFault, VGCats (contributed by TobiX).</li>
+<li>Dosage will now continue downloading strips until no new strips are
+  downloaded, this fixed problems with comics that had multiple strips per page
+  or comics that employed "precache" methods.</li>
+<li>Fixed problem with division by zero error often occuring under Windows.</li>
+</ul>
+<h2>1.4.0</h2>
+<h3>Added</h3>
+<ul>
+<li>SnafuComics/Grim, SnafuComics/KOF, SnafuComics/PowerPuffGirls,
+  SnafuComics/Snafu, SnafuComics/Tin, TheParkingLotIsFull.</li>
+<li>MadamAndEve, Zapiro (contributed by Anthony Caetano)</li>
+<li>A manual page for 'mainline' is now inculded.</li>
+<li>Events output; currently the only useful handler is 'html', which outputs an
+  HTML page with all of the downloaded comics. These files are named by date,
+  and have links to the previous and next days (similar to dailystrips).</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>UserFriendly (naming fix).</li>
+</ul>
+<h2>1.3.0</h2>
+<h3>Added</h3>
+<ul>
+<li>AstronomyPOTD, CounterCulture, Dominion, Fallen, Freefall, GenrezvousPoint,
+  KeenSpot/Blindworks, KeenSpot/BoyMeetsBoy, KeenSpot/Scrued, KeenSpot/Stubble,
+  KeenSpot/TAVision, KeenSpot/TangsWeeklyComic, KingFeatures, OhMyGods,
+  RedMeat, WotNow.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Main script is now 'mainline' (used to be 'dosage').</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>MegaTokyo, SomethingPositive.</li>
+<li>TheFray (now a virtual module)</li>
+<li>Progress bar has been improved; specifically for gauging downloads of unknown
+  size.</li>
+<li>All relevant images are now downloaded where necessary; thanks bruce :)</li>
+<li>Incomplete downloads are discarded.</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>Removed junview.</li>
+</ul>
+<h2>1.2.0</h2>
+<h3>Added</h3>
+<ul>
+<li>BiggerThanCheeses, BrickShitHouse, ChugworthAcademy, DandyAndCompany, Girly,
+  HighPingBastard, Jack, KeenSpot/ChoppingBlock,
+  KeenSpot/SaturdayMorningBreakfastCereal, KeenSpot/StrangeCandy,
+  KeenSpot/WapsiSquare, KiagiSwordscat, MakeWithTheFunny, Pixel, PockyBot,
+  SamAndFuzzy, Spoonies.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>Progress bar is now disabled if the window size cannot be determined</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Source was restructured; the dosage script is now located in the bin/
+  directory.</li>
+</ul>
+<h2>1.1.0</h2>
+<h3>Added</h3>
+<ul>
+<li>ALessonIsLearned, ASofterWorld, BoyOnAStickAndSlither, Chisuji,
+  ExploitationNow, KeenSpot/Ghastly, KeenSpot/Saturnalia, Loserz, Qwantz,
+  StarCrossdDestiny.</li>
+<li>A download progress bar is now available on Linux (and probably other
+  UNIX-like systems).</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>LittleGamers.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Timestamps are now updated even if the strip is not redownloaded.</li>
+</ul>
+<h2>1.0.1</h2>
+<h3>Fixed</h3>
+<ul>
+<li>Fix embarassing typo in 1.0.0 which rendered it completely unusable (albeit a
+  trivial fix).</li>
+</ul>
+<h2>1.0.0</h2>
+<ul>
+<li>1.0 release, yay!</li>
+</ul>
+<h3>Added</h3>
+<ul>
+<li>TwoTwoOneFour.</li>
+<li>Set modified time on downloaded images based on Last-Modified header: Patch
+  provided by gopalv82@yahoo.com, thanks :)</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>SluggyFreelance.</li>
+<li>Fixed <code>--basepath</code> on Windows: Passing a path that included a drive letter
+  didn't work.</li>
+</ul>
+<h2>0.3.2</h2>
+<h3>Added</h3>
+<ul>
+<li>FreakCentral, KeenSpot/AntiHeroForHire, KeenSpot/ElfOnlyInn,
+  KeenSpot/GeneralProtectionFault, KeenSpot/LimitedSpace,
+  KeenSpot/LostAndFound, KeenSpot/Zortic, RabidMonkeys, SluggyFreelance,
+  SpellsAndWhistles, SuburbanTribe, TheFray.</li>
+</ul>
+<h2>0.3.1</h2>
+<h3>Added</h3>
+<ul>
+<li>SomethingPositive, UnderPower, UserFriendly, KeenSpot/QueenOfWands,
+  CombustibleOrange, InkTank/*, QuestionableContent.</li>
+<li>Filesize displayed for downloaded files.</li>
+<li>Added <code>--timestamps</code>: Displays timestamps before every message.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>ComicsDotCom/flightdeck, ComicsDotCom/peanuts, ButternutSquash,
+  LifeOfConvenience.</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>Removed external helper scripts.</li>
+</ul>
+<h2>0.3.0</h2>
+<h3>Added</h3>
+<ul>
+<li>AppleGeeks, ButternutSquash, Comet7, CtrlAltDel, EightBitTheater,
+  FragileGravity, KeenSpot/24fps, KeenSpot/Alice, KeenSpot/DeltaVenture,
+  KeenSpot/ItsWalky, KeenSpot/PurplePussy, KeenSpot/TheShadows, LaurasComics,
+  MacHall, Supafine, VGCats, WhiteNinja.</li>
+<li>ComicsDotCom (Lots of submodules, most of them are untested).</li>
+<li>Comic wildcards: <code>@</code> expands to every comic already present in the basepath,
+  and <code>@@</code> expands to every single comic supported by Dosage.</li>
+</ul>
+<h3>Changed</h3>
+<ul>
+<li>Better feedback: The various info levels (up to 3 now) provide much more
+  informative output.</li>
+</ul>
+<h3>Removed</h3>
+<ul>
+<li>Removed filename override: Since the comic modules now generally have sane
+  names, this is no longer of much use.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>KeenSpot/CollegeRoomiesFromHell, KeenSpot/Wigu (renamed to Wigu),
+  UComics/{mullets, nonsequitur, tomthedancingbug}.</li>
+<li>PennyArcade: Switch back to the "low" resolution comics; some of the "high"
+  resolution comics are broken, and the "low" ones seem to be identical anyway.</li>
+<li>Junview: Lots of fixes / enhancements, still fairly alpha.</li>
+</ul>
+<h2>0.2.0</h2>
+<h3>Added</h3>
+<ul>
+<li>FilibusterCartoons, GlueMeat, RPGWorld, RealLife, UComics.</li>
+<li>Virtual comic modules.</li>
+<li>URL retrying: Also, if you specify multiple comics, and one of them errors
+  out for some reason, Dosage will continue with the others.</li>
+<li>Indexed catchup: You can now start a catchup from a specific index.</li>
+<li>Comic help: You can now pass <code>--module-help</code> to see module-specific help for
+  comic modules.</li>
+<li>Junview: Image viewer written in wxPython, pretty alpha at this stage, but
+  feel free to play around with it if you're brave.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>BasilFlint, DiselSweeties, SexyLosers.</li>
+</ul>
+<h2>0.1.0</h2>
+<h3>Added</h3>
+<ul>
+<li>LittleGamers, ClanOfTheCats, DieselSweeties, PvPonline, RadioactivePanda,
+  ScaryGoRound.</li>
+</ul>
+<h3>Fixed</h3>
+<ul>
+<li>PennyArcade (The comic "bounces" when you get to the first strip, the
+  "previous" link points to the second comic. Work around this by checking for
+  the first comic).</li>
+<li>SexyLosers seems to have implemented referrer checking recently, this is
+  handled by the new referrer passing support.</li>
+<li>Fix indexed mode up a bit: The documentation has better examples now.</li>
+</ul>
+<h2>0.0.1</h2>
+<ul>
+<li>Initial public release</li>
+</ul>
+            
+        </div>
+    </section>
+
+    </div>
+
+    
+    <!-- Footer -->
+    <div id="footer">
+        <ul class="copyright">
+            <li>Generated with <a
+                href="https://github.com/spanezz/staticsite">staticsite</a>,
+                last change: 2022-04-18 21:19:39Z</li>
+            <li>&copy; Tobias Gruetzmacher. Some rights reserved.</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+    
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.scrolly.min.js"></script>
+    <script src="/static/js/jquery.scrollzer.min.js"></script>
+    <script src="/static/js/skel.min.js"></script>
+    <script src="/static/js/util.js"></script>
+    <script src="/static/js/main.js"></script>
+
+</body>
+</html>
