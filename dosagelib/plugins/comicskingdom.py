@@ -1,29 +1,32 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019 Thomas W. Littauer
-from ..scraper import _BasicScraper
+from importlib.resources import path as get_path
+
 from ..helpers import bounceStarter, joinPathPartsNamer
+from ..scraper import _ParserScraper
 
-import re
 
-
-class ComicsKingdom(_BasicScraper):
-    imageSearch = re.compile(r'property="og:image" content="(https://[^"]*img\.php\?[^"]+)"')
-    prevSearch = re.compile(r':is-left-arrow="true"[^>]*date-slug="(\d\d\d\d-\d\d-\d\d)"')
-    nextSearch = re.compile(r':is-left-arrow="false"[^>]*date-slug="(\d\d\d\d-\d\d-\d\d)"')
+class ComicsKingdom(_ParserScraper):
+    imageSearch = '//img[@id="theComicImage"]'
+    prevSearch = '//a[./img[contains(@alt, "Previous")]]'
+    nextSearch = '//a[./img[contains(@alt, "Next")]]'
     starter = bounceStarter
     namer = joinPathPartsNamer((-2, -1), ())
     help = 'Index format: yyyy-mm-dd'
 
     def __init__(self, name, path):
-        super(ComicsKingdom, self).__init__('ComicsKingdom/' + name)
-        self.url = 'https://www.comicskingdom.com/' + path
+        super().__init__('ComicsKingdom/' + name)
+        self.url = 'https://comicskingdom.com/' + path
         self.stripUrl = self.url + '/%s'
 
-    def link_modifier(self, url, tourl):
-        if self.url not in tourl:
-            tourl = self.url + '/' + tourl.rsplit("/", 1)[1]
-        return tourl
+        # slightly iffy hack taken from certifi
+        # We need or own certificate bundle since ComicsKingdom screws up their
+        # TLS setup from time to time, this should "fix" it)
+        self.cert_ctx = get_path('dosagelib.data', 'godaddy-bundle-g2-2031.pem')
+        self.session.add_host_options('comicskingdom.com', {
+            'verify': str(self.cert_ctx.__enter__()),
+        })
 
     @classmethod
     def getmodules(cls):  # noqa: Allowed to be long
@@ -36,10 +39,8 @@ class ComicsKingdom(_BasicScraper):
             cls('AmazingSpiderMan', 'amazing-spider-man'),
             cls('Apartment3G', 'apartment-3-g_1'),
             cls('ArcticCircle', 'arctic-circle'),
-            cls('BabyBlues', 'baby-blues'),
             cls('BarneyGoogleAndSnuffySmith', 'barney-google-and-snuffy-smith'),
             cls('BeetleBailey', 'beetle-bailey-1'),
-            cls('BettyBoopSundays', 'betty-boop-sundays'),
             cls('BetweenFriends', 'between-friends'),
             cls('BigBenBolt', 'big-ben-bolt'),
             cls('BigBenBoltSundays', 'big-ben-bolt-sundays'),
@@ -51,7 +52,6 @@ class ComicsKingdom(_BasicScraper):
             cls('BrickBradford', 'brick-bradford'),
             cls('BrilliantMindOfEdisonLee', 'brilliant-mind-of-edison-lee'),
             cls('BringingUpFather', 'bringing-up-father'),
-            cls('Buckles', 'buckles'),
             cls('BuzSawyer', 'buz-sawyer'),
             cls('CarpeDiem', 'carpe-diem'),
             cls('Crankshaft', 'crankshaft'),
@@ -76,7 +76,6 @@ class ComicsKingdom(_BasicScraper):
             cls('JimmyMargulies', 'jimmy-margulies'),
             cls('JohnBranch', 'john-branch'),
             cls('JohnnyHazard', 'johnny-hazard'),
-            cls('JohnnyHazardSundays', 'johnny-hazard-sundays'),
             cls('JudgeParker', 'judge-parker'),
             cls('JungleJimSundays', 'jungle-jim-sundays'),
             cls('KatzenjammerKids', 'katzenjammer-kids'),
@@ -113,8 +112,6 @@ class ComicsKingdom(_BasicScraper):
             cls('ProsAndCons', 'pros-cons'),
             cls('Quincy', 'quincy'),
             cls('RadioPatrol', 'radio-patrol'),
-            cls('Redeye', 'redeye-2'),
-            cls('RedeyeSundays', 'redeye-sundays'),
             cls('Retail', 'retail'),
             cls('RexMorganMD', 'rex-morgan-m-d'),
             cls('RhymesWithOrange', 'rhymes-with-orange'),

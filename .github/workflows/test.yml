@@ -1,0 +1,43 @@
+name: Tests (tox)
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          pip install tox tox-gh-actions
+
+      - name: Test with tox
+        run: tox
+        if: ${{ matrix.python-version != '3.10' }}
+
+      - name: Test with tox (and upload coverage)
+        uses: paambaati/codeclimate-action@v3.0.0
+        if: ${{ matrix.python-version == '3.10' }}
+        env:
+          CC_TEST_REPORTER_ID: 2a411f596959fc32f5d73f3ba7cef8cc4d5733299d742dbfc97fd6c190b9010c
+        with:
+          coverageCommand: tox
+          coverageLocations: |
+            ${{ github.workspace }}/.tox/reports/*/coverage.xml:coverage.py
+          prefix: ${{ github.workspace }}/.tox/py39/lib/python3.9/site-packages
+
+      - uses: codecov/codecov-action@v3
+        with:
+          directory: '.tox/reports'

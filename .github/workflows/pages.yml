@@ -1,0 +1,36 @@
+---
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 10
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+
+      - name: Build
+        run: |
+          sudo apt-get --yes install --no-install-recommends libimage-exiftool-perl
+          pip install git+https://github.com/spanezz/staticsite.git@dcf41e4a2b2d3610f2561b08bee16088fbbd1b04 'jinja2<3.1'
+          ssite build --output public
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          cname: dosage.rocks
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          exclude_assets: 'Jenkinsfile,dosagelib,scripts,setup.*,tests,*.ini'
