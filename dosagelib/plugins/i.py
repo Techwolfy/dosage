@@ -42,6 +42,16 @@ class InternetWebcomic(_WPNavi):
     help = 'Index format: n'
 
 
+class Inverloch(_ParserScraper):
+    stripUrl = 'https://www.seraph-inn.com/view.php?story=inverloch&page=%s'
+    url = stripUrl % '763'
+    firstStripUrl = stripUrl % '2'
+    imageSearch = '//img[@class="page"]'
+    prevSearch = '//p[@class="comic-nav"]/a[text()=" Previous"]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+
+
 class IrregularWebcomic(_BasicScraper):
     url = 'http://www.irregularwebcomic.net/'
     stripUrl = url + '%s.html'
