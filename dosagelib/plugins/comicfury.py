@@ -5,6 +5,7 @@
 # Copyright (C) 2019-2020 Daniel Ring
 import os
 
+from ..output import out
 from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 
@@ -14,6 +15,7 @@ XPATH_IMG = '//div[d:class("comicnav")]//a[img[contains(@alt, "%s")]]'
 
 class ComicFury(_ParserScraper):
     imageSearch = ('//img[@id="comicimage"]',
+                   '//img[@class="comicsegmentimage"]',
                    '//div[@id="comicimagewrap"]//embed',
                    '//div[@id="comicimagewrap"]//img')
     prevSearch = (
@@ -53,7 +55,7 @@ class ComicFury(_ParserScraper):
     help = 'Index format: n'
     starter = bounceStarter
 
-    def __init__(self, name, sub, lang=None, adult=False, endOfLife=False):
+    def __init__(self, name, sub, lang=None, adult=False, endOfLife=False, multipleImagesPerStrip=False):
         super(ComicFury, self).__init__('ComicFury/' + name)
         self.prefix = name
         self.url = 'http://%s.webcomic.ws/comics/' % sub
@@ -65,11 +67,19 @@ class ComicFury(_ParserScraper):
             self.adult = adult
         if endOfLife:
             self.endOfLife = endOfLife
+        if multipleImagesPerStrip:
+            self.multipleImagesPerStrip = multipleImagesPerStrip
 
-    def namer(self, image_url, page_url):
-        parts = page_url.split('/')
-        path, ext = os.path.splitext(image_url)
+    def namer(self, imageUrl, pageUrl):
+        parts = pageUrl.split('/')
+        path, ext = os.path.splitext(imageUrl)
         num = parts[-1]
+        if self.multipleImagesPerStrip:
+            page = self.getPage(pageUrl)
+            images = page.xpath('//img[@class="comicsegmentimage"]/@src')
+            if len(images) > 1:
+                imageIndex = images.index(imageUrl) + 1
+                return "%s_%s-%d%s" % (self.prefix, num, imageIndex, ext)
         return "%s_%s%s" % (self.prefix, num, ext)
 
     @classmethod
@@ -123,7 +133,7 @@ class ComicFury(_ParserScraper):
             cls('AgentBishop', 'agentbishop'),
             cls('AHappierKindOfSad', 'ahappierkindofsad'),
             cls('AlbinoBrothers', 'albinobros'),
-            cls('Alderwood', 'alderwood'),
+            cls('Alderwood', 'alderwood', multipleImagesPerStrip=True),
             cls('AlexanderAndLucasRebooted', 'alexanderandlucas'),
             cls('AliaTerra', 'alia-terra'),
             cls('AlienIrony', 'alien-irony'),
