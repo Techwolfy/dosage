@@ -272,6 +272,7 @@ class WebToons(_ParserScraper):
             cls('MidnightRain', 'drama/midnight-rain', 1797),
             cls('MidnightRhapsody', 'slice-of-life/midnight-rhapsody', 116),
             cls('MidnightRhapsodySeason2', 'slice-of-life/midnight-rhapsody-season2', 365),
+            cls('Miez', 'sf/miez', 2719),
             cls('MissAbbottAndTheDoctor', 'romance/miss-abbott-and-the-doctor', 707),
             cls('MOONBEARD', 'comedy/moon-beard', 471),
             cls('MoonYou', 'supernatural/moonyou', 1340),
