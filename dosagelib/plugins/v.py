@@ -82,3 +82,11 @@ class VirmirWorld(_ParserScraper):
     def getIndexStripUrl(self, index):
         index = index.split('-')
         return self.stripUrl % (index[0], index[1])
+
+
+class Vreakerz(_ParserScraper):
+    url = 'http://vreakerz.angrykitten.nl/'
+    stripUrl = url + '/Stories/read/%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "StoryPages")]'
+    prevSearch = '//a[@class="btn-prior"]'
