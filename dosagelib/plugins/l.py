@@ -28,6 +28,12 @@ class Lackadaisy(_ParserScraper):
         return 'lackadaisy_%s.%s' % (num, ext)
 
 
+class Lancer(_WordPressScraper):
+    url = 'https://lancercomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-cover'
+
+
 class LastResort(_WordPressScraper):
     url = 'http://www.lastres0rt.com/'
     stripUrl = url + 'comic/%s/'
