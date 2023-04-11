@@ -88,5 +88,5 @@ class Vreakerz(_ParserScraper):
     url = 'http://vreakerz.angrykitten.nl/'
     stripUrl = url + '/Stories/read/%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//img[contains(@src, "StoryPages")]'
+    imageSearch = '//img[contains(@src, "storypages")]'
     prevSearch = '//a[@class="btn-prior"]'
