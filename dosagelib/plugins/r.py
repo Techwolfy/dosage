@@ -12,6 +12,14 @@ from ..util import tagre
 from .common import _WordPressScraper, _WPNavi, _WPWebcomic
 
 
+class Rainburn(_ParserScraper):
+    url = 'https://rainburn.virmir.com/'
+    stripUrl = url + 'comic.php?page=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="comic"]//img'
+    prevSearch = '//a[contains(@class, "prev")]'
+
+
 class RalfTheDestroyer(_WordPressScraper):
     url = 'http://ralfthedestroyer.com/'
 
