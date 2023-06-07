@@ -5,7 +5,6 @@
 # Copyright (C) 2019-2020 Daniel Ring
 import os
 
-from ..output import out
 from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 
