@@ -167,7 +167,7 @@ class AllTheGrowingThings(_WordPressScraper):
 
 
 class AlphaLuna(_ParserScraper):
-    url = 'https://alphaluna.net/'
+    url = 'https://alphalunacomic.net/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'issue-1-cover'
     imageSearch = '//main[@id="comic"]//img'
