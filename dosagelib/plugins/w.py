@@ -38,11 +38,10 @@ class WebcomicName(_ParserScraper):
 
 class Weregeek(_ParserScraper):
     url = 'http://www.weregeek.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2006/11/27'
-    imageSearch = '//div[@id="comic"]/img'
-    prevSearch = '//a[./img[@alt="Previous"]]'
-    help = 'Index format: yyyy/mm/dd'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'comic-1'
+    imageSearch = '//div[d:class("webcomic-media")]//img'
+    prevSearch = '//a[d:class("previous-webcomic-link")]'
 
 
 class WereIWolf(_ParserScraper):
