@@ -219,7 +219,7 @@ class PlushAndBlood(_ParserScraper):
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[contains(@src, "comics/")]'
-    prevSearch = '//a[./img[contains(@src, "Nav/Prev")]]'
+    prevSearch = '//a[contains(@text, "PREV")]'
 
 
 class PokeyThePenguin(_ParserScraper):
