@@ -282,6 +282,16 @@ class Brink(_WordPressScraper):
     endOfLife = True
 
 
+class BuddiesInBigPlaces(_ParserScraper):
+    url = 'http://www.bibp.com/cgi-bin/autokeenlite.cgi'
+    stripUrl = url + '?date=%s'
+    firstStripUrl = stripUrl % '20010722'
+    imageSearch = '//div[@class="comicholder"]//img'
+    prevSearch = '//a[text()="Previous Comic"]'
+    adult = True
+    ignoreRobotsTxt = True
+
+
 class Buni(_WordPressScraper):
     url = 'http://www.bunicomic.com/'
 
