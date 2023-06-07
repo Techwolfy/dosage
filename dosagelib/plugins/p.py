@@ -336,8 +336,12 @@ class PS238(_ParserScraper):
 
 
 class PvPOnline(_ParserScraper):
-    url = 'http://pvponline.com/comic/'
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % 'mon-may-04'
-    imageSearch = '//section[@class="comic-art"]/img'
-    prevSearch = '//div[contains(@class, "comic-nav")]/a[contains(text(), "Prev")]'
+    baseUrl = 'https://www.toonhoundstudios.com/'
+    url = baseUrl + 'pvp/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % '19980504'
+    imageSearch = '//div[@id="spliced-comic"]//img/@data-src-img'
+    prevSearch = '//a[d:class("prev")]'
+
+    def namer(self, imageUrl, pageUrl):
+        return 'pvp' + imageUrl.rsplit('/', 1)[-1]
