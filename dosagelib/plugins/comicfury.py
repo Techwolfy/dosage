@@ -1127,6 +1127,7 @@ class ComicFury(_ParserScraper):
             cls('WeAreTheLosers', 'thelosers'),
             cls('WeeabooIsland', 'weeabooisland'),
             cls('WestTreeAcademyOfHeroes', 'westtree'),
+            cls('Wevner', 'wevner'),
             cls('WhatIDontEven', 'idonteven'),
             cls('WHATSERP', 'whatserp'),
             cls('WhiskeyAndMelancholy', 'whiskeyandmelancholy'),
