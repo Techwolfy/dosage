@@ -287,6 +287,7 @@ class WebToons(_ParserScraper):
             cls('MyGiantNerdBoyfriend', 'slice-of-life/my-giant-nerd-boyfriend', 958),
             cls('MyKittyAndOldDog', 'slice-of-life/my-kitty-and-old-dog', 184),
             cls('MyNameIsBenny', 'slice-of-life/my-name-is-benny', 1279),
+            cls('MythicItemObtained', 'fantasy/mythic-item-obtained', 4582),
             cls('MyWallflowerKiss', 'challenge/my-wallflower-kiss', 151869),
             cls('NanoList', 'sf/nano-list', 700),
             cls('NationalDogDay2016', 'slice-of-life/national-dog-day', 747),
