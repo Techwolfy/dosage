@@ -219,6 +219,7 @@ class WebToons(_ParserScraper):
             cls('Inarime', 'super-hero/inarime', 675),
             cls('InternetExplorer', 'challenge/internet-explorer', 219164),
             cls('InTheBleakMidwinter', 'sf/in-the-bleak-midwinter', 1946),
+            cls('IStoleTheFirstRankersSoul', 'fantasy/i-stole-the-first-rankers-soul', 5551),
             cls('ItsMine', 'drama/its-mine', 2010),
             cls('JackieRose', 'supernatural/jackie-rose', 613),
             cls('JingleJungle', 'slice-of-life/jingle-jungle', 282),
