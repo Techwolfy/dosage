@@ -176,6 +176,12 @@ class MonkeyUser(_ParserScraper):
         return data.xpath('//div[d:class("video-container")]', namespaces=NS)
 
 
+class ModestMedusa(_WordPressScraper):
+    url = 'https://modestmedusa.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'christmas-eve-3'
+
+
 class MonsieurLeChien(_BasicScraper):
     url = 'http://www.monsieur-le-chien.fr/'
     stripUrl = url + 'index.php?planche=%s'
