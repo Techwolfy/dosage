@@ -90,7 +90,7 @@ class Flemcomics(_ParserScraper):
 
 
 class Flipside(_ParserScraper):
-    url = 'http://flipside.keenspot.com/comic.php'
+    url = 'https://www.flipsidecomics.com/comic.php'
     stripUrl = url + '?i=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[contains(@src, "comic/")]'
