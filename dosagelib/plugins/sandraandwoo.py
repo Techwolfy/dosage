@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
-from .common import _WordPressScraper
+from .common import _WordPressScraper, _WordPressSpliced
 
 
 class SandraAndWoo(_WordPressScraper):
@@ -21,5 +21,11 @@ class SandraAndWoo(_WordPressScraper):
             cls('GaiaGerman', 'gaiade/', '2000/01/01/welcome-to-gaia/', lang='de'),
             cls('SandraAndWoo', '', '2000/01/01/welcome-to-sandra-and-woo/'),
             cls('SandraAndWooGerman', 'woode/',
-                '2008/10/19/ein-ausgefuchster-waschbar/', lang='de'),
+                '2008/10/19/ein-ausgefuchster-waschbar/', lang='de')
         )
+
+
+class ScarletCarolus(_WordPressSpliced):
+    url = 'https://www.sandraandwoo.com/scarlet/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'the-machine-of-eternal-summer-001'
