@@ -172,6 +172,7 @@ class WebToons(_ParserScraper):
             cls('FINALITY', 'mystery/finality', 1457),
             cls('Firebrand', 'supernatural/firebrand', 877),
             cls('FisheyePlacebo', 'challenge/fisheye-placebo', 101841),
+            cls('Float', 'romance/float', 5427),
             cls('Flow', 'fantasy/flow', 101),
             cls('FluffyBoyfriend', 'supernatural/fluffy-boyfriend', 1164),
             cls('ForTheSakeOfSita', 'romance/for-the-sake-of-sita', 349),
