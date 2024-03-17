@@ -248,12 +248,11 @@ class DoghouseDiaries(_ParserScraper):
         return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
-class DominicDeegan(_ParserScraper):
+class DominicDeegan(_WordPressScraper):
     url = 'https://www.dominic-deegan.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '0001-20020521'
     imageSearch = '//img[contains(@class, "wp-post-image")]'
-    prevSearch = '//a[@title="Prev"]'
     help = 'Index format: ####-yyyymmdd'
 
 
