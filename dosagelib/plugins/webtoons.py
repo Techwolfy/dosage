@@ -190,6 +190,7 @@ class WebToons(_ParserScraper):
             cls('GirlsHaveABlog', 'slice-of-life/girls-have-a-blog', 1052),
             cls('GirlsOfTheWilds', 'action/girls-of-the-wilds', 93),
             cls('GodOfBath', 'comedy/god-of-bath', 91),
+            cls('GoldenHour', 'canvas/golden-hour', 893401),
             cls('GOSU', 'action/gosu', 1099),
             cls('GourmetHound', 'drama/gourmet-hound', 1245),
             cls('GremoryLand', 'horror/gremoryland', 1893),
