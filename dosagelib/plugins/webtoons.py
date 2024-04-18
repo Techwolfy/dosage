@@ -163,6 +163,7 @@ class WebToons(_ParserScraper):
             cls('Elena', 'horror/elena', 484),
             cls('ElfAndWarrior', 'fantasy/elf-and-warrior', 908),
             cls('EMPYREA', 'fantasy/empyrea', 1407),
+            cls('EnrollingInTheTranscendentAcademy', 'fantasy/enrolling-in-the-transcendent-academy', 5420),
             cls('EpicV', 'comedy/epic-v', 353),
             cls('EscapeRoom', 'thriller/escape-room', 1815),
             cls('EverywhereAndNowhere', 'comedy/everywhere-and-nowhere', 1598),
