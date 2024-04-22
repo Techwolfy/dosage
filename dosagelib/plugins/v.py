@@ -66,6 +66,14 @@ class VirmirWorld(_ParserScraper):
         return self.stripUrl % (index[0], index[1])
 
 
+class VisionHaze(_ParserScraper):
+    url = 'http://www.visionhaze.com/index.php'
+    stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="page"]//img'
+    prevSearch = '//a[contains(text(), "<")]'
+
+
 class Vreakerz(_ParserScraper):
     url = 'http://vreakerz.angrykitten.nl/'
     stripUrl = url + '/Stories/read/%s'
