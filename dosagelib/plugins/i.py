@@ -35,6 +35,12 @@ class IDreamOfAJeanieBottle(_WordPressScraper):
     url = 'http://jeaniebottle.com/'
 
 
+class ImperialGELF(_WordPressScraper):
+    url = 'http://www.imperialgelf.com/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % 'intro-page-1'
+
+
 class InternetWebcomic(_WPNavi):
     url = 'http://www.internet-webcomic.com/'
     stripUrl = url + '?p=%s'
