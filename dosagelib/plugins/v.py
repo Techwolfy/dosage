@@ -5,6 +5,7 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from ..scraper import _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
+from .common import _WordPressSpliced
 
 
 class Vexxarr(_ParserScraper):
@@ -72,6 +73,13 @@ class VisionHaze(_ParserScraper):
     firstStripUrl = stripUrl % '1'
     imageSearch = '//div[@class="page"]//img'
     prevSearch = '//a[contains(text(), "<")]'
+
+
+class VixenLogic(_WordPressSpliced):
+    url = 'https://www.vixenlogic.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'vl0001'
+    adult = True
 
 
 class Vreakerz(_ParserScraper):
