@@ -679,7 +679,9 @@ class Supercell(_ParserScraper):
 
 
 class SupernormalStep(_ComicControlScraper):
-    url = 'http://supernormalstep.com/'
+    url = 'https://www.supernormalstep.com/'
+    stripUrl = url + 'archives/%s'
+    firstStripUrl = stripUrl % '8'
 
 
 class SurvivingTheWorld(_ParserScraper):
