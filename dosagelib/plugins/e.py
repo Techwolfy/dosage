@@ -157,11 +157,12 @@ class ErmaFelnaEDF(_ParserScraper):
         return '%s-%s-%s_%s' % (postDate[1], postDate[2], postDate[3], filename)
 
 
-class ErrantStory(_BasicScraper):
-    url = 'http://www.errantstory.com/'
-    stripUrl = url + '%s'
-    imageSearch = compile(r'<img[^>]+?src="([^"]*?comics/.+?)"')
-    prevSearch = compile(r'><a href="(.+?)">&lt;Previous</a>')
+class ErrantStory(_ParserScraper):
+    url = 'https://www.errantstory.com/'
+    stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '15'
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//h4[@class="nav-previous"]/a'
     help = 'Index format: yyyy-mm-dd/num'
 
 
