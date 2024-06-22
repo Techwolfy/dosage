@@ -131,6 +131,7 @@ class MangaDex(_ParserScraper):
             cls('OMaidensinYourSavageSeason', 'c4613b7d-7a6e-48f9-82f0-bce3dd33383a'),
             cls('OokamiShounenWaKyouMoUsoOKasaneru', '5e77d9e2-2e44-431a-a995-5fefd411e55e'),
             cls('OokamiToKoshinryou', 'de900fd3-c94c-4148-bbcb-ca56eaeb57a4'),
+            cls('OsananajimiNiNajimitai', '20c45e17-7184-4942-814d-4caa8f94faa1'),
             cls('OtomeYoukaiZakuro', 'c1fa97be-0f1f-4686-84bc-806881c97d53'),
             cls('Overgeared', '3fc308c9-4b00-4dc3-943e-1f39242bc708'),
             cls('OversimplifiedSCP', 'e911fe33-a9b3-43dc-9eb7-f5ee081a6dc8'),
