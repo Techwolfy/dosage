@@ -103,6 +103,15 @@ class CaseyAndAndy(_BasicScraper):
     help = 'Index format: number'
 
 
+class CashmereSky(_ParserScraper):
+    baseUrl = 'https://comic.cashmeresky.com/'
+    url = baseUrl + 'latest-comic/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'cashmere-sky-volume-1-title'
+    imageSearch = '//div[@class="mangapress-media-img"]/img'
+    prevSearch = '//li[@class="link-prev"]/a'
+
+
 class CasuallyKayla(_BasicScraper):
     url = 'http://casuallykayla.com/'
     stripUrl = url + '?p=%s'
