@@ -326,6 +326,7 @@ class ComicFury(_ParserScraper):
             cls('CtrlZ', 'ctrlz'),
             cls('CubeCows', 'cubecows'),
             cls('CupcakeGraffiti', 'cupcakegraffiti'),
+            cls('Cynanthropy', 'cynanthropy'),
             cls('CYXLOSISM', 'cyxlocistic'),
             cls('DailyDoodle', 'dailydoodle'),
             cls('DailyOneLiner', 'daily1l'),
