@@ -407,6 +407,7 @@ class WebToons(_ParserScraper):
             cls('TheSteamDragonExpress', 'fantasy/steam-dragon-express', 1270),
             cls('TheStoriesOfThoseAroundMe', 'romance/the-stories-of-those-around-me', 96),
             cls('TheStrangeTalesOfOscarZahn', 'fantasy/the-strange-tales-of-oscar-zahn', 685),
+            cls('TheTopDungeonFarmer', 'fantasy/the-top-dungeon-farmer', 5656),
             cls('TheVaultOfHorrorACollectionOfNightmares', 'horror/the-vault-of-horror-a-collection-of-nightmares', 295),
             cls('TheWeeklyRoll', 'challenge/the-weekly-roll', 358889),
             cls('TheWeightOfOurSky', 'historical/the-weight-of-our-sky', 1739),
