@@ -8,7 +8,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import _ComicControlScraper, _WordPressScraper, _WordPressSpliced, _WPNavi
 
 
 class PandyLand(_WordPressScraper):
@@ -252,6 +252,13 @@ class PoppyOPossum(_WordPressScraper):
     url = baseUrl + '?latest'
     stripUrl = baseUrl + 'comic/%s'
     firstStripUrl = stripUrl % 'a-story'
+
+
+class PostFable(_WordPressSpliced):
+    url = 'https://post-fable.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'post-fable-cover'
+    adult = True
 
 
 class PowerNap(_ParserScraper):
