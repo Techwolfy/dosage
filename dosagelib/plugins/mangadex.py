@@ -98,6 +98,7 @@ class MangaDex(_ParserScraper):
             cls('ArcaneSniper', 'cbf53f02-9594-42e7-9dbf-8ae1c783466f'),
             cls('AttackOnTitan', '304ceac3-8cdb-4fe7-acf7-2b6ff7a60613'),
             cls('Beastars', 'f5e3baad-3cd4-427c-a2ec-ad7d776b370d'),
+            cls('BloomIntoYou', '69060a67-1d4e-4110-9d29-838bfd99917f'),
             cls('BokuNoKokoroNoYabaiYatsu', '3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac'),
             cls('CheerfulAmnesia', 'f9448f90-c068-4b6a-8c85-03d739aef255'),
             cls('DoChokkyuuKareshiXKanojo', 'efb62763-c940-4495-aba5-69c192a999a4'),
