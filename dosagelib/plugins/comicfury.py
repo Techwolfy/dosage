@@ -34,6 +34,8 @@ class ComicFury(_ParserScraper):
         '//a[img[contains(@alt, "PREVIOUS")]]',
         # RedSpot
         '//a[contains(text(), "Back")]',
+        # ChimeranLegends
+        '//a[img[contains(@src, "prev")]]',
     )
     nextSearch = (
         '//link[@rel="next"]',
@@ -50,6 +52,8 @@ class ComicFury(_ParserScraper):
         '//a[contains(text(), "Next")]',
         # MansionofE
         '//a[img[contains(@alt, "NEXT")]]',
+        # ChimeranLegends
+        '//a[img[contains(@src, "next")]]',
     )
     help = 'Index format: n'
     starter = bounceStarter
@@ -73,6 +77,8 @@ class ComicFury(_ParserScraper):
         parts = pageUrl.split('/')
         path, ext = os.path.splitext(imageUrl)
         num = parts[-1]
+        if (num == ''):
+            num = parts[-2]
         if self.multipleImagesPerStrip:
             page = self.getPage(pageUrl)
             images = page.xpath('//img[@class="comicsegmentimage"]/@src')
@@ -270,6 +276,7 @@ class ComicFury(_ParserScraper):
             cls('ChampionOfKatara', 'championofkatara'),
             cls('ChanpuruSaga', 'chanpuru'),
             cls('CharacterBattleBetweenRounds', 'between-rounds'),
+            cls('ChimeranLegends', 'chimeranlegends'),
             cls('CHLOE', 'chloe'),
             cls('ChocoLavaCOMICScom', 'chocolava'),
             cls('Chosen', 'chosentheultimatecliche'),
