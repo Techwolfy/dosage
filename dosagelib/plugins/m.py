@@ -10,7 +10,7 @@ from ..helpers import indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..xml import NS
-from .common import _ComicControlScraper, _WordPressScraper, _WPWebcomic
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class MacHall(_BasicScraper):
@@ -215,6 +215,12 @@ class Moonsticks(_ParserScraper):
     url = "http://moonsticks.org/"
     imageSearch = "//div[@class='entry']//img"
     prevSearch = u"//a[text()='\u00AB Prev']"
+
+
+class MotherLover(_WPNavi):
+    url = 'https://motherlovercomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'welcome'
 
 
 class MrLovenstein(_BasicScraper):
