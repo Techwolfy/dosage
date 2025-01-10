@@ -386,6 +386,7 @@ class WebToons(_ParserScraper):
             cls('TheDaneMen', 'comedy/the-danemen', 395),
             cls('TheDevilIsAHandsomeMan', 'drama/the-devil-is-a-handsome-man', 1311),
             cls('TheDoctorsAreOut', 'romance/the-doctors-are-out', 1910),
+            cls('TheDragonessSaysSit', 'canvas/the-dragoness-says-sit', 906809),
             cls('TheFeverKing', 'super-hero/the-fever-king', 1659),
             cls('TheFourOfThem', 'drama/the-four-of-them', 1524),
             cls('TheGamer', 'action/the-gamer', 88),
