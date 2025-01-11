@@ -32,6 +32,7 @@ class ProjectFuture(_ParserScraper):
             cls('DarkLordRising', 'darklord', '01-00', last='10-10'),
             cls('Emily', 'emily', '01-00', last='07-10'),
             cls('FishingTrip', 'fishing', '01-00', last='03-12'),
+            cls('Flux', 'flux', '0-00'),
             cls('HeadsYouLose', 'heads', '00-01', last='07-12'),
             cls('InnocenceGuiltAndChange', 'ernst', '01-00'),
             cls('IPanther', 'panther', '00', last='20'),
@@ -50,5 +51,5 @@ class ProjectFuture(_ParserScraper):
             cls('TheTuppenyMan', 'tuppenny', '00', last='16'),
             cls('TurningANewPage', 'azrael', '1', last='54'),
             cls('Xerian', 'xerian', '01-00'),
-            cls('ZetaTakesATrip', 'zeta', '0-00')
+            cls('ZetaTakesATrip', 'zeta', '0-00', last='4-10')
         )
