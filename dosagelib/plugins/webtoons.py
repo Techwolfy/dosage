@@ -216,6 +216,7 @@ class WebToons(_ParserScraper):
             cls('IF', 'action/if', 1925),
             cls('IllusionsOfAdulting', 'slice-of-life/illusions-of-adulting', 922),
             cls('IllustratedInternet', 'comedy/illustrated-internet', 750),
+            cls('IKilledTheMainPlayer', 'fantasy/i-killed-the-main-player', 6856),
             cls('ILoveYoo', 'drama/i-love-yoo', 986),
             cls('ImmortalNerd', 'slice-of-life/immortal-nerd', 579),
             cls('ImTheGrimReaper', 'supernatural/im-the-grim-reaper', 1697),
