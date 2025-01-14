@@ -1052,6 +1052,7 @@ class ComicFury(_ParserScraper):
             cls('Threan', 'threan'),
             cls('ThreeFreeFrikis', 'tff', 'es'),
             cls('TickTock', 'tick-tock'),
+            cls('Tieray', 'tieray'),
             cls('TigerWrestling', 'anybodythere'),
             cls('Timezone', 'timezone'),
             cls('Tinytown', 'tinytown'),
