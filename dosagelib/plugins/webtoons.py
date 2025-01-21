@@ -375,6 +375,7 @@ class WebToons(_ParserScraper):
             cls('SuitorArmor', 'fantasy/suitor-armor', 2159),
             cls('SuperSecret', 'romance/super-secret', 666),
             cls('SupersonicGirl', 'super-hero/supersonic-girl', 633),
+            cls('SurvivingTheGameAsABarbarian', 'fantasy/surviving-the-game-as-a-barbarian', 5515),
             cls('SweetHome', 'thriller/sweethome', 1285),
             cls('SwimmingLessonsForAMermaid', 'romance/swimming-lessons-for-a-mermaid', 1912),
             cls('SwordInterval', 'supernatural/sword-interval', 486),
