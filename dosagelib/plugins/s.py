@@ -670,9 +670,8 @@ class SuburbanJungleRoughHousing(_WordPressScraper):
 
 
 class Supercell(_ParserScraper):
-    baseUrl = 'https://www.supercellcomic.com/'
-    url = baseUrl + 'latest.html'
-    stripUrl = baseUrl + 'pages/%s.html'
+    stripUrl = 'https://www.supercellcomic.com/pages/%s.html'
+    url = stripUrl % 'latest'
     firstStripUrl = stripUrl % '0001'
     imageSearch = '//img[@class="comicStretch"]'
     prevSearch = '//div[@class="comicnav"]/a[./img[contains(@src, "comnav_02")]]'
