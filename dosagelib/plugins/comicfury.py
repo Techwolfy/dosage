@@ -356,7 +356,7 @@ class ComicFury(_ParserScraper):
             cls('DeepBlue', 'deepblue'),
             cls('DeerMe', 'deerme'),
             cls('DefineHero', 'definehero'),
-            cls('DELIA', 'delia'),
+            cls('DELIA', 'delia', multipleImagesPerStrip=True),
             cls('DemasPokmonAdventure', 'nuzlocke-dema'),
             cls('DemonWings', 'demonwings'),
             cls('DesertGrey', 'desertgrey'),
