@@ -20,6 +20,7 @@ class Lackadaisy(_ParserScraper):
     nextSearch = '//div[@class="next"]/a'
     help = 'Index format: n'
     starter = bounceStarter
+    ignoreRobotsTxt = True
 
     def namer(self, imageUrl, pageUrl):
         # Use comic id for filename
