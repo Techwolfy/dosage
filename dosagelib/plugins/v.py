@@ -27,7 +27,7 @@ class VGCats(_ParserScraper):
     url = 'https://www.vgcats.com/comics/'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
-    imageSearch = '//table//img[contains(@src, "images/")]'
+    imageSearch = '//table//img[contains(@src, "images/") and not(contains(@src, "patreon"))]'
     prevSearch = '//a[img[contains(@src, "back.")]]'
     help = 'Index format: n (unpadded)'
 
@@ -79,6 +79,7 @@ class VixenLogic(_WordPressSpliced):
     url = 'https://www.vixenlogic.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'vl0001'
+    imageSearch = '//div[@id="one-comic-option"]//span[@class="default-lang"]//img'
     adult = True
 
 
