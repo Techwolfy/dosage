@@ -27,10 +27,17 @@ class DangerouslyChloe(_ComicControlScraper):
     firstStripUrl = url + 'strips-dc/Chapter_1_-_That_damned_girl'
 
 
-class DarkWhite(_WordPressScraper):
+class DarkWhite(_ParserScraper):
     url = 'https://www.darkwhitecomic.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'chapter-1-sleep'
+    stripUrl = url + 'post/%s/'
+    firstStripUrl = stripUrl % 'dark-white-chapter-1-cover-art'
+    imageSearch = '//div[@id="content-wrapper"]//wow-image/img/@data-pin-media'
+    prevSearch = '//div[@id="content-wrapper"]//a[div[contains(text(), "Last Page")]]'
+    latestSearch = '//div[@id="content-wrapper"]//a[contains(@href, "post/")]'
+    starter = indirectStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 1)[-1]
 
 
 class DarthsAndDroids(_BasicScraper):
