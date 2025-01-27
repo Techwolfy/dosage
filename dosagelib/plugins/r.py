@@ -6,7 +6,7 @@
 from re import compile
 from urllib.parse import urljoin
 
-from ..helpers import bounceStarter
+from ..helpers import bounceStarter, indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _WordPressScraper, _WPNavi, _WPWebcomic
@@ -28,6 +28,7 @@ class RayFox(_WPNavi):
     url = 'https://www.rayfoxthecomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'not-a-super-hero/it-begins'
+    endOfLife = True
 
     def namer(self, imageUrl, pageUrl):
         filename = imageUrl.rsplit('/', 1)[-1].split('.', 1)[0]
@@ -45,6 +46,25 @@ class RayFox(_WPNavi):
         elif filename[0] == '0':
             filename = 'RF_E1_P' + filename
         return filename + '.' + ext
+
+
+class RayFoxReignited(_WPWebcomic):
+    name = 'RayFox/Reignited'
+    baseUrl = 'https://scottyartz.com/ray-fox/'
+    stripUrl = baseUrl + '%s/'
+    firstStripUrl = stripUrl % 'ray-fox'
+    imageSearch = '//div[d:class("webcomic-media")]//img'
+    url = firstStripUrl
+    starter = indirectStarter
+
+    def getPrevUrl(self, url, data):
+        # Fix broken navigation
+        if url == self.stripUrl % 'a-new-fire-page-1':
+            return self.stripUrl % 'ray-fox'
+        elif 'a-new-fire-page-' in url:
+            page = int(url.rsplit('/', 2)[1].rsplit('-', 1)[-1])
+            return self.stripUrl % ('a-new-fire-page-' + str(page - 1))
+        return super(RayFoxReboot, self).getPrevUrl(url, data)
 
 
 class RaynaOnTheRiver(_WordPressScraper):
