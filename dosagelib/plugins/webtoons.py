@@ -297,6 +297,7 @@ class WebToons(_ParserScraper):
             cls('MyWallflowerKiss', 'challenge/my-wallflower-kiss', 151869),
             cls('NanoList', 'sf/nano-list', 700),
             cls('NationalDogDay2016', 'slice-of-life/national-dog-day', 747),
+            cls('NebulasCivilization', 'nebulas-civilization/episode-38', 6535),
             cls('NewLifeProject', 'comedy/new-life-project', 279),
             cls('Newman', 'fantasy/newman', 405),
             cls('NewNormalClass8', 'drama/new-normal-class-8', 100),
