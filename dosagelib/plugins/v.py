@@ -72,7 +72,7 @@ class VisionHaze(_ParserScraper):
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//div[@class="page"]//img'
-    prevSearch = '//a[contains(text(), "<")]'
+    prevSearch = '//a[contains(text(), "‹")]'
 
 
 class VixenLogic(_WordPressSpliced):
