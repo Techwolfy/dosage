@@ -146,6 +146,7 @@ class MangaDex(_ParserScraper):
             cls('SeijoSamaIieToorisugariNoMamonotsukaiDesu', 'd4c40e73-251a-4bcb-a5a6-1edeec1e00e7'),
             cls('SenpaiGaUzaiKouhaiNoHanashi', 'af38f328-8df1-4b4c-a272-e737625c3ddc'),
             cls('SewayakiKitsuneNoSenkoSan', 'c26269c7-0f5d-4966-8cd5-b79acb86fb7a'),
+            cls('ShingetsutanTsukihime', '477800d5-bae8-4adb-b422-23e6cfa7ec87'),
             cls('ShinNoJitsuryokuWaGirigiriMadeKakushiteIyouToOmou', '22fda941-e603-4601-a536-c3ad6d004ba8'),
             cls('SoloLeveling', '32d76d19-8a05-4db0-9fc2-e0b0648fe9d0'),
             cls('SousouNoFrieren', 'b0b721ff-c388-4486-aa0f-c2b0bb321512'),
