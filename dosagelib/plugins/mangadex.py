@@ -108,6 +108,7 @@ class MangaDex(_ParserScraper):
             cls('GanbareDoukiChan', '190616bc-7da6-45fd-abd4-dd2ca656c183'),
             cls('GijiHarem', 'd8f9afe2-aa44-4bc6-9145-eebb1f282372'),
             cls('HangingOutWithAGamerGirl', 'de9e3b62-eac5-4c0a-917d-ffccad694381'),
+            cls('Hitona', '52fd5981-9010-402b-8745-b4b13cd7c6f1'),
             cls('HoriMiya', 'a25e46ec-30f7-4db6-89df-cacbc1d9a900'),
             cls('HowToOpenATriangularRiceball', '6ebd90ce-d5e8-49c0-a4bc-e02e0f8ecb93'),
             cls('HunterXHunter', 'db692d58-4b13-4174-ae8c-30c515c0689c'),
