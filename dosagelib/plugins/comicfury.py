@@ -878,6 +878,7 @@ class ComicFury(_ParserScraper):
             cls('SlugMan', 'slug-man'),
             cls('SmallTownValues', 'smalltownvalues'),
             cls('SmitheeZombieHunter', 'smitheezombiehunter'),
+            cls('Snaf', 'snaf'),
             cls('SneakersUForce', 'sneakers'),
             cls('Snowfall', 'snowfall'),
             cls('SoFunnyIForgotToLaugh', 'sofunnyiforgottolaugh'),
