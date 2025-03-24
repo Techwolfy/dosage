@@ -728,6 +728,7 @@ class ComicFury(_ParserScraper):
             cls('Nocturne21', 'nocturne21'),
             cls('NoFuture', 'nofuturevit'),
             cls('NoKeys', 'nokeys'),
+            cls('NonEntity', 'non-entity'),
             cls('Noprrkele', 'noprrkele'),
             cls('NothingMen', 'nothing-men'),
             cls('NoTitleRequired', 'ntr'),
