@@ -292,6 +292,13 @@ class ShotgunShuffle(_WordPressScraper):
     firstStripUrl = url + 'comic/pilot/'
 
 
+class SideQuested(_WPWebcomic):
+    url = 'https://sidequested.com/'
+    stripUrl = url + 'page/%s/'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[d:class("webcomic-media")]//img'
+
+
 class SinFest(_ParserScraper):
     url = 'https://www.sinfest.net/'
     stripUrl = url + 'view.php?date=%s'
