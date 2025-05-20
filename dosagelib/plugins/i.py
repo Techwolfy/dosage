@@ -41,6 +41,14 @@ class ImperialGELF(_WordPressScraper):
     firstStripUrl = stripUrl % 'intro-page-1'
 
 
+class Inhuman(_ParserScraper):
+    url = 'https://www.inhuman-comic.com/'
+    stripUrl = url + 'comic%s.php'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="page"]//img'
+    prevSearch = '//a[@class="prev"]'
+
+
 class InternetWebcomic(_WPNavi):
     url = 'http://www.internet-webcomic.com/'
     stripUrl = url + '?p=%s'
