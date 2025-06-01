@@ -476,6 +476,7 @@ class ComicFury(_ParserScraper):
             cls('Gratz', 'gratz'),
             cls('Grayling', 'grayling'),
             cls('GreenEyes', 'greeneyes'),
+            cls('Greenlocke', 'greenlocke'),
             cls('GreysterJemp', 'greysterjemp'),
             cls('GrimReaperSchool', 'grimreaperschool'),
             cls('GrippsBrain', 'grippsbrain'),
