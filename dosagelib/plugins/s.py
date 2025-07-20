@@ -417,6 +417,19 @@ class SodiumEyes(_WordPressScraper):
     endOfLife = True
 
 
+class Solivaga(_ParserScraper):
+    url = 'https://solivaga.net/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'prologue-1'
+    imageSearch = '//div[@class="comic-image"]//img'
+    prevSearch = '//a[@id="prev"]'
+    latestSearch = '//div[@class="latest-page"]/a'
+    starter = indirectStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return imageUrl.split('-', 1)[-1].split('?', 1)[0]
+
+
 class SomethingPositive(_ParserScraper):
     url = 'https://www.somethingpositive.net/'
     stripUrl = url + 'sp%s.shtml'
