@@ -53,6 +53,7 @@ class KemonoCafe(_ParserScraper):
     @classmethod
     def getmodules(cls):
         return (
+            cls('AddictiveMagic', 'addictivemagic', 'page-1'),
             cls('AddictiveScience', 'addictivescience', 'page0001'),
             cls('Bethellium', 'bethellium', 'c01p00'),
             cls('Bubblegum', 'bubblegum', 'intro-p01', adult=True),
