@@ -68,4 +68,5 @@ class KemonoCafe(_ParserScraper):
             cls('TheEyeOfRamalach', 'theeye', 'theeye-page01'),
             cls('TinaOfTheSouth', 'tots', 'tos-01-01'),
             cls('UltraRosa', 'ultrarosa', 'pg001'),
+            cls('WildlyNormal', 'wildlynormal', 'wn000')
         )
