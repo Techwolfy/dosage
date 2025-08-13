@@ -55,6 +55,7 @@ class KemonoCafe(_ParserScraper):
         return (
             cls('AddictiveScience', 'addictivescience', 'page0001'),
             cls('Bethellium', 'bethellium', 'c01p00'),
+            cls('Bubblegum', 'bubblegum', 'intro-p01', adult=True),
             cls('CaribbeanBlue', 'cb', 'page000', last='page325'),
             cls('CaughtInOrbit', 'caughtinorbit', 'comic-cover'),
             cls('IMew', 'imew', 'imew00', last='imew50'),
