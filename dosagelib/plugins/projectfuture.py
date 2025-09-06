@@ -53,3 +53,11 @@ class ProjectFuture(_ParserScraper):
             cls('Xerian', 'xerian', '01-00'),
             cls('ZetaTakesATrip', 'zeta', '0-00', last='4-10')
         )
+
+
+class PaxDraconica(_ParserScraper):
+    url = 'https://paxdraconica.com/paxdrac1.php'
+    stripUrl = url + '?strip=%s'
+    firstStripUrl = stripUrl % '00-00'
+    imageSearch = '//td[@class="tamid"]/img'
+    prevSearch = '//a[./img[@alt="Previous"]]'
