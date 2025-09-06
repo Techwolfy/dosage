@@ -8,7 +8,7 @@ from re import compile, escape
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
 class BackOffice(_WPNavi):
@@ -219,11 +219,10 @@ class BloodBound(_WordPressScraper):
     firstStripUrl = 'http://bloodboundcomic.com/comic/06112006/'
 
 
-class Bloodline(_WordPressScraper):
-    url = 'http://w0lfmare.xepher.net/'
+class Bloodline(_WPNaviIn):
+    url = 'https://bloodlinecomic.com/'
     stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % 'pg-1-2'
-    imageSearch = '//div[@id="comic"]//img[not(contains(@src, "TWC-vote-image"))]'
+    firstStripUrl = stripUrl % 'bloodline-1'
 
     def namer(self, imageUrl, pageUrl):
         # Fix filenames of early comics
