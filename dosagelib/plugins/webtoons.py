@@ -382,6 +382,7 @@ class WebToons(_ParserScraper):
             cls('SwordInterval', 'supernatural/sword-interval', 486),
             cls('TalesOfTheUnusual', 'horror/tales-of-the-unusual', 68),
             cls('TheAdvancedPlayerOfTheTutorialTower', 'action/the-advanced-player-of-the-tutorial-tower', 2409),
+            cls('TheArchmagesRestaurant', 'fantasy/the-archmages-restaurant', 7567),
             cls('TheBadguys', 'super-hero/the-bad-guys', 701),
             cls('TheBrooklynite', 'super-hero/the-brooklynite', 813),
             cls('TheCliff', 'thriller/the-cliff', 80),
