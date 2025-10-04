@@ -146,6 +146,7 @@ class WebToons(_ParserScraper):
             cls('DICE', 'fantasy/dice', 64),
             cls('DistantSky', 'horror/distant-sky', 75),
             cls('DONTHATE', 'comedy/dont-hate', 1574),
+            cls('DontWorryDearNPC', 'slice-of-life/dont-worry-dear-npc', 7490),
             cls('DoodleForFood', 'slice-of-life/doodle-for-food', 487),
             cls('DownToEarth', 'romance/down-to-earth', 1817),
             cls('Dragnarok', 'fantasy/dragnarok', 1018),
