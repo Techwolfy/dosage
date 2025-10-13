@@ -8,7 +8,7 @@ from re import compile
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
+from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn, _WPWebcomic
 
 
 class Lackadaisy(_ParserScraper):
@@ -73,6 +73,13 @@ class LeastICouldDo(_ParserScraper):
     latestSearch = '//a[@id="latest-comic"]'
     starter = indirectStarter
     help = 'Index format: yyyymmdd'
+
+
+class LeifAndThorn(_WPWebcomic):
+    url = 'https://leifandthorn.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = 'magical-comic-lyrical-test-post'
+    multipleImagesPerStrip = True
 
 
 class LetsSpeakEnglish(_ComicControlScraper):
