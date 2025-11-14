@@ -28,6 +28,7 @@ class Tamberlane(_WPWebcomic):
     firstStripUrl = stripUrl % 'page-1'
     imageSearch = '//div[@id="comic-page"]/img/@src'
     prevSearch = '//a[@class="previous-link"]'
+    multipleImagesPerStrip = True
 
 
 class TheBoyWhoFell(_ComicControlScraper):
