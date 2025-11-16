@@ -121,6 +121,7 @@ class MangaDex(_ParserScraper):
             cls('KaikoSaretaAnkokuHeishi30DaiNoSlowNaSecondLife', 'cbcf5051-74a0-4b93-b99c-1a6975f1bef9'),
             cls('KawaiiJoushiWoKomarasetai', '23b7cc7a-df89-4049-af28-1fa78f88713e'),
             cls('KanojoOkarishimasu', '32fdfe9b-6e11-4a13-9e36-dcd8ea77b4e4'),
+            cls('KimiToKoeteKoiNiNaru', 'a43bfc8f-3daf-4aba-bb2e-284109cbc03b'),
             cls('KiNiNatteruHitoGaOtokoJanakatta', '9d3d3403-1a87-4737-9803-bc3d99db1424'),
             cls('KoiToUtatane', 'f7d40a27-e289-45b3-9c68-d1cb251897e6'),
             cls('KonoKaishaNiSukiNaHitoGaImasu', '3e8cf40f-ba17-480a-b60b-a675db032ee2'),
