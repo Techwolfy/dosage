@@ -655,6 +655,7 @@ class ComicFury(_ParserScraper):
             cls('MagnaComica', 'magnacomica'),
             cls('Maluk', 'maluk'),
             cls('ManChildren', 'manchildren'),
+            cls('MarbleGateDungeon', 'marblegate'),
             cls('MariosCastleTales', 'mariocastletales', 'it'),
             cls('MarriedToATransformersFan', 'marriedtoatransformersfan'),
             cls('MARS', 'mars'),
