@@ -53,6 +53,14 @@ class ParaNatural(_ComicControlScraper):
     firstStripUrl = url + 'comic/chapter-1'
 
 
+class Parapsych(_ParserScraper):
+    url = 'https://www.parapsych-comic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'parapsych-ch01-cover'
+    imageSearch = '//div[@id="spliced-comic"]//img/@nitro-lazy-src'
+    prevSearch = '//a[@class="previous-comic"]'
+
+
 class PartiallyClips(_WordPressScraper):
     url = ('https://web.archive.org/web/20180509161332/'
         'http://partiallyclips.com/')
