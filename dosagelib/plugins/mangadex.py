@@ -130,6 +130,7 @@ class MangaDex(_ParserScraper):
             cls('MaouNoOreGaDoreiElfWoYomeNiShitandaGaDouMederebaIi', '55ace2fb-e157-4d76-9e72-67c6bd762a39'),
             cls('ModernMoGal', 'b1953f80-36f7-492c-b0f8-e9dd0ad01752'),
             cls('MousouTelepathy', '3d25d7da-893f-400e-9aeb-6163773c671a'),
+            cls('MyFoodLooksVeryCute', 'b98c4daf-be1a-46c8-ad83-21d532995240'),
             cls('MyTinySenpaiFromWork', '28ed63af-61f8-43af-bac3-762030c72963'),
             cls('MyWifeIsFromAThousandYearsAgo', '17a56d33-9443-433a-9e0d-70459893ed8f'),
             cls('OMaidensinYourSavageSeason', 'c4613b7d-7a6e-48f9-82f0-bce3dd33383a'),
