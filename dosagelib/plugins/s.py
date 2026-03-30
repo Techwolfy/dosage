@@ -327,9 +327,10 @@ class SixPackOfOtters(_WPWebcomic):
 
 
 class SkinDeep(_WPWebcomic):
-    url = 'http://www.skindeepcomic.com/'
+    url = 'https://www.skindeepcomic.com/'
     stripUrl = url + 'archive/%s/'
     firstStripUrl = stripUrl % 'issue-1-cover'
+    imageSearch = '//div[d:class("webcomic-image")]//img/@data-src'
 
 
 class SleeplessDomain(_ComicControlScraper):
