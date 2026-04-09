@@ -347,6 +347,7 @@ class WebToons(_ParserScraper):
             cls('SHADOW', 'super-hero/shadow', 281),
             cls('ShadowPirates', 'action/shadow-pirates', 1455),
             cls('Shard', 'supernatural/shard', 960),
+            cls('ShesMine', 'canvas/shes-mine-', 1006123),
             cls('Shiloh', 'thriller/shiloh', 1649),
             cls('ShootAround', 'drama/shoot-around', 399),
             cls('Shriek', 'thriller/shriek', 772),
