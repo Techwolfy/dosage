@@ -566,6 +566,7 @@ class ComicFury(_ParserScraper):
             cls('JenffersShowsFanArtPage', 'jenffersshowsfanartpage'),
             cls('JenffersShowsMissJAndJensPhotoAlbum', 'missjandjensphotoalbum'),
             cls('JenffersShowTheNewStoriesOfMissJAndJen', 'thenewstoriesofmissjandjen'),
+            cls('Jeren', 'jeren'),
             cls('Jericho', 'jericho'),
             cls('JillpokeBohemia', 'jillpokebohemia'),
             cls('Jix', 'jix'),
